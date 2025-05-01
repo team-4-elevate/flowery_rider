@@ -1,0 +1,19 @@
+{
+  "validation": {
+    "firstNameEmpty": "Please enter the first name",
+    "firstNameInvalid": "Please enter a valid first name",
+    "lastNameEmpty": "Please enter the last name",
+    "lastNameInvalid": "Please enter a valid last name",
+    "emailEmpty": "Please enter the email",
+    "emailInvalid": "Please enter a valid email",
+    "passwordEmpty": "Please enter the password",
+    "passwordInvalid": "Invalid password",
+    "passwordShort": "Password must be at least 6 characters long",
+    "confirmPasswordEmpty": "Please confirm the password",
+    "confirmPasswordMismatch": "Passwords do not match",
+    "passwordSamePassword": "The new password must be different from the current password",
+    "phoneEmpty": "Please enter the phone number",
+    "phoneInvalid": "Please enter a valid phone number",
+    "pinCodeError": "Invalid code"
+  }
+}

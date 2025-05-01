@@ -1,0 +1,19 @@
+{
+  "validation": {
+    "firstNameEmpty": "يرجى إدخال الاسم الأول",
+    "firstNameInvalid": "الرجاء إدخال اسم أول صحيح",
+    "lastNameEmpty": "يرجى إدخال اسم العائلة",
+    "lastNameInvalid": "الرجاء إدخال اسم عائلة صحيح",
+    "emailEmpty": "يرجى إدخال البريد الإلكتروني",
+    "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+    "passwordEmpty": "يرجى إدخال كلمة المرور",
+    "passwordInvalid": "كلمة المرور غير صالحة",
+    "passwordShort": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل",
+    "confirmPasswordEmpty": "يرجى تأكيد كلمة المرور",
+    "confirmPasswordMismatch": "كلمتا المرور غير متطابقتين",
+    "passwordSamePassword": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور الحالية",
+    "phoneEmpty": "يرجى إدخال رقم الهاتف",
+    "phoneInvalid": "يرجى إدخال رقم هاتف صحيح",
+    "pinCodeError": "رمز غير صحيح"
+    }
+}
