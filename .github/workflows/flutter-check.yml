@@ -1,0 +1,62 @@
+name: Flutter CI with Branch Check and Slack Notification
+
+on:
+  push:
+  pull_request:
+    # types: [opened, reopened, ready_for_review]
+
+jobs:
+  flutter-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Check branch name
+      run: |
+        BRANCH_NAME="${GITHUB_REF##*/}"
+        echo "🔎 Branch: $BRANCH_NAME"
+        if [[ ! "$BRANCH_NAME" =~ ^(feature|bugfix|hotfix)/ ]]; then
+          echo "❌ Branch name must start with feature/, bugfix/, or hotfix/"
+          exit 1
+        fi
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.0'
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Run linting
+      run: flutter analyze
+
+    - name: Run tests
+      run: flutter test
+
+    - name: Notify Slack on PR
+      if: github.event_name == 'pull_request'
+      run: |
+        PR_TITLE="${{ github.event.pull_request.title }}"
+        PR_AUTHOR="${{ github.event.pull_request.user.login }}"
+        PR_URL="${{ github.event.pull_request.html_url }}"
+        BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+
+        curl -X POST -H 'Content-type: application/json' \
+          --data "{
+            \"text\": \"<!channel> 📣 *New Pull Request Created!*\",
+            \"attachments\": [
+              {
+                \"color\": \"#36a64f\",
+                \"fields\": [
+                  { \"title\": \"Title\", \"value\": \"$PR_TITLE\", \"short\": false },
+                  { \"title\": \"Author\", \"value\": \"$PR_AUTHOR\", \"short\": true },
+                  { \"title\": \"Branch\", \"value\": \"$BRANCH_NAME\", \"short\": true },
+                  { \"title\": \"URL\", \"value\": \"$PR_URL\", \"short\": false }
+                ]
+              }
+            ]
+          }" \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
