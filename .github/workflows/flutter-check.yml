@@ -17,15 +17,12 @@ jobs:
       run: |
        BRANCH_NAME="${GITHUB_REF##*/}"
        echo "🔎 Branch: $BRANCH_NAME"
-       if [[ "$BRANCH_NAME" == "merge" || "$BRANCH_NAME" == "main" ]]; then
-        echo "✅ Skipping branch name check for $BRANCH_NAME"
-        exit 0
+       if [[ ! "${BRANCH_NAME,,}" =~ ^(feature|bugfix|hotfix)/ ]]; then
+       echo "❌ Branch name must start with feature/, bugfix/, or hotfix/"
+       exit 1
        fi
-       if [[ ! "$BRANCH_NAME" =~ ^(feature|bugfix|hotfix)/ ]]; then
-        echo "❌ Branch name must start with feature/, bugfix/, or hotfix/"
-        exit 1
-       fi
-
+       echo "✅ Branch name is valid"
+       
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
