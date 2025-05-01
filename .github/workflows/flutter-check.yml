@@ -1,18 +1,26 @@
 name: Flutter CI with Branch Check and Slack Notification
+
 permissions:
-  contents: write  # إذن لتعديل الكود
+  contents: write 
+
 on:
   push:
   pull_request:
+
 jobs:
   flutter-ci:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref || github.ref_name }} 
+        fetch-depth: 0 
+
     - name: Check branch name
       run: |
-        BRANCH_NAME="${GITHUB_REF##*/}"
+        BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
         echo "🔎 Branch: $BRANCH_NAME"
         if [[ "$BRANCH_NAME" == "main" || "$BRANCH_NAME" == "merge" ]]; then
           echo "✅ Branch check skipped for main/merge"
@@ -23,12 +31,15 @@ jobs:
           exit 1
         fi
         echo "✅ Branch name is valid"
+
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.29.3'
+
     - name: Install dependencies
       run: flutter pub get
+
     - name: Format code
       run: |
         dart format .
@@ -37,14 +48,18 @@ jobs:
           git config --global user.email 'action@github.com'
           git add .
           git commit -m "Apply dart format changes"
-          git push
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}
         fi
+
     - name: Generate localization files
       run: flutter pub run easy_localization:generate -S assets/translations -f keys -o locale_keys.g.dart
+
     - name: Run linting
       run: flutter analyze
+
     - name: Run tests
       run: flutter test
+
     - name: Notify Slack on PR
       if: github.event_name == 'pull_request'
       run: |
