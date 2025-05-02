@@ -26,8 +26,8 @@ jobs:
           echo "✅ Branch check skipped for main/merge"
           exit 0
         fi
-        if [[ ! "${BRANCH_NAME,,}" =~ ^(feature|bugfix|hotfix)/ ]]; then
-          echo "❌ Branch name must start with feature/, bugfix/, or hotfix/"
+        if [[ ! "${BRANCH_NAME,,}" =~ ^(feature|bugfix|hotfix)/ && "$BRANCH_NAME" != "develop" ]]; then
+          echo "❌ Branch name must start with feature/, bugfix/, or hotfix/, or be develop"
           exit 1
         fi
         echo "✅ Branch name is valid"
