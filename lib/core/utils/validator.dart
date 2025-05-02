@@ -6,9 +6,9 @@ class Validator {
 
   static String? phoneNumberValidation(String? number) {
     final RegExp numberRegex = RegExp(
-      r"^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$",
+      r'^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$',
     );
-    if (number == null || number.trim().isEmpty || number == "+2") {
+    if (number == null || number.trim().isEmpty || number == '+2') {
       return LocaleKeys.validation_phoneEmpty.tr();
     } else if (numberRegex.hasMatch(number) == false) {
       return LocaleKeys.validation_phoneInvalid.tr();
@@ -32,7 +32,7 @@ class Validator {
 
   static String? lastNameValidation(String? name) {
     final RegExp nameRegex = RegExp(
-      r"^[a-zA-Z]{2,30}$",
+      r'^[a-zA-Z]{2,30}$',
     );
     if (name == null || name.trim().isEmpty) {
       return LocaleKeys.validation_lastNameEmpty.tr();
@@ -45,7 +45,7 @@ class Validator {
 
   static String? firstNameValidation(String? name) {
     final RegExp nameRegex = RegExp(
-      r"^[a-zA-Z]{2,30}$",
+      r'^[a-zA-Z]{2,30}$',
     );
     if (name == null || name.trim().isEmpty) {
       return LocaleKeys.validation_firstNameEmpty.tr();
@@ -58,7 +58,7 @@ class Validator {
 
   static String? emailValidate(String? email) {
     final RegExp emailRegex = RegExp(
-      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
     );
 
     if (email == null || email.trim().isEmpty) {
