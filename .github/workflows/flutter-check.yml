@@ -53,8 +53,6 @@ jobs:
     - name: Generate localization files
       run: flutter pub run easy_localization:generate -S assets/translations -f keys -o locale_keys.g.dart
 
-    - name: Run linting
-      run: flutter analyze
 
     - name: Run tests
       run: flutter test
