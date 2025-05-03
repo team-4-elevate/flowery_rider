@@ -15,5 +15,12 @@
     "phoneEmpty": "Please enter the phone number",
     "phoneInvalid": "Please enter a valid phone number",
     "pinCodeError": "Invalid code"
+  },
+  "onboarding": {
+    "welcomeTo": "Welcome to",
+    "floweryRiderApp": "Flowery rider app",
+    "login": "Login",
+    "applyNow": "Apply now",
+    "version": "v 6.3.0 - (446)"
   }
 }

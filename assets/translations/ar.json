@@ -1,19 +1,24 @@
 {
   "validation": {
-    "firstNameEmpty": "يرجى إدخال الاسم الأول",
-    "firstNameInvalid": "الرجاء إدخال اسم أول صحيح",
-    "lastNameEmpty": "يرجى إدخال اسم العائلة",
+    "firstNameEmpty": "الرجاء إدخال الاسم الأول",
+    "firstNameInvalid": "الرجاء إدخال اسم أول صالح",
+    "lastNameEmpty": "الرجاء إدخال اسم العائلة",
     "lastNameInvalid": "الرجاء إدخال اسم عائلة صحيح",
-    "emailEmpty": "يرجى إدخال البريد الإلكتروني",
-    "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
-    "passwordEmpty": "يرجى إدخال كلمة المرور",
-    "passwordInvalid": "كلمة المرور غير صالحة",
-    "passwordShort": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل",
-    "confirmPasswordEmpty": "يرجى تأكيد كلمة المرور",
-    "confirmPasswordMismatch": "كلمتا المرور غير متطابقتين",
+    "emailEmpty": "الرجاء إدخال البريد الإلكتروني",
+    "emailInvalid": "الرجاء إدخال بريد إلكتروني صحيح",
+    "passwordEmpty": "الرجاء إدخال كلمة المرور",
+    "passwordInvalid": "كلمة مرور غير صالحة",
+    "passwordShort": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "confirmPasswordEmpty": "الرجاء تأكيد كلمة المرور",
+    "confirmPasswordMismatch": "كلمات المرور غير متطابقة",
     "passwordSamePassword": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور الحالية",
-    "phoneEmpty": "يرجى إدخال رقم الهاتف",
-    "phoneInvalid": "يرجى إدخال رقم هاتف صحيح",
-    "pinCodeError": "رمز غير صحيح"
-    }
+    "phoneEmpty": "الرجاء إدخال رقم الهاتف",
+    "phoneInvalid": "الرجاء إدخال رقم هاتف صحيح",
+    "pinCodeError": "رمز غير صالح"
+  },
+  "onboardingWelcomeTo": "مرحبًا بك في",
+  "onboardingFloweryRiderApp": "تطبيق فلاوري رايدر",
+  "onboardingLogin": "تسجيل الدخول",
+  "onboardingApplyNow": "تقدم الآن",
+  "onboardingVersion": "إصدار {6.3.0} - ({446})"
 }

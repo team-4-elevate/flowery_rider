@@ -14,6 +14,12 @@ ThemeData getLightTheme() => ThemeData(
         seedColor: AppColors.primary,
         brightness: Brightness.light,
       ),
+      textTheme: TextTheme(
+        labelLarge: getRegularStyle(
+          color: AppColors.black,
+          fontSize: 16.sp,
+        ),
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.scaffoldBackground,
         foregroundColor: AppColors.black,
@@ -31,23 +37,24 @@ ThemeData getLightTheme() => ThemeData(
           disabledForegroundColor: AppColors.scaffoldBackground,
           // elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(25.r), 
           ),
-          minimumSize: Size(double.infinity, 48.h),
+          minimumSize: Size(double.infinity, 50.h), 
         ),
       ),
       //outlined button theme
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.white[90]!,
+          foregroundColor: AppColors.black,
           backgroundColor: AppColors.scaffoldBackground,
-          side: const BorderSide(
-            color: AppColors.primary,
+          side: BorderSide(
+            color: Colors.grey,
+            width: 1.0,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(25.r),
           ),
-          minimumSize: Size(double.infinity, 48.h),
+          minimumSize: Size(double.infinity, 50.h),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(

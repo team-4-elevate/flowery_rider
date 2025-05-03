@@ -49,9 +49,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i558.FlutterSecureStorage>(
         () => getItRegisterModule.secureStorage);
-    gh.singleton<_i318.DialogUtils>(() => _i318.DialogUtils());
     gh.singleton<_i944.AppNavigatorObserver>(
         () => _i944.AppNavigatorObserver());
+    gh.singleton<_i318.DialogUtils>(() => _i318.DialogUtils());
     gh.singleton<_i983.LocalStorageClient>(() => _i983.LocalStorageClient(
           gh<_i460.SharedPreferences>(),
           gh<_i558.FlutterSecureStorage>(),

@@ -1,16 +1,14 @@
+// core/routes/app_router.dart
 import 'package:flowery_rider/core/routes/routes.dart';
+import 'package:flowery_rider/features/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case Routes.splash:
+    case Routes.onboarding:
       return MaterialPageRoute(
         settings: settings,
-        builder: (_) => const Scaffold(
-          body: Center(
-            child: Text('Splash Screen'),
-          ),
-        ),
+        builder: (_) => const Onboarding(),
       );
 
     default:

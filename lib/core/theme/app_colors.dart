@@ -1,3 +1,4 @@
+// core/theme/app_colors.dart
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -5,7 +6,7 @@ class AppColors {
 
   static const scaffoldBackground = Color(0xffF9F9F9);
 
-  static const primary = Color.fromARGB(255, 56, 25, 38);
+  static const primary = Color(0xffD21E6A);
   static const black = MaterialColor(
     0xff0C1015,
     <int, Color>{

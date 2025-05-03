@@ -1,3 +1,4 @@
+// core/utils/validator.dart
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/generated/locale_keys.g.dart';
 
@@ -85,7 +86,7 @@ class Validator {
   static String? confirmPasswordValidation(
       String? confirmPassword, String? originalPassword) {
     if (confirmPassword == null || confirmPassword.trim().isEmpty) {
-      return LocaleKeys.validation_confirmPasswordEmpty.tr();
+      return LocaleKeys.validation_passwordEmpty.tr();
     }
     if (confirmPassword != originalPassword) {
       return LocaleKeys.validation_confirmPasswordMismatch.tr();

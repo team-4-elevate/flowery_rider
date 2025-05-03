@@ -1,3 +1,4 @@
+// core/error_handling/dio_error_handler.dart
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
@@ -100,7 +101,7 @@ class DioErrorHandler {
 
   void _checkTokenValidity(data) {
     if (appCurrentRoute != Routes.login &&
-        appCurrentRoute != Routes.signup &&
+        //appCurrentRoute != Routes.signup &&
         data['code'] == 401 &&
         (data['message'].contains('invalid token') ||
             data['message'].contains('user not found'))) {
