@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class LoginUseCase {
- final AuthRepo _authRepo;
+  final AuthRepo _authRepo;
   LoginUseCase(this._authRepo);
 
   Future<Either<ApiException, LoginResponse>> call(

@@ -65,13 +65,16 @@ void main() {
       },
       expect: () => [
         isA<LoginStates>()
-            .having((s) => s.loginStates, 'loginStates', isA<BaseInitialState>())
+            .having(
+                (s) => s.loginStates, 'loginStates', isA<BaseInitialState>())
             .having((s) => s.rememberMe, 'rememberMe', true),
         isA<LoginStates>()
-            .having((s) => s.loginStates, 'loginStates', isA<BaseLoadingState>())
+            .having(
+                (s) => s.loginStates, 'loginStates', isA<BaseLoadingState>())
             .having((s) => s.rememberMe, 'rememberMe', true),
         isA<LoginStates>()
-            .having((s) => s.loginStates, 'loginStates', isA<BaseSuccessState>())
+            .having(
+                (s) => s.loginStates, 'loginStates', isA<BaseSuccessState>())
             .having((s) => s.rememberMe, 'rememberMe', true),
       ],
       verify: (_) {
@@ -97,22 +100,24 @@ void main() {
         return loginCubit;
       },
       act: (cubit) {
-        cubit.changeRememberMe(false); 
+        cubit.changeRememberMe(false);
         cubit.doLogin(email, password);
       },
       expect: () => [
         isA<LoginStates>()
-            .having((s) => s.loginStates, 'loginStates', isA<BaseInitialState>())
+            .having(
+                (s) => s.loginStates, 'loginStates', isA<BaseInitialState>())
             .having((s) => s.rememberMe, 'rememberMe', false),
         isA<LoginStates>()
-            .having((s) => s.loginStates, 'loginStates', isA<BaseLoadingState>())
+            .having(
+                (s) => s.loginStates, 'loginStates', isA<BaseLoadingState>())
             .having((s) => s.rememberMe, 'rememberMe', false),
         isA<LoginStates>()
             .having(
               (s) => s.loginStates,
               'loginStates',
-              isA<BaseErrorState>()
-                  .having((e) => e.errorMessage, 'message', 'Invalid credentials'),
+              isA<BaseErrorState>().having(
+                  (e) => e.errorMessage, 'message', 'Invalid credentials'),
             )
             .having((s) => s.rememberMe, 'rememberMe', false),
       ],

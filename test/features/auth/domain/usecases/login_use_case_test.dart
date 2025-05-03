@@ -16,7 +16,7 @@ void main() {
   late LoginUseCase loginUseCase;
 
   provideDummy<Either<ApiException, LoginResponse>>(
-        Right(LoginResponse(message: 'dummyMessage', token: 'dummyToken')),
+    Right(LoginResponse(message: 'dummyMessage', token: 'dummyToken')),
   );
 
   setUp(() {
@@ -25,7 +25,8 @@ void main() {
   });
 
   group('LoginUseCase Tests', () {
-    final loginRequest = LoginRequset(email: 'test@example.com', password: 'password123');
+    final loginRequest =
+        LoginRequset(email: 'test@example.com', password: 'password123');
     final loginResponse = LoginResponse(token: 'dummyToken');
     final apiException = ApiException(message: 'Invalid credentials');
 

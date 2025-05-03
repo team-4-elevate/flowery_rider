@@ -17,11 +17,14 @@ void main() {
 
   setUp(() {
     mockRemoteDataSource = MockAuthRemoteDataSource();
-    authRepo = AuthRepoImpl(mockRemoteDataSource,);
+    authRepo = AuthRepoImpl(
+      mockRemoteDataSource,
+    );
   });
 
   group('AuthRepoImpl.login', () {
-    final loginRequest = LoginRequset(email: 'test@example.com', password: 'password123');
+    final loginRequest =
+        LoginRequset(email: 'test@example.com', password: 'password123');
     final loginResponse = LoginResponse(token: 'dummyToken');
 
     test('should return LoginResponse when login is successful', () async {

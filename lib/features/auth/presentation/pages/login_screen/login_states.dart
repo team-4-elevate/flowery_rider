@@ -12,9 +12,7 @@ class LoginStates extends Equatable {
       rememberMe ?? this.rememberMe,
     );
   }
+
   @override
-  List<Object?> get props =>[
-    loginStates,
-    rememberMe
-  ];
+  List<Object?> get props => [loginStates, rememberMe];
 }

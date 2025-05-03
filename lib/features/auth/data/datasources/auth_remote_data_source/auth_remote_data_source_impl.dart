@@ -11,7 +11,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   AuthRemoteDataSourceImpl(this._apiClient);
   @override
-  Future<LoginResponse> login(LoginRequset loginRequset) async{
+  Future<LoginResponse> login(LoginRequset loginRequset) async {
     var response = await _apiClient.post(
       ApiConstants.loginEndPoint,
       data: loginRequset.toJson(),

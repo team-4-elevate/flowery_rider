@@ -20,7 +20,8 @@ void main() {
   });
 
   group('AuthRemoteDataSourceImpl.login', () {
-    final loginRequest = LoginRequset(email: 'test@example.com', password: 'password123');
+    final loginRequest =
+        LoginRequset(email: 'test@example.com', password: 'password123');
     final loginResponse = LoginResponse(token: 'dummyToken');
 
     test('should return LoginResponse when login is successful', () async {
@@ -50,7 +51,8 @@ void main() {
         requiresToken: false,
       )).thenThrow(Exception('Login failed'));
 
-      expect(() => authRemoteDataSourceImpl.login(loginRequest), throwsA(isA<Exception>()));
+      expect(() => authRemoteDataSourceImpl.login(loginRequest),
+          throwsA(isA<Exception>()));
       verify(mockApiClient.post(
         ApiConstants.loginEndPoint,
         data: loginRequest.toJson(),

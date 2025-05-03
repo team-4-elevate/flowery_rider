@@ -4,5 +4,6 @@ import 'package:flowery_rider/features/auth/data/models/login_model/login_requse
 import 'package:flowery_rider/features/auth/data/models/login_model/login_response/login_response.dart';
 
 abstract interface class AuthRepo {
-  Future<Either<ApiException, LoginResponse>> login(LoginRequset loginRequset, bool rememberMe);
+  Future<Either<ApiException, LoginResponse>> login(
+      LoginRequset loginRequset, bool rememberMe);
 }
