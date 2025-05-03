@@ -1,11 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flowery_rider/core/app_bloc_observer.dart';
 import 'package:flowery_rider/core/di/injectable.dart';
+import 'package:flowery_rider/core/routes/app_router.dart';
+import 'package:flowery_rider/core/routes/routes.dart';
+import 'package:flowery_rider/core/theme/theme_data/theme_data_light.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await configureDependencies();
+  Bloc.observer = AppBlocObserver();
   runApp(
     EasyLocalization(
         supportedLocales: const [
@@ -23,16 +30,23 @@ class FloweryRider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      home: const Scaffold(
-        body: Center(
-          child: Text('hello'),
-        ),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: getLightTheme(),
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        onGenerateRoute: generateRoute,
+        initialRoute: Routes.onboarding,
+        // home: const Scaffold(
+        //   body: Center(
+        //     child: Text('hello'),
+        //   ),
+        // ),
       ),
     );
   }

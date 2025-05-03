@@ -5,7 +5,21 @@ class AppColors {
 
   static const scaffoldBackground = Color(0xffF9F9F9);
 
-  static const primary = Color.fromARGB(255, 56, 25, 38);
+  static const primary = MaterialColor(
+    0xffD21E6A,
+    <int, Color>{
+      10: Color(0xfff6d2e1),
+      20: Color(0xfff0b4cd),
+      30: Color(0xffe98fb5),
+      40: Color(0xffe1699c),
+      50: Color(0xffda4483),
+      60: Color(0xffaf1958),
+      70: Color(0xff8c1447),
+      80: Color(0xff690f35),
+      90: Color(0xff460a23),
+      100: Color(0xff2a0615),
+    },
+  );
   static const black = MaterialColor(
     0xff0C1015,
     <int, Color>{
