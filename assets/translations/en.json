@@ -15,5 +15,19 @@
     "phoneEmpty": "Please enter the phone number",
     "phoneInvalid": "Please enter a valid phone number",
     "pinCodeError": "Invalid code"
+  },
+  "login_screen": {
+    "login": "Login",
+    "authentication_failed": "Authentication Failed",
+    "email_label": "Email",
+    "email_hint": "Enter your email",
+    "password_label": "Password",
+    "password_hint": "Enter your password",
+    "remember_me": "Remember me",
+    "forget_password": "Forget password?"
+  },"Onboarding":{
+    "onboarding_title": "Welcome to\nFlowery rider app",
+  "login": "Login",
+  "apply_now": "Apply Now"
   }
 }
