@@ -1,3 +1,4 @@
+import 'package:flowery_rider/application_approved_page.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,11 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
             child: Text('Splash Screen'),
           ),
         ),
+      );
+    case Routes.applicationApproved:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const ApplicationApprovedPage(),
       );
 
     default:

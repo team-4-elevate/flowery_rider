@@ -36,7 +36,7 @@ class DialogUtils {
               ),
             ],
           ),
-          backgroundColor: Colors.black.withValues(alpha: 0.8),
+          backgroundColor: Colors.black.withOpacity(0.8),
           duration: duration,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(

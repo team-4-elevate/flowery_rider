@@ -15,5 +15,10 @@
     "phoneEmpty": "Please enter the phone number",
     "phoneInvalid": "Please enter a valid phone number",
     "pinCodeError": "Invalid code"
+  },
+  "applicationApproved": {
+    "title": "Your application has been \n submitted!",
+    "description": "Thank you for providing your application, we will review your application and will get back to you soon.",
+    "login": "Login"
   }
 }
