@@ -25,4 +25,5 @@ class Routes {
   static const String userOrdersScreen = '/userOrdersScreen';
   static const String webViewPage = '/webViewPage';
   static const String notificationPage = '/notificationPage';
+  static const String applicationApproved = '/application-approved';
 }
