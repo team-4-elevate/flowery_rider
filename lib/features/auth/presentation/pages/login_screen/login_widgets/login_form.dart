@@ -2,8 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flowery_rider/core/utils/validator.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_cubit.dart';
+import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_states.dart';
 import 'package:flowery_rider/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginForm extends StatelessWidget {
@@ -55,12 +57,13 @@ class LoginForm extends StatelessWidget {
           ),
           Row(
             children: [
-              ValueListenableBuilder<bool>(
-                valueListenable: loginCubit.rememberMe,
-                builder: (context, value, child) {
+              BlocBuilder<LoginCubit, LoginStates>(
+                buildWhen: (previous, current) =>
+                    previous.rememberMe != current.rememberMe,
+                builder: (context, state) {
                   return Checkbox(
                     activeColor: AppColors.primary,
-                    value: value,
+                    value: state.rememberMe,
                     onChanged: (bool? value) {
                       loginCubit.changeRememberMe(value ?? false);
                     },

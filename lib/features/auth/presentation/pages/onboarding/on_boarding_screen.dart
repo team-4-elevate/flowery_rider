@@ -7,9 +7,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  late LottieBuilder asset;
+  @override
+  void didChangeDependencies() {
+    if(FocusScope.of(context).hasFocus) {
+      FocusScope.of(context).unfocus();
+      asset = Lottie.asset('assets/ainmations/on-boarding.json',
+          filterQuality: FilterQuality.low);
+    }
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,12 +38,12 @@ class OnBoardingScreen extends StatelessWidget {
               width: double.infinity,
               height: 350.h,
               child: FittedBox(
+                alignment: AlignmentGeometry.lerp(Alignment.center,
+                    Alignment.centerRight, 0.1)!,
                 fit: BoxFit.cover,
-                child: Lottie.asset(
-                  'assets/ainmations/on-boarding.json',
-                ),
-              ),
-            ),
+                child: asset,
+            )),
+
             Text(
               LocaleKeys.Onboarding_onboarding_title.tr(),
               style: getBoldStyle(
@@ -69,7 +84,7 @@ class OnBoardingScreen extends StatelessWidget {
                 LocaleKeys.Onboarding_apply_now.tr(),
                 style: getRegularStyle(color: AppColors.black, fontSize: 16.sp),
               ),
-            ),
+            )
           ],
         ),
       ),

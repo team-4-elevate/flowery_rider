@@ -39,8 +39,13 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   //-----------------------------RememberMe-----------------------------------
   @override
-  Future<void> cacheRememberMe(bool rememberMe) async {
-    await _localStorageClient.saveData('rememberMe', rememberMe.toString());
+  Future<bool> cacheRememberMe(bool rememberMe) async {
+    try{
+      await _localStorageClient.saveData('rememberMe', rememberMe.toString());
+      return true;
+    }catch(e){
+      return false;
+    }
   }
 
   @override
