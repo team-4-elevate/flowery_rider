@@ -50,9 +50,6 @@ class LoginForm extends StatelessWidget {
               hintText: LocaleKeys.login_screen_password_hint.tr(),
             ),
           ),
-          SizedBox(
-            height: 24.h,
-          ),
           Row(
             children: [
               ValueListenableBuilder<bool>(
