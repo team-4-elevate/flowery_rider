@@ -29,81 +29,72 @@ class LoginScreen extends StatelessWidget {
           LocaleKeys.login_screen_login.tr(),
         ),
         leading: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: const Icon(Icons.arrow_back_ios_new_rounded)),
+          onTap: () => Navigator.pop(context),
+          child: const Icon(Icons.arrow_back_ios_new_rounded),
+        ),
         leadingWidth: 30.w,
       ),
-      body: Builder(
-        builder: (context) {
-          final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-          return Stack(
-            children: <Widget>[
-              ListView(
-                padding: EdgeInsets.only(bottom: 150.h + keyboardHeight),
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(16.w),
-                    child: LoginForm(
-                      emailController: emailController,
-                      passwordController: passwordController,
-                      loginFormKey: formKey,
-                      loginCubit: context.read<LoginCubit>(),
-                    ),
-                  ),
-                ],
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: ListView(
+            children: [
+              LoginForm(
+                emailController: emailController,
+                passwordController: passwordController,
+                loginFormKey: formKey,
+                loginCubit: context.read<LoginCubit>(),
               ),
-              Positioned(
-                bottom: keyboardHeight > 0 ? keyboardHeight : 50.h,
-                left: 0,
-                right: 0,
-                child: Padding(
-                  padding: EdgeInsets.all(16.w),
-                  child: BlocListener<LoginCubit, LoginStates>(
-                    listener: (context, state) {
-                      if (state.loginStates is BaseSuccessState) {
-                        _showDoneDialog(context);
-                      }
-                      if (state.loginStates is BaseErrorState) {
-                        Navigator.of(context).pop();
-                        getIt<DialogUtils>().showErrorDialog(
-                          context,
-                          LocaleKeys.login_screen_authentication_failed.tr(),
-                          (state.loginStates as BaseErrorState).errorMessage,
-                        );
-                      }
-                      if (state.loginStates is BaseLoadingState) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => const AlertDialog(
-                            backgroundColor: Colors.transparent,
-                            content: Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.primary,
-                              ),
-                            ),
+              SizedBox(height: 32.h),
+              BlocListener<LoginCubit, LoginStates>(
+                listener: (context, state) {
+                  if (state.loginStates is BaseSuccessState) {
+                    _showDoneDialog(context);
+                  }
+                  if (state.loginStates is BaseErrorState) {
+                    Navigator.of(context).pop();
+                    getIt<DialogUtils>().showErrorDialog(
+                      context,
+                      LocaleKeys.login_screen_authentication_failed.tr(),
+                      (state.loginStates as BaseErrorState).errorMessage,
+                    );
+                  }
+                  if (state.loginStates is BaseLoadingState) {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) => const AlertDialog(
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
+                        content: Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primary,
                           ),
-                        );
-                      }
-                    },
-                    child: ElevatedButton(
-                      onPressed: () {
-                        _validateThenDoLogin(
-                          formKey: formKey,
-                          context: context,
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                      },
-                      child: Text(
-                        LocaleKeys.login_screen_login.tr(),
+                        ),
                       ),
+                    );
+                  }
+                },
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _validateThenDoLogin(
+                        formKey: formKey,
+                        context: context,
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                    },
+                    child: Text(
+                      LocaleKeys.login_screen_continue.tr(),
                     ),
                   ),
                 ),
               ),
             ],
-          );
-        },
+          ),
+        ),
       ),
     );
   }
@@ -128,7 +119,10 @@ void _showDoneDialog(BuildContext context) {
             composition.duration + const Duration(milliseconds: 200),
             () {
               if (context.mounted) {
-                Navigator.of(context).pushReplacementNamed(Routes.homeLayout);
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  Routes.homeLayout,
+                  (route) => false,
+                );
               }
             },
           );

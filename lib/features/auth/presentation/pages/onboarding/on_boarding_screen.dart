@@ -7,8 +7,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
+
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  late LottieBuilder animation;
+
+  @override
+  void initState() {
+    super.initState();
+    animation = Lottie.asset(
+      'assets/ainmations/on-boarding.json',
+      filterQuality: FilterQuality.low,
+      frameRate: FrameRate.max,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,67 +38,45 @@ class OnBoardingScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 3,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child: Lottie.asset(
-                      'assets/ainmations/on-boarding.json',
-                    ),
+              SizedBox(
+                width: double.infinity,
+                height: 350.h,
+                child: FittedBox(
+                  alignment: AlignmentGeometry.lerp(
+                      Alignment.center, Alignment.centerRight, 0.2)!,
+                  fit: BoxFit.cover,
+                  child: animation,
+                ),
+              ),
+              Text(
+                LocaleKeys.Onboarding_onboarding_title.tr(),
+                style: getBoldStyle(
+                  color: AppColors.black,
+                  fontSize: 20.sp,
+                ),
+              ),
+              SizedBox(height: 24.h),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.login);
+                },
+                child: Text(
+                  LocaleKeys.Onboarding_login.tr(),
+                  style: getRegularStyle(
+                    color: AppColors.white,
+                    fontSize: 16.sp,
                   ),
                 ),
               ),
-              Expanded(
-                  flex: 4,
-                  child: Column(
-                    children: [
-                      Text(
-                        LocaleKeys.Onboarding_onboarding_title.tr(),
-                        style: getBoldStyle(
-                          color: AppColors.black,
-                          fontSize: 20.sp,
-                        ),
-                      ),
-                      SizedBox(height: 24.h),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, Routes.login);
-                        },
-                        child: Text(
-                          LocaleKeys.Onboarding_login.tr(),
-                          style: getRegularStyle(
-                            color: AppColors.white,
-                            fontSize: 16.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 16.h),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStatePropertyAll(
-                              AppColors.scaffoldBackground),
-                          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(100.r)),
-                              side: BorderSide(
-                                color: AppColors.black,
-                                width: 1.w,
-                              ),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          LocaleKeys.Onboarding_apply_now.tr(),
-                          style: getRegularStyle(
-                              color: AppColors.black, fontSize: 16.sp),
-                        ),
-                      ),
-                    ],
-                  ))
+              SizedBox(height: 16.h),
+              OutlinedButton(
+                onPressed: () {},
+                child: Text(
+                  LocaleKeys.Onboarding_apply_now.tr(),
+                  style:
+                      getRegularStyle(color: AppColors.black, fontSize: 16.sp),
+                ),
+              )
             ],
           ),
         ),

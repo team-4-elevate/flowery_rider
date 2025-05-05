@@ -6,4 +6,6 @@ import 'package:flowery_rider/features/auth/data/models/login_model/login_respon
 abstract interface class AuthRepo {
   Future<Either<ApiException, LoginResponse>> login(
       LoginRequset loginRequset, bool rememberMe);
+
+  cacheRememberMe(bool rememberMe);
 }

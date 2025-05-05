@@ -29,11 +29,16 @@
       "password_label": "كلمة المرور",
       "password_hint": "أدخل كلمة المرور",
       "remember_me": "تذكرني",
-      "forget_password": "هل نسيت كلمة المرور؟"
+      "forget_password": "هل نسيت كلمة المرور؟",
+    "continue": "متابعة"
     },"Onboarding":{
     "onboarding_title": "مرحبًا بك في\nتطبيق فلاوري رايدر",
   "login": "تسجيل الدخول",
   "apply_now": "قدّم الآن"
+  },
+  "somethingWentWrong": "حدث خطأ ما",
+  "Dialog": {
+    "ok": "حسناً"
   }
 }
    

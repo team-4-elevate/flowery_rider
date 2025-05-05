@@ -37,19 +37,6 @@ ThemeData getLightTheme() => ThemeData(
         ),
       ),
       //outlined button theme
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.white[90]!,
-          backgroundColor: AppColors.scaffoldBackground,
-          side: const BorderSide(
-            color: AppColors.primary,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100),
-          ),
-          minimumSize: Size(double.infinity, 48.h),
-        ),
-      ),
       inputDecorationTheme: InputDecorationTheme(
         // contentPadding: EdgeInsets.zero,
         contentPadding:
@@ -83,6 +70,18 @@ ThemeData getLightTheme() => ThemeData(
           borderSide: const BorderSide(
             color: AppColors.error,
           ),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          backgroundColor: AppColors.scaffoldBackground,
+          side: const BorderSide(
+            color: AppColors.black,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100.r),
+          ),
+          minimumSize: Size(double.infinity, 48.h),
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(

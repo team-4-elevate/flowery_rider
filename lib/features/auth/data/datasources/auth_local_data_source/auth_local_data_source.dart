@@ -7,7 +7,7 @@ abstract class AuthLocalDataSource {
   Future<void> deleteToken();
   Future<String?> checkSavedToken();
   //-----------------------------cacheRememberMe-----------------------------------
-  Future<void> cacheRememberMe(bool rememberMe);
+  Future<bool> cacheRememberMe(bool rememberMe);
   bool getRememberMe();
   Future<void> deleteRememberMe();
 }

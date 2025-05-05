@@ -3,13 +3,13 @@ import 'package:flowery_rider/core/base/base_state.dart';
 
 class LoginStates extends Equatable {
   final BaseState? loginStates;
-  final bool? rememberMe;
-  const LoginStates(this.loginStates, this.rememberMe);
+  final bool rememberMe;
+  const LoginStates(this.loginStates, {this.rememberMe = false});
 
   LoginStates copyWith({BaseState? loginStates, bool? rememberMe}) {
     return LoginStates(
       loginStates ?? this.loginStates,
-      rememberMe ?? this.rememberMe,
+      rememberMe: rememberMe ?? this.rememberMe,
     );
   }
 

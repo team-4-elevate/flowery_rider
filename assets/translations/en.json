@@ -24,7 +24,8 @@
     "password_label": "Password",
     "password_hint": "Enter your password",
     "remember_me": "Remember me",
-    "forget_password": "Forget password?"
+    "forget_password": "Forget password?",
+    "continue": "Continue"
   },
   "Onboarding": {
     "onboarding_title": "Welcome to\nFlowery rider app",
@@ -35,5 +36,9 @@
     "title": "Your application has been \n submitted!",
     "description": "Thank you for providing your application, we will review your application and will get back to you soon.",
     "login": "Login"
+  },
+  "somethingWentWrong": "Something went wrong",
+  "Dialog": {
+    "ok": "OK"
   }
 }
