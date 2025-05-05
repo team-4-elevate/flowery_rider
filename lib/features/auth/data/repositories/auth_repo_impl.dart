@@ -19,14 +19,16 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<ApiException, LoginResponse>> login(
       LoginRequset loginRequset, bool rememberMe) async {
     try {
-      var reponse = await _authRemoteDataSource.login(loginRequset);
-      if (reponse.token != null && rememberMe) {
-        await _authLocalDataSource.cacheToken(reponse.token!);
-        await cacheRememberMe(rememberMe);
-        return Right(reponse);
-      } else {
+      var response = await _authRemoteDataSource.login(loginRequset);
+
+      if (response.token == null) {
         return Left(ApiException(message: LocaleKeys.somethingWentWrong.tr()));
       }
+      if (rememberMe) {
+        await _authLocalDataSource.cacheToken(response.token!);
+        await cacheRememberMe(rememberMe);
+      }
+      return Right(response);
     } catch (e) {
       return Left(ApiException(message: e.toString()));
     }

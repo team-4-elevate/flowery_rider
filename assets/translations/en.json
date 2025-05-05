@@ -37,5 +37,8 @@
     "description": "Thank you for providing your application, we will review your application and will get back to you soon.",
     "login": "Login"
   },
-  "somethingWentWrong": "Something went wrong"
+  "somethingWentWrong": "Something went wrong",
+  "Dialog": {
+    "ok": "OK"
+  }
 }

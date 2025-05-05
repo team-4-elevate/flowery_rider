@@ -61,7 +61,7 @@ class DialogUtils {
           actions: [
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('dialogs.error.ok'.tr()),
+              child: Text('Dialog.ok'.tr()),
             ),
           ],
         );

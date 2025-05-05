@@ -36,6 +36,9 @@
   "login": "تسجيل الدخول",
   "apply_now": "قدّم الآن"
   },
-  "somethingWentWrong": "حدث خطأ ما"
+  "somethingWentWrong": "حدث خطأ ما",
+  "Dialog": {
+    "ok": "حسناً"
+  }
 }
    
