@@ -20,5 +20,20 @@
     "title": "تم إرسال طلبك!",
     "description": "شكرًا لتقديمك الطلب. سنقوم بمراجعة طلبك وسنعاود التواصل معك قريبًا.",
     "login": "تسجيل الدخول"
+  },
+  "login_screen": {
+      "login": "تسجيل الدخول",
+      "authentication_failed": "فشل في تسجيل الدخول",
+      "email_label": "البريد الإلكتروني",
+      "email_hint": "أدخل بريدك الإلكتروني",
+      "password_label": "كلمة المرور",
+      "password_hint": "أدخل كلمة المرور",
+      "remember_me": "تذكرني",
+      "forget_password": "هل نسيت كلمة المرور؟"
+    },"Onboarding":{
+    "onboarding_title": "مرحبًا بك في\nتطبيق فلاوري رايدر",
+  "login": "تسجيل الدخول",
+  "apply_now": "قدّم الآن"
   }
 }
+   

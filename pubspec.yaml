@@ -43,6 +43,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.1.0
   get_it: ^8.0.3
+  mockito: ^5.4.2
   injectable: ^2.5.0
   internet_connection_checker: ^3.0.1
   logger: ^2.5.0
@@ -75,8 +76,8 @@ flutter:
   assets:
     - assets/translations/
     - assets/fonts/
-    - assets/icons/
-    - assets/images/
+    - assets/ainmations/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
