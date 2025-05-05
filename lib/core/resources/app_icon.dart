@@ -1,2 +1,3 @@
-// core/resources/icon_manager.dart
-class AppIcon {}
+class AppIcon {
+  static const String checkCircle = 'assets/icons/check-circle.svg';
+}

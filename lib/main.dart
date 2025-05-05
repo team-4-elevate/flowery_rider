@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/core/app_bloc_observer.dart';
 import 'package:flowery_rider/core/di/injectable.dart';
 import 'package:flowery_rider/core/routes/app_router.dart';
+import 'package:flowery_rider/core/routes/navigator_observer.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/theme_data/theme_data_light.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -36,17 +36,16 @@ class FloweryRider extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
+        navigatorObservers: [getIt<AppNavigatorObserver>()],
+        //initialRoute: Routes.login,
+        initialRoute: Routes.onboarding,
+        onGenerateRoute: generateRoute,
         theme: getLightTheme(),
+        darkTheme: ThemeData(),
+        themeMode: ThemeMode.light,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        onGenerateRoute: generateRoute,
-        initialRoute: Routes.onboarding,
-        // home: const Scaffold(
-        //   body: Center(
-        //     child: Text('hello'),
-        //   ),
-        // ),
       ),
     );
   }

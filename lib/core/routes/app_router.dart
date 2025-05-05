@@ -1,4 +1,5 @@
 import 'package:flowery_rider/core/di/injectable.dart';
+import 'package:flowery_rider/application_approved_page.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/features/Home_layout/home_layout.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_screen.dart';
@@ -21,6 +22,11 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => HomeLayout(),
+      );
+    case Routes.applicationApproved:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const ApplicationApprovedPage(),
       );
     default:
       return MaterialPageRoute(

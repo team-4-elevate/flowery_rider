@@ -5,4 +5,11 @@ class Routes {
   static const String forgetPassword = '/forget-password';
   static const String onboarding = '/onboarding';
   static const String homeLayout = '/homeLayout';
+  static const String pinCode = '/pin-code';
+  static const String resetPassword = '/reset-password';
+  static const String profile = '/profile';
+  static const String profileResetPassword = '/profile-reset-password';
+  static const String splash = '/splash';
+  static const String home = '/home';
+  static const String applicationApproved = '/application-approved';
 }

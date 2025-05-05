@@ -15,8 +15,13 @@
     "phoneEmpty": "يرجى إدخال رقم الهاتف",
     "phoneInvalid": "يرجى إدخال رقم هاتف صحيح",
     "pinCodeError": "رمز غير صحيح"
-    },
-    "login_screen": {
+  },
+  "applicationApproved": {
+    "title": "تم إرسال طلبك!",
+    "description": "شكرًا لتقديمك الطلب. سنقوم بمراجعة طلبك وسنعاود التواصل معك قريبًا.",
+    "login": "تسجيل الدخول"
+  },
+  "login_screen": {
       "login": "تسجيل الدخول",
       "authentication_failed": "فشل في تسجيل الدخول",
       "email_label": "البريد الإلكتروني",
@@ -30,4 +35,5 @@
   "login": "تسجيل الدخول",
   "apply_now": "قدّم الآن"
   }
-  }
+}
+   
