@@ -10,6 +10,7 @@ import 'package:flowery_rider/features/auth/presentation/pages/login_screen/logi
 import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/onboarding/on_boarding_screen.dart';
 import 'package:flowery_rider/features/forget_password/presentation/pages/reset_password_page.dart';
+import 'package:flowery_rider/features/success-screen/order_success.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -79,6 +80,12 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => const ApplySuccessPage(),
+      );
+
+      case Routes.successorder:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) =>  SuccessOrderPage(),
       );
     default:
       return MaterialPageRoute(

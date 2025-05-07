@@ -39,7 +39,7 @@ class FloweryRider extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorObservers: [getIt<AppNavigatorObserver>()],
         //initialRoute: Routes.login,
-        initialRoute: Routes.onboarding,
+        initialRoute: Routes.successorder,
         onGenerateRoute: generateRoute,
         theme: getLightTheme(),
         darkTheme: ThemeData(),
