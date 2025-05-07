@@ -3,4 +3,7 @@ class ApiConstants {
   ApiConstants._();
   static const String baseUrl = 'https://flower.elevateegy.com/api/v1/';
   static const String loginEndPoint = 'drivers/signin';
+  static const String forgetPassword = 'drivers/forgotPassword';
+  static const String verifyOtp = 'drivers/verifyResetCode';
+  static const String resetPassword = 'drivers/resetPassword';
 }

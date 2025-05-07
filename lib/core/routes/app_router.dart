@@ -5,8 +5,13 @@ import 'package:flowery_rider/features/Home_layout/home_layout.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_screen.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/onboarding/on_boarding_screen.dart';
+import 'package:flowery_rider/features/forget_password/presentation/pages/reset_password_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../features/forget_password/presentation/cubit/forget_password_cubit.dart';
+import '../../features/forget_password/presentation/pages/forget_password_page.dart';
+import '../../features/forget_password/presentation/pages/pin_code_page.dart';
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -28,6 +33,34 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         settings: settings,
         builder: (_) => const ApplicationApprovedPage(),
       );
+    case Routes.forgetPassword:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) {
+          return BlocProvider(
+              create: (context) => getIt<ForgetPasswordCubit>(),
+              child: ForgetPasswordPage());
+        },
+      );
+    case Routes.pinCode:
+      return MaterialPageRoute(
+          settings: settings,
+          builder: (_) {
+            final args = settings.arguments as ForgetPasswordCubit;
+            return BlocProvider.value(
+                value: args, child: PinCodePage(forgetPasswordCubit: args));
+          });
+    case Routes.resetPassword:
+      return MaterialPageRoute(
+          settings: settings,
+          builder: (con) {
+            final args = settings.arguments as ForgetPasswordCubit;
+            return BlocProvider.value(
+                value: args,
+                child: ResetPasswordPage(
+                  forgetCubit: args,
+                ));
+          });
     default:
       return MaterialPageRoute(
         settings: settings,
