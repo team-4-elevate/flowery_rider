@@ -21,13 +21,14 @@ ThemeData getLightTheme() => ThemeData(
         ),
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.scaffoldBackground,
+        backgroundColor: Colors.transparent,
         foregroundColor: AppColors.black,
         titleTextStyle: getMediumStyle(
           color: AppColors.black,
           fontSize: 20.sp,
         ),
         centerTitle: false,
+        elevation: 0,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -37,9 +38,9 @@ ThemeData getLightTheme() => ThemeData(
           disabledForegroundColor: AppColors.scaffoldBackground,
           // elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25.r), 
+            borderRadius: BorderRadius.circular(25.r),
           ),
-          minimumSize: Size(double.infinity, 50.h), 
+          minimumSize: Size(double.infinity, 50.h),
         ),
       ),
       //outlined button theme

@@ -14,11 +14,96 @@
     "passwordSamePassword": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور الحالية",
     "phoneEmpty": "الرجاء إدخال رقم الهاتف",
     "phoneInvalid": "الرجاء إدخال رقم هاتف صحيح",
-    "pinCodeError": "رمز غير صالح"
+    "pinCodeError": "رمز غير صالح",
+    "passwordMatch": "كلمات المرور غير متطابقة",
+    "required": "هذا الحقل مطلوب",
+    "passwordLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "invalidEmail": "الرجاء إدخال بريد إلكتروني صحيح",
+    "invalidVehicleNumber": "الرجاء إدخال رقم مركبة صحيح (مثل AB-12 1234)",
+    "vehicleNumber": "الرجاء إدخال رقم مركبة صحيح (مثل AB-12 1234)"
   },
-  "onboardingWelcomeTo": "مرحبًا بك في",
-  "onboardingFloweryRiderApp": "تطبيق فلاوري رايدر",
-  "onboardingLogin": "تسجيل الدخول",
-  "onboardingApplyNow": "تقدم الآن",
-  "onboardingVersion": "إصدار {6.3.0} - ({446})"
+  "onboarding": {
+    "welcomeTo": "مرحبًا بك في",
+    "floweryRiderApp": "تطبيق فلاوري رايدر",
+    "login": "تسجيل الدخول",
+    "applyNow": "تقدم الآن",
+    "version": "إصدار {6.3.0} - ({446})"
+  },
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "email": {
+        "label": "البريد الإلكتروني",
+        "hint": "أدخل عنوان بريدك الإلكتروني"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "hint": "أدخل كلمة المرور الخاصة بك"
+      },
+      "remember_me": "تذكرني",
+      "forgot_password": "نسيت كلمة المرور؟",
+      "login_button": "تسجيل الدخول"
+    },
+    "forgot_password": {
+      "title": "كلمة المرور",
+      "heading": "نسيت كلمة المرور",
+      "instruction": "الرجاء إدخال بريدك الإلكتروني المرتبط بحسابك",
+      "email": {
+        "label": "البريد الإلكتروني",
+        "hint": "أدخل عنوان بريدك الإلكتروني"
+      },
+      "confirm_button": "تأكيد"
+    },
+    "verification": {
+      "title": "التحقق من البريد الإلكتروني",
+      "heading": "التحقق من البريد الإلكتروني",
+      "instruction": "الرجاء إدخال رمز التحقق المرسل إلى بريدك الإلكتروني:",
+      "resend_button": "إعادة إرسال رمز التحقق"
+    },
+    "resetpassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "heading": "إعادة تعيين كلمة المرور",
+      "instruction": "الرجاء إدخال كلمة المرور الجديدة",
+      "confirm_label": "تأكيد كلمة المرور",
+      "confirm_hint": "تأكيد كلمة المرور الجديدة",
+      "button": "إعادة تعيين كلمة المرور",
+      "success": "تم إعادة تعيين كلمة المرور بنجاح!"
+    },
+    "apply": {
+      "title": "تقديم طلب",
+      "welcome": "أهلا بك!",
+      "description": "هل تريد أن تكون سائق توصيل؟ انضم إلى فريقنا الآن!",
+      "personal_information": "المعلومات الشخصية",
+      "first_name": "الاسم الأول",
+      "last_name": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone_number": "رقم الهاتف",
+      "gender": "الجنس",
+      "male": "ذكر",
+      "female": "أنثى",
+      "vehicle_information": "معلومات المركبة",
+      "select_vehicle_type": "اختر نوع المركبة",
+      "car": "سيارة",
+      "motorcycle": "دراجة نارية",
+      "bicycle": "دراجة هوائية",
+      "van": "شاحنة صغيرة",
+      "vehicle_number": "رقم المركبة",
+      "upload_vehicle_license": "تحميل رخصة المركبة",
+      "account_information": "معلومات الحساب",
+      "id_number": "رقم الهوية",
+      "upload_id_card": "تحميل بطاقة الهوية",
+      "password": "كلمة المرور",
+      "confirm_password": "تأكيد كلمة المرور",
+      "submit_application": "إرسال الطلب",
+      "upload_required_files": "الرجاء تحميل جميع الملفات المطلوبة",
+      "file_uploaded": "تم تحميل الملف",
+      "processing": "جاري المعالجة...",
+      "submission_note": "قد يستغرق هذا بعض الوقت. الرجاء عدم إغلاق التطبيق."
+    }
+  },
+  "select_vehicle_type": "اختر نوع المركبة",
+  "car": "سيارة",
+  "motorcycle": "دراجة نارية",
+  "bicycle": "دراجة هوائية",
+  "van": "شاحنة صغيرة"
 }

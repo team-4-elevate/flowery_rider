@@ -6,6 +6,10 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class DialogUtils {
+  // Loading dialog tracking
+  bool _isLoading = false;
+  BuildContext? _loadingContext;
+
   void showSnackBar({
     required Color textColor,
     required String message,
@@ -36,7 +40,7 @@ class DialogUtils {
               ),
             ],
           ),
-          backgroundColor: Colors.black.withValues(alpha: 0.8),
+          backgroundColor: Colors.black.withAlpha(204),
           duration: duration,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
@@ -67,5 +71,45 @@ class DialogUtils {
         );
       },
     );
+  }
+
+  // Show loading dialog
+  void showLoading(BuildContext context) {
+    if (_isLoading) return;
+
+    _isLoading = true;
+    _loadingContext = context;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const CircularProgressIndicator(),
+                SizedBox(height: 16.h),
+                Text('Please wait...', style: TextStyle(fontSize: 16.sp)),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  // Hide loading dialog
+  void hideLoading(BuildContext context) {
+    if (!_isLoading) return;
+
+    _isLoading = false;
+
+    if (_loadingContext != null && Navigator.canPop(_loadingContext!)) {
+      Navigator.pop(_loadingContext!);
+      _loadingContext = null;
+    }
   }
 }
