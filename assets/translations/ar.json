@@ -21,6 +21,37 @@
     "description": "شكرًا لتقديمك الطلب. سنقوم بمراجعة طلبك وسنعاود التواصل معك قريبًا.",
     "login": "تسجيل الدخول"
   },
+  "forgetPassword": {
+    "title": "نسيت كلمة المرور",
+    "description": "يرجى إدخال البريد الإلكتروني المرتبط بحسابك",
+    "continueButton": "متابعة"
+  },
+  "pinCode": {
+  "title": "تأكيد البريد الإلكتروني",
+  "description": "يرجى إدخال الرمز المرسل إلى بريدك الإلكتروني",
+  "ErrorMessage": "رمز غير صحيح",
+  "ReadyMessage": "لم يصلك الرمز؟",
+  "ResendMessage": " إعادة الإرسال",
+  "otpSent": "تم ارسال الكود لبريدك الالكتروني"
+},
+  "reset_password": {
+    "title": "إعادة تعيين كلمة المرور",
+    "current_password": "كلمة المرور الحالية",
+    "current_password_hint": "كلمة المرور الحالية",
+    "new_password": "كلمة المرور الجديدة",
+    "new_password_hint": "كلمة المرور الجديدة",
+    "confirm_password": "تأكيد كلمة المرور",
+    "confirm_password_hint": "تأكيد كلمة المرور",
+    "update_button": "تحديث",
+    "success_message": "تم تحديث كلمة المرور بنجاح",
+    "error_message": "فشل في تحديث كلمة المرور. يرجى المحاولة مرة أخرى.",
+    "error": {
+      "confirm_password_required": "يرجى تأكيد كلمة المرور",
+      "passwords_not_match": "كلمتا المرور غير متطابقتين",
+      "same_password": "يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية",
+      "incorrect_password": "كلمة المرور الحالية غير صحيحة"
+    }
+  },
   "login_screen": {
       "login": "تسجيل الدخول",
       "authentication_failed": "فشل في تسجيل الدخول",
@@ -40,5 +71,6 @@
   "Dialog": {
     "ok": "حسناً"
   }
+
 }
    

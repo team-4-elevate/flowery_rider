@@ -78,7 +78,10 @@ class LoginForm extends StatelessWidget {
                   LocaleKeys.login_screen_forget_password.tr(),
                   style: const TextStyle(decoration: TextDecoration.underline),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(Routes.forgetPassword, arguments: loginCubit);
+                },
               ),
             ],
           ),
