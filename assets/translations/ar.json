@@ -14,7 +14,13 @@
     "passwordSamePassword": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور الحالية",
     "phoneEmpty": "يرجى إدخال رقم الهاتف",
     "phoneInvalid": "يرجى إدخال رقم هاتف صحيح",
-    "pinCodeError": "رمز غير صحيح"
+    "pinCodeError": "رمز غير صحيح",
+    "required": "هذا الحقل مطلوب",
+    "passwordLength": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل",
+    "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+    "invalidVehicleNumber": "يرجى إدخال رقم مركبة صحيح (مثال: AB-12 1234)",
+    "vehicleNumber": "يرجى إدخال رقم مركبة صحيح (مثال: AB-12 1234)",
+    "passwordMatch": "كلمتا المرور غير متطابقتين"
   },
   "applicationApproved": {
     "title": "تم إرسال طلبك!",
@@ -62,15 +68,62 @@
       "remember_me": "تذكرني",
       "forget_password": "هل نسيت كلمة المرور؟",
     "continue": "متابعة"
-    },"Onboarding":{
+    },
+  "Onboarding": {
     "onboarding_title": "مرحبًا بك في\nتطبيق فلاوري رايدر",
-  "login": "تسجيل الدخول",
-  "apply_now": "قدّم الآن"
+    "login": "تسجيل الدخول",
+    "apply_now": "قدّم الآن"
   },
-  "somethingWentWrong": "حدث خطأ ما",
+  "somethingWentWrong": "حدث خطأ ما",
   "Dialog": {
     "ok": "حسناً"
+  },
+  "auth": {
+    "apply": {
+      "select_vehicle_type": "اختر نوع المركبة",
+      "car": "سيارة",
+      "motorcycle": "دراجة نارية",
+      "bicycle": "دراجة هوائية",
+      "van": "شاحنة صغيرة",
+      "processing": "جاري المعالجة...",
+      "submit_application": "تقديم الطلب",
+      "upload_required_files": "يرجى تحميل جميع الملفات المطلوبة",
+      "title": "تقديم طلب",
+      "file_uploaded": "تم تحميل الملف",
+      "account_information": "معلومات الحساب",
+      "vehicle_information": "معلومات المركبة",
+      "id_number": "رقم الهوية"
+    }
+  },
+  "apply": {
+    "title": "تقديم طلب",
+    "welcome": "مرحبًا!",
+    "description": "هل ترغب في أن تكون سائق توصيل؟ انضم إلى فريقنا الآن!",
+    "personal_information": "المعلومات الشخصية",
+    "first_name": "الاسم الأول",
+    "last_name": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "phone_number": "رقم الهاتف",
+    "gender": "الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "vehicle_information": "معلومات المركبة",
+    "select_vehicle_type": "اختر نوع المركبة",
+    "car": "سيارة",
+    "motorcycle": "دراجة نارية",
+    "bicycle": "دراجة هوائية",
+    "van": "شاحنة صغيرة",
+    "vehicle_number": "رقم المركبة",
+    "upload_vehicle_license": "تحميل رخصة المركبة",
+    "account_information": "معلومات الحساب",
+    "id_number": "رقم الهوية",
+    "upload_id_card": "تحميل بطاقة الهوية",
+    "password": "كلمة المرور",
+    "confirm_password": "تأكيد كلمة المرور",
+    "submit_application": "تقديم الطلب",
+    "upload_required_files": "يرجى تحميل جميع الملفات المطلوبة",
+    "file_uploaded": "تم تحميل الملف",
+    "processing": "جاري المعالجة...",
+    "submission_note": "قد يستغرق هذا لحظة. يرجى عدم إغلاق التطبيق."
   }
-
 }
-   

@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -17,6 +18,21 @@ import 'package:flowery_rider/core/error_handling/dio_error_handler.dart'
     as _i388;
 import 'package:flowery_rider/core/routes/navigator_observer.dart' as _i944;
 import 'package:flowery_rider/core/widget/dialog_utils.dart' as _i318;
+import 'package:flowery_rider/features/apply/data/datasource/local_data_source/auth_loca_data_source_impl.dart'
+    as _i51;
+import 'package:flowery_rider/features/apply/data/datasource/local_data_source/auth_local_data_source_contract.dart'
+    as _i127;
+import 'package:flowery_rider/features/apply/data/datasource/remote_data_source/auth_remote_data_source_contract.dart'
+    as _i959;
+import 'package:flowery_rider/features/apply/data/datasource/remote_data_source/auth_remote_data_source_impl.dart'
+    as _i304;
+import 'package:flowery_rider/features/apply/data/repo/auth_repo.dart' as _i762;
+import 'package:flowery_rider/features/apply/domain/repo/auth_repo.dart'
+    as _i711;
+import 'package:flowery_rider/features/apply/domain/use_case/apply_usecase.dart'
+    as _i937;
+import 'package:flowery_rider/features/apply/presentation/cubit/auth_cubit.dart'
+    as _i391;
 import 'package:flowery_rider/features/auth/data/datasources/auth_local_data_source/auth_local_data_source.dart'
     as _i902;
 import 'package:flowery_rider/features/auth/data/datasources/auth_local_data_source/auth_local_data_source_impl.dart'
@@ -88,13 +104,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i558.FlutterSecureStorage>(
         () => getItRegisterModule.secureStorage);
-    gh.singleton<_i318.DialogUtils>(() => _i318.DialogUtils());
     gh.singleton<_i944.AppNavigatorObserver>(
         () => _i944.AppNavigatorObserver());
+    gh.singleton<_i318.DialogUtils>(() => _i318.DialogUtils());
     gh.singleton<_i983.LocalStorageClient>(() => _i983.LocalStorageClient(
           gh<_i460.SharedPreferences>(),
           gh<_i558.FlutterSecureStorage>(),
         ));
+    gh.factory<_i127.AuthLocalDataSourceContract>(
+        () => _i51.AuthLocalDataSourceImpl(gh<_i983.LocalStorageClient>()));
     gh.singleton<_i388.DioErrorHandler>(() => _i388.DioErrorHandler(
           gh<_i983.LocalStorageClient>(),
           gh<_i719.GlobalKey<_i719.NavigatorState>>(),
@@ -110,28 +128,40 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i1016.ForgetPasswordRemoteDsI>(
         () => _i785.ForgetPasswordRemoteDsImpl(gh<_i452.ApiClient>()));
+    gh.factory<_i959.AuthRemoteDataSourceContract>(
+        () => _i304.AuthRemoteDataSourceImpl(gh<_i452.ApiClient>()));
     gh.factory<_i614.AuthRemoteDataSource>(
         () => _i363.AuthRemoteDataSourceImpl(gh<_i452.ApiClient>()));
     gh.factory<_i78.ForgetPasswordRepoI>(() => _i259.ForgetPasswordRepoImpl(
           gh<_i1016.ForgetPasswordRemoteDsI>(),
           gh<_i650.ForgetPasswordLocalDsI>(),
         ));
+    gh.factory<_i711.AuthRepo>(() => _i762.AuthRepositoryImpl(
+          gh<_i959.AuthRemoteDataSourceContract>(),
+          gh<_i127.AuthLocalDataSourceContract>(),
+        ));
     gh.factory<_i351.AuthRepo>(() => _i683.AuthRepoImpl(
           gh<_i614.AuthRemoteDataSource>(),
           gh<_i902.AuthLocalDataSource>(),
         ));
+    gh.factory<_i937.ApplyUseCase>(
+        () => _i937.ApplyUseCase(gh<_i711.AuthRepo>()));
     gh.factory<_i442.ForgetPasswordUseCase>(
         () => _i442.ForgetPasswordUseCase(gh<_i78.ForgetPasswordRepoI>()));
-    gh.factory<_i1007.VerifyOtpUseCase>(
-        () => _i1007.VerifyOtpUseCase(gh<_i78.ForgetPasswordRepoI>()));
     gh.factory<_i542.ResendOtpUseCase>(
         () => _i542.ResendOtpUseCase(gh<_i78.ForgetPasswordRepoI>()));
+    gh.factory<_i1007.VerifyOtpUseCase>(
+        () => _i1007.VerifyOtpUseCase(gh<_i78.ForgetPasswordRepoI>()));
     gh.factory<_i597.CacheRememberMeUsecase>(
         () => _i597.CacheRememberMeUsecase(gh<_i351.AuthRepo>()));
     gh.factory<_i968.LoginUseCase>(
         () => _i968.LoginUseCase(gh<_i351.AuthRepo>()));
     gh.factory<_i592.ResetPasswordUseCase>(
         () => _i592.ResetPasswordUseCase(gh<_i78.ForgetPasswordRepoI>()));
+    gh.factory<_i391.AuthCubit>(() => _i391.AuthCubit(
+          gh<_i711.AuthRepo>(),
+          gh<_i937.ApplyUseCase>(),
+        ));
     gh.factory<_i107.ForgetPasswordCubit>(() => _i107.ForgetPasswordCubit(
           gh<_i442.ForgetPasswordUseCase>(),
           gh<_i542.ResendOtpUseCase>(),

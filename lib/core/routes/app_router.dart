@@ -1,7 +1,11 @@
+// core/routes/app_router.dart
 import 'package:flowery_rider/core/di/injectable.dart';
 import 'package:flowery_rider/application_approved_page.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/features/Home_layout/home_layout.dart';
+import 'package:flowery_rider/features/apply/presentation/cubit/auth_cubit.dart';
+import 'package:flowery_rider/features/apply/presentation/pages/apply_page.dart';
+import 'package:flowery_rider/features/apply/presentation/pages/apply_success_page.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_screen.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/onboarding/on_boarding_screen.dart';
@@ -61,6 +65,21 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
                   forgetCubit: args,
                 ));
           });
+
+    case Routes.apply:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => BlocProvider(
+          create: (_) => getIt<AuthCubit>(),
+          child: const ApplyPage(),
+        ),
+      );
+
+    case Routes.successApply:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const ApplySuccessPage(),
+      );
     default:
       return MaterialPageRoute(
         settings: settings,

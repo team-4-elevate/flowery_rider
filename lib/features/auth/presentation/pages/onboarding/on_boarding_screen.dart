@@ -1,3 +1,4 @@
+// features/auth/presentation/pages/onboarding/on_boarding_screen.dart
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
@@ -70,7 +71,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
               SizedBox(height: 16.h),
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.apply);
+                },
                 child: Text(
                   LocaleKeys.Onboarding_apply_now.tr(),
                   style:
