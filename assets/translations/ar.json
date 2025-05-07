@@ -69,10 +69,12 @@
       "forget_password": "هل نسيت كلمة المرور؟",
     "continue": "متابعة"
     },
-  "Onboarding": {
-    "onboarding_title": "مرحبًا بك في\nتطبيق فلاوري رايدر",
+  "onboarding": {
+    "welcomeTo": "مرحبًا بك في",
+    "floweryRiderApp": "تطبيق فلاوري رايدر",
     "login": "تسجيل الدخول",
-    "apply_now": "قدّم الآن"
+    "applyNow": "تقدم الآن",
+    "version": "إصدار {6.3.0} - ({446})"
   },
   "somethingWentWrong": "حدث خطأ ما",
   "Dialog": {

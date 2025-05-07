@@ -29,10 +29,12 @@
     "forget_password": "Forget password?",
     "continue": "Continue"
   },
-  "Onboarding": {
-    "onboarding_title": "Welcome to\nFlowery rider app",
+  "onboarding": {
+    "welcomeTo": "Welcome to",
+    "floweryRiderApp":  "Flowery rider app",
     "login": "Login",
-    "apply_now": "Apply Now"
+    "applyNow":  "Apply now",
+    "version":  "v 6.3.0 - (446)"
   },
   "applicationApproved": {
     "title": "Your application has been \n submitted!",

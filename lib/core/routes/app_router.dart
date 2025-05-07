@@ -21,7 +21,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case Routes.onboarding:
       return MaterialPageRoute(
-          settings: settings, builder: (_) => OnBoardingScreen());
+          settings: settings, builder: (_) => Onboarding());
     case Routes.login:
       return MaterialPageRoute(
           settings: settings,
