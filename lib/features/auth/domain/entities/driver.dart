@@ -1,6 +1,5 @@
 // features/auth/domain/entities/driver.dart
 
-/// Legacy Driver class - used for backward compatibility
 class Driver {
   String? country;
   String? firstName;

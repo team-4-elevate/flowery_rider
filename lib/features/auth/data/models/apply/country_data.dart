@@ -1,5 +1,5 @@
-// features/apply/data/model/apply/country_data.dart
-import 'package:flowery_rider/features/apply/data/model/apply/country_model.dart';
+// features/auth/data/models/apply/country_data.dart
+import 'package:flowery_rider/features/auth/data/models/apply/country_model.dart';
 
 class CountryData {
   static List<Country> getDefaultCountries() {

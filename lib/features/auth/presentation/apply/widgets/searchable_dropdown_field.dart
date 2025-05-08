@@ -1,6 +1,6 @@
-// features/apply/presentation/widgets/apply_widgets/searchable_dropdown_field.dart
+// features/auth/presentation/apply/widgets/searchable_dropdown_field.dart
 import 'package:flowery_rider/core/theme/app_colors.dart';
-import 'package:flowery_rider/features/apply/presentation/widgets/apply_widgets/searchable_dropdown.dart';
+import 'package:flowery_rider/features/auth/presentation/apply/widgets/searchable_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flowery_rider/core/theme/app_styles.dart';
