@@ -1,58 +1,64 @@
-// features/auth/presentation/widgets/apply_widgets/vehicle_type_dropdown.dart
+// features/auth/presentation/apply/widgets/vehicle_type_dropdown.dart
+import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/generated/locale_keys.g.dart';
+import 'package:flowery_rider/features/auth/presentation/apply/widgets/searchable_dropdown.dart';
 
 class VehicleTypeDropdown extends StatelessWidget {
   final String? selectedValue;
   final Function(String?) onChanged;
+  final List<VehicleTypeOption> options;
+  final String? hintText;
 
   const VehicleTypeDropdown({
     super.key,
     required this.selectedValue,
     required this.onChanged,
+    required this.options,
+    this.hintText,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50.h,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.withOpacity(0.3)),
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: ButtonTheme(
-          alignedDropdown: true,
-          child: DropdownButton<String>(
-            value: selectedValue,
-            icon: const Icon(Icons.keyboard_arrow_down),
-            isExpanded: true,
-            hint: Text(LocaleKeys.auth_apply_select_vehicle_type.tr()),
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            items: [
-              DropdownMenuItem<String>(
-                value: 'Car',
-                child: Text(LocaleKeys.auth_apply_car.tr()),
-              ),
-              DropdownMenuItem<String>(
-                value: 'Motorcycle',
-                child: Text(LocaleKeys.auth_apply_motorcycle.tr()),
-              ),
-              DropdownMenuItem<String>(
-                value: 'Bicycle',
-                child: Text(LocaleKeys.auth_apply_bicycle.tr()),
-              ),
-              DropdownMenuItem<String>(
-                value: 'Van',
-                child: Text(LocaleKeys.auth_apply_van.tr()),
-              ),
-            ],
-            onChanged: onChanged,
+    return SearchableDropdown<String>(
+      hint: hintText ?? LocaleKeys.auth_apply_select_vehicle_type.tr(),
+      value: selectedValue,
+      items: options.map((option) => option.value).toList(),
+      onChanged: onChanged,
+      displayStringForOption: (value) {
+        return options.firstWhere(
+          (option) => option.value == value,
+          orElse: () => VehicleTypeOption('', 'Not Found'),
+        ).label;
+      },
+      itemBuilder: (value) {
+        final option = options.firstWhere(
+          (option) => option.value == value,
+          orElse: () => VehicleTypeOption('', 'Not Found'),
+        );
+        
+        return Text(
+          option.label,
+          style: TextStyle(
+            fontSize: 14.sp,
+            color: value == selectedValue
+                ? Theme.of(context).primaryColor
+                : AppColors.black,
+            fontWeight: value == selectedValue
+                ? FontWeight.bold
+                : FontWeight.normal,
           ),
-        ),
-      ),
+        );
+      },
     );
   }
+}
+
+class VehicleTypeOption {
+  final String value;
+  final String label;
+
+  const VehicleTypeOption(this.value, this.label);
 }

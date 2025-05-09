@@ -6,16 +6,24 @@ class Validator {
   Validator._();
 
   static String? phoneNumberValidation(String? number) {
-    final RegExp numberRegex = RegExp(
-      r'^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$',
-    );
-    if (number == null || number.trim().isEmpty || number == '+2') {
+    if (number == null || number.trim().isEmpty) {
       return LocaleKeys.validation_phoneEmpty.tr();
-    } else if (numberRegex.hasMatch(number) == false) {
-      return LocaleKeys.validation_phoneInvalid.tr();
-    } else {
-      return null;
     }
+    
+    // Check length first (for immediate user feedback)
+    if (number.length < 11) {
+      return 'Phone number must be 11 digits';
+    }
+    
+    // Only validate format if length is correct
+    final RegExp numberRegex = RegExp(
+      r'^(01)[0-2,5]{1}[0-9]{8}$',
+    );
+    if (numberRegex.hasMatch(number) == false) {
+      return LocaleKeys.validation_phoneInvalid.tr();
+    }
+    
+    return null;
   }
 
   static String? passwordValidation(String? password) {

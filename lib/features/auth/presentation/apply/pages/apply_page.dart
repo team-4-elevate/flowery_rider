@@ -9,12 +9,12 @@ import 'package:flowery_rider/core/utils/validator.dart';
 import 'package:flowery_rider/core/widget/dialog_utils.dart';
 import 'package:flowery_rider/features/auth/data/models/apply/country_data.dart';
 import 'package:flowery_rider/features/auth/data/models/apply/country_model.dart';
-import 'package:flowery_rider/features/auth/domain/entities/apply_entity.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/cubit/auth_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/widgets/form_section.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/widgets/gender_selection.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/widgets/searchable_dropdown_field.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/widgets/upload_field.dart';
+import 'package:flowery_rider/features/auth/presentation/apply/widgets/vehicle_type_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,10 +32,7 @@ class ApplyPage extends StatefulWidget {
 }
 
 class _ApplyPageState extends State<ApplyPage> {
-  // Form key for validation
   final _formKey = GlobalKey<FormState>();
-
-  // Form controllers
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _vehicleNumberController = TextEditingController();
@@ -45,33 +42,30 @@ class _ApplyPageState extends State<ApplyPage> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
-  // Selection values
   Country? _selectedCountry;
   String? _selectedVehicleType = 'Car';
   String _gender = 'male';
-
-  // File upload states
   File? _licensePhoto;
   File? _idPhoto;
-  bool _isSubmitting = false;
 
-  // Countries list
+  // Lists to store multiple images
+  final List<File> _idPhotos = [];
+  final List<File> _licensePhotos = [];
   List<Country> _countries = [];
 
-  // Vehicle types
-  final List<String> _vehicleTypes = ['Car', 'Motorcycle', 'Bicycle', 'Van'];
+  final Map<String, String> _vehicleTypeMap = {
+    'Car': LocaleKeys.auth_apply_car,
+    'Motorcycle': LocaleKeys.auth_apply_motorcycle,
+    'Bicycle': LocaleKeys.auth_apply_bicycle,
+    'Van': LocaleKeys.auth_apply_van,
+  };
+  List<String> get _vehicleTypes => _vehicleTypeMap.keys.toList();
 
   bool _isLoading = true;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadCountries();
-  }
-
+//------------------------------------------------- Load countries from json file
   Future<void> _loadCountries() async {
     try {
-      // Load country data from assets
       final String data = await rootBundle.loadString('assets/country.json');
       final List<dynamic> jsonData = json.decode(data);
 
@@ -94,6 +88,98 @@ class _ApplyPageState extends State<ApplyPage> {
     }
   }
 
+  //------------------------------------- Pick image from gallery or camera
+  Future<void> _pickImage(bool isLicensePhoto) async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? pickedFile =
+          await picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile == null) {
+        return; 
+      }
+      final newFile = File(pickedFile.path);
+      setState(() {
+        if (isLicensePhoto) {
+          _licensePhoto = newFile;
+          if (_licensePhotos.isEmpty) {
+            _licensePhotos.add(newFile);
+          } else {
+            bool isDuplicate = false;
+            for (var file in _licensePhotos) {
+              if (file.path == newFile.path) {
+                isDuplicate = true;
+                break;
+              }
+            }
+            if (!isDuplicate) {
+              _licensePhotos.add(newFile);
+            }
+          }
+        } else {
+          _idPhoto = newFile;
+          if (_idPhotos.isEmpty) {
+            _idPhotos.add(newFile);
+          } else {
+            bool isDuplicate = false;
+            for (var file in _idPhotos) {
+              if (file.path == newFile.path) {
+                isDuplicate = true;
+                break;
+              }
+            }
+            if (!isDuplicate) {
+              _idPhotos.add(newFile);
+            }
+          }
+        }
+      });
+    } catch (e) {
+      if (mounted) {
+        GetIt.I<DialogUtils>().showSnackBar(
+          textColor: AppColors.error,
+          message: 'Error selecting image: $e',
+          context: context,
+        );
+      }
+    }
+  }
+
+
+//------------------------------------------------- Remove image
+  void _removeImage(bool isLicensePhoto) {
+    setState(() {
+      if (isLicensePhoto) {
+        _licensePhoto = null;
+        _licensePhotos.clear();
+      } else {
+        _idPhoto = null;
+        _idPhotos.clear();
+      }
+    });
+  }
+  void _removeSpecificImage(bool isLicensePhoto, File specificFile) {
+    setState(() {
+      if (isLicensePhoto) {
+        _licensePhotos.removeWhere((file) => file.path == specificFile.path);
+        if (_licensePhoto != null && _licensePhoto!.path == specificFile.path) {
+          _licensePhoto =
+              _licensePhotos.isNotEmpty ? _licensePhotos.last : null;
+        }
+      } else {
+        _idPhotos.removeWhere((file) => file.path == specificFile.path);
+        if (_idPhoto != null && _idPhoto!.path == specificFile.path) {
+          _idPhoto = _idPhotos.isNotEmpty ? _idPhotos.last : null;
+        }
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCountries();
+  }
+
   @override
   void dispose() {
     _firstNameController.dispose();
@@ -107,97 +193,94 @@ class _ApplyPageState extends State<ApplyPage> {
     super.dispose();
   }
 
-  // Pick image from gallery or camera
-  Future<void> _pickImage(bool isLicensePhoto) async {
-    try {
-      final ImagePicker picker = ImagePicker();
-      final XFile? pickedFile =
-          await picker.pickImage(source: ImageSource.gallery);
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<AuthCubit, AuthState>(
+      listenWhen: (previous, current) =>
+          previous.applyState != current.applyState,
+      listener: (context, state) {
+        if (state.applyState is BaseSuccessState) {
+          Navigator.pushReplacementNamed(
+            context,
+            Routes.successApply,
+          );
+        } else if (state.applyState is BaseErrorState) {
+          GetIt.I<DialogUtils>().showSnackBar(
+            textColor: AppColors.error,
+            message: (state.applyState as BaseErrorState).errorMessage,
+            context: context,
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(LocaleKeys.auth_apply_title.tr()),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // ------------------------------------- Header
+                  SizedBox(height: 10.h),
+                  Text(
+                    'Welcome!!',
+                    style: getMediumStyle(
+                      fontSize: 20.sp,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  Text(
+                    'You want to be a delivery man?\nJoin our team',
+                    style: getRegularStyle(
+                      fontSize: 14.sp,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
 
-      if (pickedFile != null) {
-        setState(() {
-          if (isLicensePhoto) {
-            _licensePhoto = File(pickedFile.path);
-          } else {
-            _idPhoto = File(pickedFile.path);
-          }
-        });
-      }
-    } catch (e) {
-      if (mounted) {
-        GetIt.I<DialogUtils>().showSnackBar(
-          textColor: AppColors.error,
-          message: 'Error selecting image: $e',
-          context: context,
-        );
-      }
-    }
-  }
+                  // ------------------------------------- Country dropdown
+                  _buildCountryDropdown(),
+                  SizedBox(height: 15.h),
+                  // ------------------------------------- personal info
+                  _buildPersonalInfoSection(),
+                  SizedBox(height: 15.h),
 
-  Widget _buildBody() {
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ------------------------------------- Header
-              SizedBox(height: 10.h),
-              Text(
-                'Welcome!!',
-                style: getMediumStyle(
-                  fontSize: 20.sp,
-                  color: Colors.black,
-                ),
+                  // ------------------------------------- Vehicle info
+                  _buildVehicleInfoSection(),
+                  SizedBox(height: 15.h),
+
+                  // ------------------------------------- Email and phone
+                  _buildEmailAndPhoneSection(),
+                  SizedBox(height: 15.h),
+
+                  // ------------------------------------- ID info
+                  _buildIdInfoSection(),
+                  SizedBox(height: 15.h),
+                  // ------------------------------------- Account info
+                  _buildAccountInfoSection(),
+                  SizedBox(height: 20.h),
+                  // ------------------------------------- Gender
+                  _buildGenderSelection(),
+                  SizedBox(height: 20.h),
+
+                  // ------------------------------------- Submit button
+                  _buildSubmitButton(),
+                  SizedBox(height: 30.h),
+                ],
               ),
-              SizedBox(height: 5.h),
-              Text(
-                'You want to be a delivery man?\nJoin our team',
-                style: getRegularStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey,
-                ),
-              ),
-              SizedBox(height: 12.h),
-
-              // ------------------------------------- Country dropdown
-              _buildCountryDropdown(),
-              SizedBox(height: 15.h),
-              // ------------------------------------- personal info
-              _buildPersonalInfoSection(),
-              SizedBox(height: 15.h),
-
-              // ------------------------------------- Vehicle info
-              _buildVehicleInfoSection(),
-              SizedBox(height: 15.h),
-
-              // ------------------------------------- Email and phone
-              _buildEmailAndPhoneSection(),
-              SizedBox(height: 15.h),
-
-              // ------------------------------------- ID info
-              _buildIdInfoSection(),
-              SizedBox(height: 15.h),
-              // ------------------------------------- Account info
-              _buildAccountInfoSection(),
-              SizedBox(height: 20.h),
-              // ------------------------------------- Gender
-              _buildGenderSelection(),
-              SizedBox(height: 20.h),
-
-              // ------------------------------------- Submit button
-              _buildSubmitButton(),
-              SizedBox(height: 30.h),
-            ],
+            ),
           ),
         ),
       ),
     );
   }
 
-// ------------------------------------- Widgets country dropdown
+// ----------------------------------------------------------- country dropdown
   Widget _buildCountryDropdown() {
     return SearchableDropdownField<Country>(
       label: 'Country',
@@ -232,6 +315,7 @@ class _ApplyPageState extends State<ApplyPage> {
     );
   }
 
+//----------------------------------------------------------- first and last name
   Widget _buildPersonalInfoSection() {
     return FormSection(
       title: LocaleKeys.auth_apply_account_information.tr(),
@@ -249,7 +333,7 @@ class _ApplyPageState extends State<ApplyPage> {
           keyboardType: TextInputType.name,
         ),
 
-        ///second name3
+        ///second name
         TextFormField(
           decoration: InputDecoration(
             hintText: 'Enter Second legal name',
@@ -265,24 +349,24 @@ class _ApplyPageState extends State<ApplyPage> {
     );
   }
 
+//----------------------------------------------------------- vehicle info
   Widget _buildVehicleInfoSection() {
     return FormSection(
       title: LocaleKeys.auth_apply_vehicle_information.tr(),
       children: [
-        SearchableDropdownField<String>(
-          label: 'Vehicle type',
-          hint: 'Search vehicle type',
-          value: _selectedVehicleType,
-          items: _vehicleTypes,
-          displayStringForOption: (String vehicleType) => vehicleType,
-          onChanged: (String newValue) {
-            setState(() {
-              _selectedVehicleType = newValue;
-            });
+        VehicleTypeDropdown(
+          selectedValue: _selectedVehicleType,
+          onChanged: (String? newValue) {
+            if (newValue != null) {
+              setState(() {
+                _selectedVehicleType = newValue;
+              });
+            }
           },
-          itemBuilder: (String vehicleType) {
-            return Text(vehicleType);
-          },
+          options: _vehicleTypeMap.entries
+              .map((entry) => VehicleTypeOption(entry.key, entry.value.tr()))
+              .toList(),
+          hintText: LocaleKeys.auth_apply_select_vehicle_type.tr(),
         ),
         TextFormField(
           decoration: InputDecoration(
@@ -296,15 +380,19 @@ class _ApplyPageState extends State<ApplyPage> {
           keyboardType: TextInputType.text,
         ),
         UploadField(
-          label: 'Vehicle license',
+          label: 'Vehicle License',
           hintText: 'Upload license photo',
           file: _licensePhoto,
+          files: _licensePhotos,
           onTap: () => _pickImage(true),
+          onRemove: () => _removeImage(true),
+          onRemoveFile: (file) => _removeSpecificImage(true, file),
         ),
       ],
     );
   }
 
+//----------------------------------------------------------- email and phone
   Widget _buildEmailAndPhoneSection() {
     return FormSection(
       title: LocaleKeys.auth_apply_account_information.tr(),
@@ -328,13 +416,18 @@ class _ApplyPageState extends State<ApplyPage> {
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: _phoneController,
-          validator: Validator.validateRequired,
+          validator: Validator.phoneNumberValidation,
           keyboardType: TextInputType.phone,
+          maxLength: 11,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+          ],
         ),
       ],
     );
   }
 
+//----------------------------------------------------------- ID info
   Widget _buildIdInfoSection() {
     return FormSection(
       title: LocaleKeys.auth_apply_id_number.tr(),
@@ -351,19 +444,24 @@ class _ApplyPageState extends State<ApplyPage> {
           keyboardType: TextInputType.number,
         ),
         UploadField(
-          label: 'ID image',
+          label: 'ID Documents',
           hintText: 'Upload ID image',
           file: _idPhoto,
+          files: _idPhotos,
           onTap: () => _pickImage(false),
+          onRemove: () => _removeImage(false),
+          onRemoveFile: (file) => _removeSpecificImage(false, file),
         ),
       ],
     );
   }
 
+//----------------------------------------------------------- password and confirm password
   Widget _buildAccountInfoSection() {
     return FormSection(
       title: LocaleKeys.auth_apply_account_information.tr(),
       children: [
+        ///password
         TextFormField(
           decoration: InputDecoration(
             hintText: 'Enter password',
@@ -376,6 +474,8 @@ class _ApplyPageState extends State<ApplyPage> {
           obscureText: true,
           keyboardType: TextInputType.visiblePassword,
         ),
+
+        ///confirm password
         TextFormField(
           decoration: InputDecoration(
             hintText: 'Confirm password',
@@ -400,6 +500,7 @@ class _ApplyPageState extends State<ApplyPage> {
     );
   }
 
+//----------------------------------------------------------- gender(male or female)
   Widget _buildGenderSelection() {
     return GenderSelection(
       selectedGender: _gender,
@@ -411,112 +512,69 @@ class _ApplyPageState extends State<ApplyPage> {
     );
   }
 
+//----------------------------------------------------------- Apply button
   Widget _buildSubmitButton() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ElevatedButton(
-          onPressed: _isSubmitting ? null : _submitForm,
-          child: _isSubmitting
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                            color: Colors.white, strokeWidth: 2.5)),
-                    const SizedBox(width: 10),
-                    Text(LocaleKeys.auth_apply_processing.tr()),
-                  ],
-                )
-              : Text(LocaleKeys.auth_apply_submit_application.tr()),
+        BlocBuilder<AuthCubit, AuthState>(
+          buildWhen: (previous, current) =>
+              previous.applyState.runtimeType != current.applyState.runtimeType,
+          builder: (context, state) {
+            final isLoading = state.applyState is BaseLoadingState;
+
+            return ElevatedButton(
+              onPressed: isLoading
+                  ? null
+                  : () {
+                      if (!_formKey.currentState!.validate()) return;
+
+                      if (_licensePhoto == null || _idPhoto == null) {
+                        GetIt.I<DialogUtils>().showSnackBar(
+                          textColor: AppColors.error,
+                          message:
+                              LocaleKeys.auth_apply_upload_required_files.tr(),
+                          context: context,
+                        );
+                        return;
+                      }
+
+                      final formData = {
+                        'firstName': _firstNameController.text.trim(),
+                        'lastName': _lastNameController.text.trim(),
+                        'email': _emailController.text.trim().toLowerCase(),
+                        'phone': _phoneController.text.trim(),
+                        'countryCode': _selectedCountry?.phoneCode ?? '+20',
+                        'gender': _gender,
+                        'vehicleType': _selectedVehicleType ?? 'Car',
+                        'vehicleNumber': _vehicleNumberController.text.trim(),
+                        'idNumber': _idNumberController.text.trim(),
+                        'password': _passwordController.text,
+                        'licensePhoto': _licensePhoto,
+                        'idPhoto': _idPhoto,
+                      };
+
+                      context.read<AuthCubit>().apply(formData);
+                    },
+              child: isLoading
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                                color: Colors.white, strokeWidth: 2.5)),
+                        const SizedBox(width: 10),
+                        Text(LocaleKeys.auth_apply_processing.tr()),
+                      ],
+                    )
+                  : Text(LocaleKeys.auth_apply_submit_application.tr()),
+            );
+          },
         ),
       ],
     );
   }
 
-  bool _validateForm() {
-    if (!_formKey.currentState!.validate()) {
-      return false;
-    }
-
-    if (_licensePhoto == null || _idPhoto == null) {
-      GetIt.I<DialogUtils>().showSnackBar(
-        textColor: Colors.white,
-        message: LocaleKeys.auth_apply_upload_required_files.tr(),
-        context: context,
-      );
-      return false;
-    }
-
-    return true;
-  }
-
-  void _setLoading(bool isLoading) {
-    setState(() {
-      _isSubmitting = isLoading;
-    });
-  }
-
-  Future<void> _submitForm() async {
-    if (!_validateForm()) return;
-
-    _setLoading(true);
-
-    final entity = ApplyEntity.fromFormData(
-      firstName: _firstNameController.text,
-      lastName: _lastNameController.text,
-      email: _emailController.text,
-      phone: _phoneController.text,
-      countryCode: _selectedCountry?.phoneCode ?? '+20',
-      gender: _gender,
-      vehicleType: _selectedVehicleType ?? 'Car',
-      vehicleNumber: _vehicleNumberController.text,
-      idNumber: _idNumberController.text,
-      password: _passwordController.text,
-      licensePhoto: _licensePhoto,
-      idPhoto: _idPhoto,
-    );
-
-    context.read<AuthCubit>().apply(entity);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(
-      listenWhen: (previous, current) =>
-          previous.applyState != current.applyState,
-      listener: (context, state) {
-        if (state.applyState is BaseLoadingState) {
-          setState(() {
-            _isSubmitting = true;
-          });
-        } else if (state.applyState is BaseSuccessState) {
-          setState(() {
-            _isSubmitting = false;
-          });
-          Navigator.pushReplacementNamed(
-            context,
-            Routes.successApply,
-          );
-        } else if (state.applyState is BaseErrorState) {
-          setState(() {
-            _isSubmitting = false;
-          });
-          GetIt.I<DialogUtils>().showSnackBar(
-            textColor: AppColors.error,
-            message: (state.applyState as BaseErrorState).errorMessage,
-            context: context,
-          );
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(LocaleKeys.auth_apply_title.tr()),
-        ),
-        body: _buildBody(),
-      ),
-    );
-  }
 }

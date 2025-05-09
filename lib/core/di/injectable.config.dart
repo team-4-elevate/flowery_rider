@@ -131,16 +131,13 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i542.ResendOtpUseCase(gh<_i78.ForgetPasswordRepoI>()));
     gh.factory<_i1007.VerifyOtpUseCase>(
         () => _i1007.VerifyOtpUseCase(gh<_i78.ForgetPasswordRepoI>()));
-    gh.factory<_i394.AuthCubit>(() => _i394.AuthCubit(
-          gh<_i351.AuthRepo>(),
-          gh<_i929.ApplyUseCase>(),
-        ));
     gh.factory<_i929.ApplyUseCase>(
         () => _i929.ApplyUseCase(gh<_i351.AuthRepo>()));
     gh.factory<_i597.CacheRememberMeUsecase>(
         () => _i597.CacheRememberMeUsecase(gh<_i351.AuthRepo>()));
     gh.factory<_i968.LoginUseCase>(
         () => _i968.LoginUseCase(gh<_i351.AuthRepo>()));
+    gh.factory<_i394.AuthCubit>(() => _i394.AuthCubit(gh<_i351.AuthRepo>()));
     gh.factory<_i592.ResetPasswordUseCase>(
         () => _i592.ResetPasswordUseCase(gh<_i78.ForgetPasswordRepoI>()));
     gh.factory<_i107.ForgetPasswordCubit>(() => _i107.ForgetPasswordCubit(
