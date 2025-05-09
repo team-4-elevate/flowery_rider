@@ -30,7 +30,7 @@ class ApplyEntity {
     this.licensePhoto,
     this.idPhoto,
   });
-  
+
   /// Factory method to create an entity from form data
   /// This approach maintains clean architecture by keeping the mapping logic
   /// in the data layer conceptually, while not requiring a new file
@@ -64,7 +64,7 @@ class ApplyEntity {
       idPhoto: idPhoto,
     );
   }
-  
+
   /// Convert entity to a map - useful for API requests
   Map<String, dynamic> toMap() {
     return {

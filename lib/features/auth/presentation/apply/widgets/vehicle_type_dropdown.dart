@@ -28,17 +28,21 @@ class VehicleTypeDropdown extends StatelessWidget {
       items: options.map((option) => option.value).toList(),
       onChanged: onChanged,
       displayStringForOption: (value) {
-        return options.firstWhere(
-          (option) => option.value == value,
-          orElse: () => VehicleTypeOption('', LocaleKeys.auth_apply_not_found.tr()),
-        ).label;
+        return options
+            .firstWhere(
+              (option) => option.value == value,
+              orElse: () =>
+                  VehicleTypeOption('', LocaleKeys.auth_apply_not_found.tr()),
+            )
+            .label;
       },
       itemBuilder: (value) {
         final option = options.firstWhere(
           (option) => option.value == value,
-          orElse: () => VehicleTypeOption('', LocaleKeys.auth_apply_not_found.tr()),
+          orElse: () =>
+              VehicleTypeOption('', LocaleKeys.auth_apply_not_found.tr()),
         );
-        
+
         return Text(
           option.label,
           style: TextStyle(
@@ -46,9 +50,8 @@ class VehicleTypeDropdown extends StatelessWidget {
             color: value == selectedValue
                 ? Theme.of(context).primaryColor
                 : AppColors.black,
-            fontWeight: value == selectedValue
-                ? FontWeight.bold
-                : FontWeight.normal,
+            fontWeight:
+                value == selectedValue ? FontWeight.bold : FontWeight.normal,
           ),
         );
       },

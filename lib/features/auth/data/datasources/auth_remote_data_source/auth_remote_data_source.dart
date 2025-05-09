@@ -9,7 +9,7 @@ import '../../models/apply/apply_response.dart';
 
 abstract interface class AuthRemoteDataSource {
   Future<LoginResponse> login(LoginRequset loginRequset);
-  
-    //------------------------------apply-----------------------------------
+
+  //------------------------------apply-----------------------------------
   Future<Either<ApiException, ApplyResponse>> apply(ApplyRequest request);
 }

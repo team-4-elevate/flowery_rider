@@ -3,7 +3,6 @@
 part of 'auth_cubit.dart';
 
 class AuthState extends Equatable {
-
   final BaseState? applyState;
 
   const AuthState({
@@ -14,7 +13,6 @@ class AuthState extends Equatable {
     BaseState? applyState,
   }) {
     return AuthState(
-
       applyState: applyState ?? this.applyState,
     );
   }

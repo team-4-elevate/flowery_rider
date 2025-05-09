@@ -27,7 +27,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return loginResponse;
   }
 
-    @override
+  @override
   Future<Either<ApiException, ApplyResponse>> apply(
       ApplyRequest request) async {
     try {

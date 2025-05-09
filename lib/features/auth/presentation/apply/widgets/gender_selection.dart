@@ -44,7 +44,7 @@ class GenderSelection extends StatelessWidget {
             } else {
               optionText = option.capitalize();
             }
-            
+
             return Padding(
               padding: EdgeInsets.only(right: 20.w),
               child: Row(

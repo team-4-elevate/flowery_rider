@@ -95,7 +95,7 @@ class _ApplyPageState extends State<ApplyPage> {
       final XFile? pickedFile =
           await picker.pickImage(source: ImageSource.gallery);
       if (pickedFile == null) {
-        return; 
+        return;
       }
       final newFile = File(pickedFile.path);
       setState(() {
@@ -144,7 +144,6 @@ class _ApplyPageState extends State<ApplyPage> {
     }
   }
 
-
 //------------------------------------------------- Remove image
   void _removeImage(bool isLicensePhoto) {
     setState(() {
@@ -157,6 +156,7 @@ class _ApplyPageState extends State<ApplyPage> {
       }
     });
   }
+
   void _removeSpecificImage(bool isLicensePhoto, File specificFile) {
     setState(() {
       if (isLicensePhoto) {
@@ -328,7 +328,7 @@ class _ApplyPageState extends State<ApplyPage> {
           ),
         ),
         SizedBox(height: 15.h),
-        
+
         ///first name
         TextFormField(
           decoration: InputDecoration(
@@ -372,7 +372,6 @@ class _ApplyPageState extends State<ApplyPage> {
           ),
         ),
         SizedBox(height: 15.h),
-        
         VehicleTypeDropdown(
           selectedValue: _selectedVehicleType,
           onChanged: (String? newValue) {
@@ -388,7 +387,6 @@ class _ApplyPageState extends State<ApplyPage> {
           hintText: LocaleKeys.auth_apply_select_vehicle_type.tr(),
         ),
         SizedBox(height: 15.h),
-        
         TextFormField(
           decoration: InputDecoration(
             hintText: LocaleKeys.auth_apply_vehicle_number_hint.tr(),
@@ -401,7 +399,6 @@ class _ApplyPageState extends State<ApplyPage> {
           keyboardType: TextInputType.text,
         ),
         SizedBox(height: 15.h),
-        
         UploadField(
           label: LocaleKeys.auth_apply_vehicle_license.tr(),
           hintText: LocaleKeys.auth_apply_vehicle_license_hint.tr(),
@@ -428,7 +425,6 @@ class _ApplyPageState extends State<ApplyPage> {
           ),
         ),
         SizedBox(height: 15.h),
-        
         TextFormField(
           decoration: InputDecoration(
             hintText: LocaleKeys.auth_apply_email_hint.tr(),
@@ -441,7 +437,6 @@ class _ApplyPageState extends State<ApplyPage> {
           keyboardType: TextInputType.emailAddress,
         ),
         SizedBox(height: 15.h),
-        
         TextFormField(
           decoration: InputDecoration(
             hintText: LocaleKeys.auth_apply_phone_number_hint.tr(),
@@ -474,7 +469,6 @@ class _ApplyPageState extends State<ApplyPage> {
           ),
         ),
         SizedBox(height: 15.h),
-        
         TextFormField(
           decoration: InputDecoration(
             hintText: LocaleKeys.auth_apply_id_hint.tr(),
@@ -487,7 +481,6 @@ class _ApplyPageState extends State<ApplyPage> {
           keyboardType: TextInputType.number,
         ),
         SizedBox(height: 15.h),
-        
         UploadField(
           label: LocaleKeys.auth_apply_id_docs.tr(),
           hintText: LocaleKeys.auth_apply_id_image_hint.tr(),
@@ -514,7 +507,7 @@ class _ApplyPageState extends State<ApplyPage> {
           ),
         ),
         SizedBox(height: 15.h),
-        
+
         /// Password fields in a row
         Row(
           children: [
@@ -542,7 +535,8 @@ class _ApplyPageState extends State<ApplyPage> {
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: _confirmPasswordController,
-                validator: (value) => Validator.confirmPasswordValidation(value, _passwordController.text),
+                validator: (value) => Validator.confirmPasswordValidation(
+                    value, _passwordController.text),
                 obscureText: true,
                 keyboardType: TextInputType.visiblePassword,
               ),
@@ -629,5 +623,4 @@ class _ApplyPageState extends State<ApplyPage> {
       ],
     );
   }
-
 }

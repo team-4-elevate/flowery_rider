@@ -70,8 +70,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     Text(
                       LocaleKeys.forgetPassword_description.tr(),
                       textAlign: TextAlign.center,
-                      style: getLightStyle(
-                          color: AppColors.grey, fontSize: 14.sp),
+                      style:
+                          getLightStyle(color: AppColors.grey, fontSize: 14.sp),
                     ),
                   ],
                 ),
@@ -85,7 +85,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       controller: forgetEmailController,
                       validator: Validator.emailValidate,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration:  InputDecoration(
+                      decoration: InputDecoration(
                         labelText: LocaleKeys.login_screen_email_label.tr(),
                         hintText: LocaleKeys.login_screen_email_hint.tr(),
                       ),
@@ -105,8 +105,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       if (state.forgetPasswordState is BaseSuccessState) {
                         Navigator.pushNamed(context, Routes.pinCode,
                             arguments: forgetCubit);
-                      } else if (state.forgetPasswordState
-                          is BaseErrorState) {
+                      } else if (state.forgetPasswordState is BaseErrorState) {
                         final errorMessage =
                             (state.forgetPasswordState as BaseErrorState)
                                 .errorMessage;
@@ -142,7 +141,6 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                                 color: AppColors.white)
                             : Text(
                                 LocaleKeys.forgetPassword_continueButton.tr()),
-
                       );
                     },
                   ),

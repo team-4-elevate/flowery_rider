@@ -13,7 +13,7 @@ import 'package:flowery_rider/generated/locale_keys.g.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: AuthRepo)
-class AuthRepoImpl implements AuthRepo { 
+class AuthRepoImpl implements AuthRepo {
   final AuthRemoteDataSource _authRemoteDataSource;
   final AuthLocalDataSource _authLocalDataSource;
 

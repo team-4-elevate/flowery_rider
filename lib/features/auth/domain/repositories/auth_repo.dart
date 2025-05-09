@@ -12,6 +12,6 @@ abstract interface class AuthRepo {
 
   cacheRememberMe(bool rememberMe);
 
-    //-----------------------------Apply as Driver-----------------------------------
+  //-----------------------------Apply as Driver-----------------------------------
   Future<Either<Exception, bool>> apply(ApplyEntity entity);
 }
