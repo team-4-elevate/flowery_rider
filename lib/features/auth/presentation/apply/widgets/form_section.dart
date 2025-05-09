@@ -1,4 +1,5 @@
-// features/auth/presentation/widgets/apply_widgets/form_section.dart
+// features/auth/presentation/apply/widgets/form_section.dart
+/* // features/auth/presentation/widgets/apply_widgets/form_section.dart
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,3 +38,4 @@ class FormSection extends StatelessWidget {
     );
   }
 }
+ */

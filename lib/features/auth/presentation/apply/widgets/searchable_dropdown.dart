@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flowery_rider/generated/locale_keys.g.dart';
 
 class SearchableDropdown<T> extends StatefulWidget {
   final String hint;
@@ -125,7 +127,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                               controller: _searchController,
                               focusNode: _searchFocusNode,
                               decoration: InputDecoration(
-                                hintText: 'Search...',
+                                hintText: LocaleKeys.auth_apply_search_hint.tr(),
                                 prefixIcon: const Icon(Icons.search),
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 10.w, vertical: 8.h),
@@ -146,7 +148,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                                         child: Padding(
                                           padding: EdgeInsets.all(8.w),
                                           child: Text(
-                                            'No results found',
+                                            LocaleKeys.auth_apply_no_results.tr(),
                                             style: TextStyle(
                                               fontSize: 14.sp,
                                               color: AppColors.grey,
@@ -241,7 +243,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                               widget.displayStringForOption(widget.value!),
                               style: TextStyle(
                                 fontSize: 14.sp,
-                                color: Colors.black,
+                                color: AppColors.black,
                               ),
                               overflow: TextOverflow.ellipsis,
                             )
@@ -249,7 +251,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                           widget.hint,
                           style: TextStyle(
                             fontSize: 14.sp,
-                            color: Colors.grey,
+                            color: AppColors.grey,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),

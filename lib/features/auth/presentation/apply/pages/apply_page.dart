@@ -227,7 +227,7 @@ class _ApplyPageState extends State<ApplyPage> {
                   // ------------------------------------- Header
                   SizedBox(height: 10.h),
                   Text(
-                    'Welcome!!',
+                    LocaleKeys.auth_apply_welcome.tr(),
                     style: getMediumStyle(
                       fontSize: 20.sp,
                       color: Colors.black,
@@ -235,7 +235,7 @@ class _ApplyPageState extends State<ApplyPage> {
                   ),
                   SizedBox(height: 5.h),
                   Text(
-                    'You want to be a delivery man?\nJoin our team',
+                    LocaleKeys.auth_apply_join_team.tr(),
                     style: getRegularStyle(
                       fontSize: 14.sp,
                       color: Colors.grey,
@@ -283,8 +283,8 @@ class _ApplyPageState extends State<ApplyPage> {
 // ----------------------------------------------------------- country dropdown
   Widget _buildCountryDropdown() {
     return SearchableDropdownField<Country>(
-      label: 'Country',
-      hint: 'Search country',
+      label: LocaleKeys.auth_apply_country.tr(),
+      hint: LocaleKeys.auth_apply_search_country.tr(),
       value: _selectedCountry,
       items: _countries,
       displayStringForOption: (Country country) => country.name,
@@ -317,14 +317,23 @@ class _ApplyPageState extends State<ApplyPage> {
 
 //----------------------------------------------------------- first and last name
   Widget _buildPersonalInfoSection() {
-    return FormSection(
-      title: LocaleKeys.auth_apply_account_information.tr(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          LocaleKeys.auth_apply_account_information.tr(),
+          style: getMediumStyle(
+            fontSize: 16.sp,
+            color: AppColors.black,
+          ),
+        ),
+        SizedBox(height: 15.h),
+        
         ///first name
         TextFormField(
           decoration: InputDecoration(
-            hintText: 'Enter first legal name',
-            labelText: 'first legal name',
+            hintText: LocaleKeys.auth_apply_first_name_hint.tr(),
+            labelText: LocaleKeys.auth_apply_first_name.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -332,12 +341,13 @@ class _ApplyPageState extends State<ApplyPage> {
           validator: Validator.firstNameValidation,
           keyboardType: TextInputType.name,
         ),
+        SizedBox(height: 15.h),
 
         ///second name
         TextFormField(
           decoration: InputDecoration(
-            hintText: 'Enter Second legal name',
-            labelText: 'Second legal name',
+            hintText: LocaleKeys.auth_apply_last_name_hint.tr(),
+            labelText: LocaleKeys.auth_apply_last_name.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -351,9 +361,18 @@ class _ApplyPageState extends State<ApplyPage> {
 
 //----------------------------------------------------------- vehicle info
   Widget _buildVehicleInfoSection() {
-    return FormSection(
-      title: LocaleKeys.auth_apply_vehicle_information.tr(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          LocaleKeys.auth_apply_vehicle_information.tr(),
+          style: getMediumStyle(
+            fontSize: 16.sp,
+            color: AppColors.black,
+          ),
+        ),
+        SizedBox(height: 15.h),
+        
         VehicleTypeDropdown(
           selectedValue: _selectedVehicleType,
           onChanged: (String? newValue) {
@@ -368,10 +387,12 @@ class _ApplyPageState extends State<ApplyPage> {
               .toList(),
           hintText: LocaleKeys.auth_apply_select_vehicle_type.tr(),
         ),
+        SizedBox(height: 15.h),
+        
         TextFormField(
           decoration: InputDecoration(
-            hintText: 'Enter vehicle number',
-            labelText: 'Vehicle number',
+            hintText: LocaleKeys.auth_apply_vehicle_number_hint.tr(),
+            labelText: LocaleKeys.auth_apply_vehicle_number.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -379,9 +400,11 @@ class _ApplyPageState extends State<ApplyPage> {
           validator: Validator.validateVehicleNumber,
           keyboardType: TextInputType.text,
         ),
+        SizedBox(height: 15.h),
+        
         UploadField(
-          label: 'Vehicle License',
-          hintText: 'Upload license photo',
+          label: LocaleKeys.auth_apply_vehicle_license.tr(),
+          hintText: LocaleKeys.auth_apply_vehicle_license_hint.tr(),
           file: _licensePhoto,
           files: _licensePhotos,
           onTap: () => _pickImage(true),
@@ -394,13 +417,22 @@ class _ApplyPageState extends State<ApplyPage> {
 
 //----------------------------------------------------------- email and phone
   Widget _buildEmailAndPhoneSection() {
-    return FormSection(
-      title: LocaleKeys.auth_apply_account_information.tr(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          LocaleKeys.auth_apply_account_information.tr(),
+          style: getMediumStyle(
+            fontSize: 16.sp,
+            color: AppColors.black,
+          ),
+        ),
+        SizedBox(height: 15.h),
+        
         TextFormField(
           decoration: InputDecoration(
-            hintText: 'Enter your email',
-            labelText: 'Email',
+            hintText: LocaleKeys.auth_apply_email_hint.tr(),
+            labelText: LocaleKeys.auth_apply_email.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -408,10 +440,12 @@ class _ApplyPageState extends State<ApplyPage> {
           validator: Validator.emailValidate,
           keyboardType: TextInputType.emailAddress,
         ),
+        SizedBox(height: 15.h),
+        
         TextFormField(
           decoration: InputDecoration(
-            hintText: 'Enter phone number',
-            labelText: 'Phone number',
+            hintText: LocaleKeys.auth_apply_phone_number_hint.tr(),
+            labelText: LocaleKeys.auth_apply_phone_number.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -429,13 +463,22 @@ class _ApplyPageState extends State<ApplyPage> {
 
 //----------------------------------------------------------- ID info
   Widget _buildIdInfoSection() {
-    return FormSection(
-      title: LocaleKeys.auth_apply_id_number.tr(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          LocaleKeys.auth_apply_id_number.tr(),
+          style: getMediumStyle(
+            fontSize: 16.sp,
+            color: AppColors.black,
+          ),
+        ),
+        SizedBox(height: 15.h),
+        
         TextFormField(
           decoration: InputDecoration(
-            hintText: 'Enter national ID number',
-            labelText: 'ID number',
+            hintText: LocaleKeys.auth_apply_id_hint.tr(),
+            labelText: LocaleKeys.auth_apply_id_number.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -443,9 +486,11 @@ class _ApplyPageState extends State<ApplyPage> {
           validator: Validator.validateRequired,
           keyboardType: TextInputType.number,
         ),
+        SizedBox(height: 15.h),
+        
         UploadField(
-          label: 'ID Documents',
-          hintText: 'Upload ID image',
+          label: LocaleKeys.auth_apply_id_docs.tr(),
+          hintText: LocaleKeys.auth_apply_id_image_hint.tr(),
           file: _idPhoto,
           files: _idPhotos,
           onTap: () => _pickImage(false),
@@ -458,43 +503,51 @@ class _ApplyPageState extends State<ApplyPage> {
 
 //----------------------------------------------------------- password and confirm password
   Widget _buildAccountInfoSection() {
-    return FormSection(
-      title: LocaleKeys.auth_apply_account_information.tr(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ///password
-        TextFormField(
-          decoration: InputDecoration(
-            hintText: 'Enter password',
-            labelText: 'Password',
-            floatingLabelBehavior: FloatingLabelBehavior.always,
+        Text(
+          LocaleKeys.auth_apply_account_information.tr(),
+          style: getMediumStyle(
+            fontSize: 16.sp,
+            color: AppColors.black,
           ),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          controller: _passwordController,
-          validator: Validator.passwordValidation,
-          obscureText: true,
-          keyboardType: TextInputType.visiblePassword,
         ),
-
-        ///confirm password
-        TextFormField(
-          decoration: InputDecoration(
-            hintText: 'Confirm password',
-            labelText: 'Confirm password',
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-          ),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          controller: _confirmPasswordController,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return LocaleKeys.validation_required.tr();
-            }
-            if (value != _passwordController.text) {
-              return LocaleKeys.validation_passwordMatch.tr();
-            }
-            return null;
-          },
-          obscureText: true,
-          keyboardType: TextInputType.visiblePassword,
+        SizedBox(height: 15.h),
+        
+        /// Password fields in a row
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: LocaleKeys.auth_apply_password_hint.tr(),
+                  labelText: LocaleKeys.auth_apply_password.tr(),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                ),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: _passwordController,
+                validator: Validator.passwordValidation,
+                obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
+              ),
+            ),
+            SizedBox(width: 10.w),
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: LocaleKeys.auth_apply_confirm_password_hint.tr(),
+                  labelText: LocaleKeys.auth_apply_confirm_password.tr(),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                ),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: _confirmPasswordController,
+                validator: (value) => Validator.confirmPasswordValidation(value, _passwordController.text),
+                obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
+              ),
+            ),
+          ],
         ),
       ],
     );

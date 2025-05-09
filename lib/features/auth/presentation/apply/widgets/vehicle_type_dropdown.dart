@@ -30,13 +30,13 @@ class VehicleTypeDropdown extends StatelessWidget {
       displayStringForOption: (value) {
         return options.firstWhere(
           (option) => option.value == value,
-          orElse: () => VehicleTypeOption('', 'Not Found'),
+          orElse: () => VehicleTypeOption('', LocaleKeys.auth_apply_not_found.tr()),
         ).label;
       },
       itemBuilder: (value) {
         final option = options.firstWhere(
           (option) => option.value == value,
-          orElse: () => VehicleTypeOption('', 'Not Found'),
+          orElse: () => VehicleTypeOption('', LocaleKeys.auth_apply_not_found.tr()),
         );
         
         return Text(
