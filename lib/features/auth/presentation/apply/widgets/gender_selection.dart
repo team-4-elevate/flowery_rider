@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flowery_rider/core/theme/app_styles.dart';
+import 'package:flowery_rider/core/utils/string_extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/generated/locale_keys.g.dart';
 
 class GenderSelection extends StatelessWidget {
   final String selectedGender;
+
   final Function(String) onChanged;
   final List<String> options;
   final String label;
@@ -19,6 +21,12 @@ class GenderSelection extends StatelessWidget {
     this.options = const ['male', 'female'],
     this.label = '',
   });
+
+  String getLocalizedGender(String value) {
+    if (value == 'male') return LocaleKeys.auth_apply_male.tr();
+    if (value == 'female') return LocaleKeys.auth_apply_female.tr();
+    return value.capitalize(); 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +43,7 @@ class GenderSelection extends StatelessWidget {
         SizedBox(height: 10.h),
         Row(
           children: options.map((option) {
-            // Get localized text for gender option
-            String optionText = '';
-            if (option == 'male') {
-              optionText = LocaleKeys.auth_apply_male.tr();
-            } else if (option == 'female') {
-              optionText = LocaleKeys.auth_apply_female.tr();
-            } else {
-              optionText = option.capitalize();
-            }
+            String optionText = getLocalizedGender(option);
 
             return Padding(
               padding: EdgeInsets.only(right: 20.w),
@@ -73,11 +73,5 @@ class GenderSelection extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-extension StringExtension on String {
-  String capitalize() {
-    return '${this[0].toUpperCase()}${substring(1)}';
   }
 }

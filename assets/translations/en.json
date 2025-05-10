@@ -6,7 +6,7 @@
     "lastNameInvalid": "Please enter a valid last name",
     "emailEmpty": "Please enter the email",
     "emailInvalid": "Please enter a valid email",
-    "passwordEmpty": "Please enter the password",
+    "passwordEmpty": "enter the password",
     "passwordInvalid": "Invalid password",
     "passwordShort": "Password must be at least 6 characters long",
     "confirmPasswordEmpty": "Please confirm the password",
