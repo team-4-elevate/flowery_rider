@@ -5,7 +5,8 @@ class AppImage {
   static const String onboardingAnimation =
       'assets/images/onboarding_animation.json';
 
-  static const String successApply = 'assets/images/bg-application-approved.png';
+  static const String successApply =
+      'assets/images/bg-application-approved.png';
 
   static const String successApplyAnimation = 'assets/images/Animation.json';
 }

@@ -2,7 +2,7 @@
 import 'package:flowery_rider/core/di/injectable.dart';
 import 'package:flowery_rider/application_approved_page.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
-import 'package:flowery_rider/features/Home_layout/home_layout.dart';
+import 'package:flowery_rider/features/Home_layout/screen/home_layout.dart';
 import 'package:flowery_rider/features/apply/presentation/cubit/auth_cubit.dart';
 import 'package:flowery_rider/features/apply/presentation/pages/apply_page.dart';
 import 'package:flowery_rider/features/apply/presentation/pages/apply_success_page.dart';

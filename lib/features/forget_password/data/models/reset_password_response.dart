@@ -12,7 +12,7 @@ class ResetPasswordResponseModel {
   }
 
   Map<String, dynamic> toJson() => {
-    'message': message,
-    'token': token,
-  };
+        'message': message,
+        'token': token,
+      };
 }

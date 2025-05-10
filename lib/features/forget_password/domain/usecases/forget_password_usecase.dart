@@ -7,6 +7,5 @@ class ForgetPasswordUseCase {
 
   ForgetPasswordUseCase(this._repo);
 
-  Future<void> call(String email) async =>
-      await _repo.forgetPassword(email);
+  Future<void> call(String email) async => await _repo.forgetPassword(email);
 }

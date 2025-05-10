@@ -94,10 +94,6 @@ class Validator {
     return null;
   }
 
-
-  
-
-
   //---------------------------------------------------------phone number
 
   static String formatPhoneNumber(String? phone, String? countryCode) {
@@ -140,6 +136,7 @@ class Validator {
     String result = phone.replaceAll(RegExp(r'[^0-9]'), '');
     return result;
   }
+
 //---------------------------------------------------------vehicle number
   static String? validateVehicleNumber(String? vehicleNumber) {
     final RegExp vehicleNumberRegex = RegExp(
@@ -181,7 +178,6 @@ class Validator {
     return null;
   }
 
-
 //--------------------------------------------------------national id
   static bool isValidObjectId(String? str) {
     if (str == null || str.length != 24) return false;
@@ -196,7 +192,6 @@ class Validator {
     }
 
     String digitsOnly = nid.replaceAll(RegExp(r'\D'), '');
-
 
     if (digitsOnly.length != 14) {
       return 'National ID must be exactly 14 digits';
@@ -222,11 +217,11 @@ class Validator {
       return 'National ID has invalid date format';
     }
 
-    return null; 
+    return null;
   }
 
   static String formatNationalID(String? nid) {
-    if (nid == null || nid.isEmpty) return '00000000000000'; 
+    if (nid == null || nid.isEmpty) return '00000000000000';
 
     String digitsOnly = nid.replaceAll(RegExp(r'\D'), '');
 
@@ -243,5 +238,3 @@ class Validator {
     return '6469945aa4c3eb5241c0dae2';
   }
 }
-
-

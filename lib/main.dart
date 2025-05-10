@@ -24,7 +24,8 @@ void main() async {
         path: 'assets/translations',
         fallbackLocale: Locale('en'),
         child: BlocProvider(
-            create: (context) => getIt<AppCubit>(), child: FloweryRider())),
+            create: (context) => getIt<AppCubit>()..getUserLoggedInState(),
+            child: FloweryRider())),
   );
 }
 
@@ -33,7 +34,6 @@ class FloweryRider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AppCubit>().getUserLoggedInState();
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
