@@ -1,6 +1,6 @@
 import 'package:flowery_rider/features/Home_layout/cubit/app_states.dart';
 import 'package:flowery_rider/features/auth/data/datasources/auth_local_data_source/auth_local_data_source.dart';
-import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
+// import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -9,18 +9,21 @@ class AppCubit extends Cubit<AppStates> {
   AppCubit(this._authLocalDataSource) : super(AppStates(bottomNavBarIndex: 0));
 
   final AuthLocalDataSource _authLocalDataSource;
-  UserDataEntity? _cachedUserProfileData;
-  DateTime? _lastProfileFetchTime;
+ // remove this commented code if not used
+
+
+  // UserDataEntity? _cachedUserProfileData;
+  // DateTime? _lastProfileFetchTime;
   
 
-  UserDataEntity? get cachedUserProfileData => _cachedUserProfileData;
+  // UserDataEntity? get cachedUserProfileData => _cachedUserProfileData;
 
-  bool hasProfileData() => _cachedUserProfileData != null;
+  // bool hasProfileData() => _cachedUserProfileData != null;
 
-  bool isProfileDataFresh() {
-    if (_lastProfileFetchTime == null) return false;
-    return DateTime.now().difference(_lastProfileFetchTime!).inMinutes < 30;
-  }
+  // bool isProfileDataFresh() {
+  //   if (_lastProfileFetchTime == null) return false;
+  //   return DateTime.now().difference(_lastProfileFetchTime!).inMinutes < 30;
+  // }
 
   void changeBottomNavBarIndex(int index) {
     emit(state.copyWith(bottomNavBarIndex: index));
@@ -31,11 +34,11 @@ class AppCubit extends Cubit<AppStates> {
     emit(state.copyWith(isLoggedIn: isLoggedIn));
   }
 
-  void saveProfileTabData(UserDataEntity profileData) {
-    _cachedUserProfileData = profileData;
-    _lastProfileFetchTime = DateTime.now();
-    emit(state.copyWith(haseProfileData: true));
-  }
+  // void saveProfileTabData(UserDataEntity profileData) {
+  //   _cachedUserProfileData = profileData;
+  //   _lastProfileFetchTime = DateTime.now();
+  //   emit(state.copyWith(haseProfileData: true));
+  // }
 
   // void clearProfileData() {
   //   _cachedUserProfileData = null;

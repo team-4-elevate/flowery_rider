@@ -1,6 +1,5 @@
 import 'package:flowery_rider/features/Home_layout/cubit/app_cubit.dart';
 import 'package:flowery_rider/features/Home_layout/cubit/app_states.dart';
-import 'package:flowery_rider/features/profile/presentation/pages/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,8 +14,8 @@ class _HomeLayoutState extends State<HomeLayout> {
   final List<Widget> _screens = [
     const Center(child: Text('Home Screen')),
     const Center(child: Text('Explore Screen')),
-    ProfileScreen(),
-  ];
+    const Center(child: Text('Profile Screen')),
+      ];
 
   @override
   Widget build(BuildContext context) {
