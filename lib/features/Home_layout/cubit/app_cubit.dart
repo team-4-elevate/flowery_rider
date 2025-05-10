@@ -9,12 +9,10 @@ class AppCubit extends Cubit<AppStates> {
   AppCubit(this._authLocalDataSource) : super(AppStates(bottomNavBarIndex: 0));
 
   final AuthLocalDataSource _authLocalDataSource;
- // remove this commented code if not used
-
+  // remove this commented code if not used
 
   // UserDataEntity? _cachedUserProfileData;
   // DateTime? _lastProfileFetchTime;
-  
 
   // UserDataEntity? get cachedUserProfileData => _cachedUserProfileData;
 

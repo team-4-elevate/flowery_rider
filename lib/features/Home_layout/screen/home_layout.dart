@@ -15,7 +15,7 @@ class _HomeLayoutState extends State<HomeLayout> {
     const Center(child: Text('Home Screen')),
     const Center(child: Text('Explore Screen')),
     const Center(child: Text('Profile Screen')),
-      ];
+  ];
 
   @override
   Widget build(BuildContext context) {
