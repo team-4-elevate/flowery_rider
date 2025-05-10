@@ -25,7 +25,7 @@ class GenderSelection extends StatelessWidget {
   String getLocalizedGender(String value) {
     if (value == 'male') return LocaleKeys.auth_apply_male.tr();
     if (value == 'female') return LocaleKeys.auth_apply_female.tr();
-    return value.capitalize(); 
+    return value.capitalize();
   }
 
   @override

@@ -30,6 +30,7 @@ class PersonalInfoSection extends StatelessWidget {
           ),
         ),
         SizedBox(height: 15.h),
+
         /// First Name
         TextFormField(
           decoration: InputDecoration(
@@ -43,7 +44,7 @@ class PersonalInfoSection extends StatelessWidget {
           keyboardType: TextInputType.name,
         ),
         SizedBox(height: 15.h),
-        
+
         /// Last Name
         TextFormField(
           decoration: InputDecoration(

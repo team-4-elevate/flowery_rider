@@ -10,9 +10,10 @@ class ImagePickerService {
 
   Future<File?> pickImage(BuildContext context) async {
     try {
-      final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+      final XFile? pickedFile =
+          await _picker.pickImage(source: ImageSource.gallery);
       if (pickedFile == null) return null;
-      
+
       return File(pickedFile.path);
     } catch (e) {
       GetIt.I<DialogUtils>().showSnackBar(
@@ -24,7 +25,8 @@ class ImagePickerService {
     }
   }
 
-  void addImageToCollection(File newFile, List<File> collection, ValueSetter<File?> setPrimaryImage) {
+  void addImageToCollection(
+      File newFile, List<File> collection, ValueSetter<File?> setPrimaryImage) {
     if (collection.isEmpty) {
       collection.add(newFile);
     } else {
@@ -41,9 +43,10 @@ class ImagePickerService {
     setPrimaryImage(null);
   }
 
-  void removeSpecificImage(File specificFile, List<File> collection, File? primaryImage, ValueSetter<File?> setPrimaryImage) {
+  void removeSpecificImage(File specificFile, List<File> collection,
+      File? primaryImage, ValueSetter<File?> setPrimaryImage) {
     collection.removeWhere((file) => file.path == specificFile.path);
-    
+
     if (primaryImage != null && primaryImage.path == specificFile.path) {
       setPrimaryImage(collection.isNotEmpty ? collection.last : null);
     }
