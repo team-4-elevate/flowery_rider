@@ -31,18 +31,4 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     }
   }
 
-  @override
-  Future<Either<ApiException, bool>> acceptOrder(String orderId) async {
-    try {
-      await _apiClient.put(
-        '${ApiConstants.acceptOrder}/$orderId/accept',
-        requiresToken: true,
-      );
-
-      return const Right(true);
-    } catch (e) {
-      Log.e('Error accepting order: $e');
-      return Left(ApiException(message: 'Failed to accept order: $e'));
-    }
-  }
 }

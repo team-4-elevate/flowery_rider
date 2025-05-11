@@ -1,6 +1,5 @@
 // features/Home_layout/data/repo/home_repo_impl.dart
 
-
 import 'package:either_dart/either.dart';
 import 'package:flowery_rider/core/error_handling/exceptions/api_exception.dart';
 import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_source/home_remote_data_source.dart';
@@ -20,35 +19,27 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<ApiException, List<OrderEntity>>> getPendingOrders() async {
     try {
       final token = await _authLocalDataSource.getToken();
-      
+
       if (token == null) {
         return Left(ApiException(message: 'Authentication token not found'));
       }
-      
+
       final response = await _remoteDataSource.getPendingOrders();
-      
+
       final orders = OrderEntity.fromModelList(response.right.orders);
-      
-      return Right(orders);
+
+      final Map<String, OrderEntity> uniqueOrdersMap = {};
+      for (final order in orders) {
+        uniqueOrdersMap[order.id] = order;
+      }
+
+      final uniqueOrders = uniqueOrdersMap.values.toList();
+
+      return Right(uniqueOrders);
     } catch (e) {
       return Left(ApiException(message: e.toString()));
     }
   }
 
-  @override
-  Future<Either<ApiException, bool>> acceptOrder(String orderId) async {
-    try {
-      final token = await _authLocalDataSource.getToken();
-      
-      if (token == null) {
-        return Left(ApiException(message: 'Authentication token not found'));
-      }
-      
-      final response = await _remoteDataSource.acceptOrder(orderId);
-      
-      return response;
-    } catch (e) {
-      return Left(ApiException(message: e.toString()));
-    }
-  }
+
 }

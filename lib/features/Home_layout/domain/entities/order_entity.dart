@@ -4,6 +4,7 @@ import 'package:flowery_rider/features/Home_layout/data/model/orders_pending/ord
 
 class OrderEntity {
   final String id;
+  final String orderId;
   final String storeAddress;
   final String userName;
   final String userAddress;
@@ -12,6 +13,7 @@ class OrderEntity {
 
   OrderEntity({
     required this.id,
+    required this.orderId,
     required this.storeAddress,
     required this.userName,
     required this.userAddress,
@@ -20,26 +22,37 @@ class OrderEntity {
   });
 
   String get formattedPrice => 'EGP ${price.toStringAsFixed(0)}';
-  bool get isPending => state.toLowerCase() == 'pending';
+  bool get isPending =>
+      state.toLowerCase() == 'pending' || state.toLowerCase() == 'inprogress';
 
-  factory OrderEntity.fromModel(Order order) {
-    final firstName = order.user?.firstName ?? '';
-    final lastName = order.user?.lastName ?? '';
+  factory OrderEntity.fromModel(Order driverOrder) {
+    final nestedOrder = driverOrder.order;
+
+    final firstName = nestedOrder?.user?.firstName ?? '';
+    final lastName = nestedOrder?.user?.lastName ?? '';
     final fullName =
         [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
 
-    final street = order.shippingAddress?.street ?? '';
-    final city = order.shippingAddress?.city ?? '';
-    final fullAddress =
-        [street, city].where((part) => part.isNotEmpty).join(', ');
+    final storeAddress =
+        driverOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
+
+    final userAddress = storeAddress.contains(',')
+        ? storeAddress
+        : '20th st,Sheikh Zayed, Giza';
+
+    double price = 0.0;
+    if (nestedOrder?.totalPrice != null) {
+      price = nestedOrder!.totalPrice!.toDouble();
+    }
 
     return OrderEntity(
-      id: order.id ?? '',
-      storeAddress: order.store?.address ?? '',
-      userName: fullName,
-      userAddress: fullAddress,
-      price: (order.totalPrice ?? 0).toDouble(),
-      state: order.state ?? '',
+      id: driverOrder.id ?? '',
+      orderId: nestedOrder?.id ?? '',
+      storeAddress: driverOrder.store?.address ?? 'Store address unavailable',
+      userName: fullName.isEmpty ? 'Unknown Customer' : fullName,
+      userAddress: userAddress,
+      price: price,
+      state: nestedOrder?.state ?? '',
     );
   }
 

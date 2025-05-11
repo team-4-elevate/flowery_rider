@@ -127,5 +127,19 @@
       "vehicle_information": "Vehicle Information",
       "id_number": "ID Number"
     }
+  },
+  "home": {
+    "app_title": "Flowery rider",
+    "try_again": "Try Again",
+    "no_pending_orders": "No pending orders",
+    "pull_to_refresh": "Pull down to refresh",
+    "accept_order_message": "Accept button clicked! Details page will be implemented soon.",
+    "flower_order": "Flower order",
+    "pickup_address": "Pickup address",
+    "flowery_store": "Flowery store",
+    "user_address": "User address",
+    "currency": "EGP",
+    "reject": "Reject",
+    "accept": "Accept"
   }
 }

@@ -9,5 +9,4 @@ class ApiConstants {
   static const String applyDriverEndPoint = 'drivers/apply';
   static const String homeEndPoint = 'orders/pending-orders';
   static const String pendingOrders = 'orders/driver-orders';
-  static const String acceptOrder = 'orders';  // Will be used as: acceptOrder/orderId/accept
 }

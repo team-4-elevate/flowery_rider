@@ -1,9 +1,57 @@
 import 'order_item.dart';
-import 'shipping_address.dart';
 import 'store.dart';
 import 'user.dart';
 
 class Order {
+  String? id;
+  String? driver;
+  NestedOrder? order;
+  Store? store;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? v;
+
+  Order({
+    this.id,
+    this.driver,
+    this.order,
+    this.store,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
+
+  factory Order.fromJson(Map<String, dynamic> json) => Order(
+        id: json['_id'] as String?,
+        driver: json['driver'] as String?,
+        order: json['order'] == null
+            ? null
+            : NestedOrder.fromJson(json['order'] as Map<String, dynamic>),
+        store: json['store'] == null
+            ? null
+            : Store.fromJson(json['store'] as Map<String, dynamic>),
+        createdAt: json['createdAt'] == null
+            ? null
+            : DateTime.parse(json['createdAt'] as String),
+        updatedAt: json['updatedAt'] == null
+            ? null
+            : DateTime.parse(json['updatedAt'] as String),
+        v: json['__v'] as int?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        '_id': id,
+        'driver': driver,
+        'order': order?.toJson(),
+        'store': store?.toJson(),
+        'createdAt': createdAt?.toIso8601String(),
+        'updatedAt': updatedAt?.toIso8601String(),
+        '__v': v,
+      };
+}
+
+// Nested order structure as seen in the API response
+class NestedOrder {
   String? id;
   User? user;
   List<OrderItem>? orderItems;
@@ -16,11 +64,8 @@ class Order {
   DateTime? updatedAt;
   String? orderNumber;
   int? v;
-  Store? store;
-  ShippingAddress? shippingAddress;
-  DateTime? paidAt;
 
-  Order({
+  NestedOrder({
     this.id,
     this.user,
     this.orderItems,
@@ -33,12 +78,9 @@ class Order {
     this.updatedAt,
     this.orderNumber,
     this.v,
-    this.store,
-    this.shippingAddress,
-    this.paidAt,
   });
 
-  factory Order.fromJson(Map<String, dynamic> json) => Order(
+  factory NestedOrder.fromJson(Map<String, dynamic> json) => NestedOrder(
         id: json['_id'] as String?,
         user: json['user'] == null
             ? null
@@ -59,16 +101,6 @@ class Order {
             : DateTime.parse(json['updatedAt'] as String),
         orderNumber: json['orderNumber'] as String?,
         v: json['__v'] as int?,
-        store: json['store'] == null
-            ? null
-            : Store.fromJson(json['store'] as Map<String, dynamic>),
-        shippingAddress: json['shippingAddress'] == null
-            ? null
-            : ShippingAddress.fromJson(
-                json['shippingAddress'] as Map<String, dynamic>),
-        paidAt: json['paidAt'] == null
-            ? null
-            : DateTime.parse(json['paidAt'] as String),
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,8 +116,5 @@ class Order {
         'updatedAt': updatedAt?.toIso8601String(),
         'orderNumber': orderNumber,
         '__v': v,
-        'store': store?.toJson(),
-        'shippingAddress': shippingAddress?.toJson(),
-        'paidAt': paidAt?.toIso8601String(),
       };
 }

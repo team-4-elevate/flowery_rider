@@ -1,7 +1,10 @@
 // features/Home_layout/presentation/widgets/order_content.dart
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
+import 'package:flowery_rider/core/theme/app_icons.dart';
 import 'package:flowery_rider/core/theme/app_styles.dart';
-import 'package:flowery_rider/features/Home_layout/presentation/widgets/address_card.dart';
+import 'package:flowery_rider/core/common/widgets/address_card.dart';
+import 'package:flowery_rider/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -49,7 +52,7 @@ class OrderContent extends StatelessWidget {
         children: [
           /// Order title
           Text(
-            'Flower order',
+            LocaleKeys.home_flower_order.tr(),
             style: getBoldStyle(
               fontSize: 16.sp,
               color: AppColors.black,
@@ -57,7 +60,7 @@ class OrderContent extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           Text(
-            'Pickup address',
+            LocaleKeys.home_pickup_address.tr(),
             style: getRegularStyle(
               fontSize: 14.sp,
               color: AppColors.grey,
@@ -65,13 +68,13 @@ class OrderContent extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           AddressCard(
-            icon: Icons.store,
-            title: 'Flowery store',
+            imagePath: AppIcons.flowerImg,
+            title: LocaleKeys.home_flowery_store.tr(),
             address: storeAddress,
           ),
           SizedBox(height: 12.h),
           Text(
-            'User address',
+            LocaleKeys.home_user_address.tr(),
             style: getRegularStyle(
               fontSize: 14.sp,
               color: AppColors.grey,
@@ -81,7 +84,7 @@ class OrderContent extends StatelessWidget {
 
           /// User address
           AddressCard(
-            icon: Icons.person,
+            imagePath: AppIcons.userImg,
             title: userName,
             address: userAddress,
           ),
@@ -94,7 +97,7 @@ class OrderContent extends StatelessWidget {
                 flex: 2,
                 //// Price
                 child: Text(
-                  'EGP ${price.toStringAsFixed(0)}',
+                  price > 0 ? '${LocaleKeys.home_currency.tr()} ${price.toStringAsFixed(0)}' : '${LocaleKeys.home_currency.tr()} 0',
                   style: getBoldStyle(
                     fontSize: 16.sp,
                     color: AppColors.black,
@@ -110,7 +113,7 @@ class OrderContent extends StatelessWidget {
                     minimumSize: Size(double.infinity, 36.h),
                   ),
                   child: Text(
-                    'Reject',
+                    LocaleKeys.home_reject.tr(),
                     style: getMediumStyle(
                       fontSize: 14.sp,
                       color: AppColors.primary,
@@ -129,7 +132,7 @@ class OrderContent extends StatelessWidget {
                     minimumSize: Size(double.infinity, 36.h),
                   ),
                   child: Text(
-                    'Accept',
+                    LocaleKeys.home_accept.tr(),
                     style: getMediumStyle(
                       fontSize: 14.sp,
                       color: AppColors.white,

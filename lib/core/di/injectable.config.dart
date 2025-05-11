@@ -73,6 +73,18 @@ import 'package:flowery_rider/features/forget_password/domain/usecases/verify_ot
     as _i1007;
 import 'package:flowery_rider/features/forget_password/presentation/cubit/forget_password_cubit.dart'
     as _i107;
+import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_source/home_remote_data_source.dart'
+    as _i765;
+import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_source/home_remote_data_source_impl.dart'
+    as _i44;
+import 'package:flowery_rider/features/Home_layout/data/repo/home_repo_impl.dart'
+    as _i700;
+import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.dart'
+    as _i408;
+import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart'
+    as _i867;
+import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart'
+    as _i955;
 import 'package:flutter/cupertino.dart' as _i719;
 import 'package:flutter/material.dart' as _i409;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
@@ -128,6 +140,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i1016.ForgetPasswordRemoteDsI>(
         () => _i785.ForgetPasswordRemoteDsImpl(gh<_i452.ApiClient>()));
+    gh.factory<_i765.HomeRemoteDataSource>(
+        () => _i44.HomeRemoteDataSourceImpl(gh<_i452.ApiClient>()));
     gh.factory<_i959.AuthRemoteDataSourceContract>(
         () => _i304.AuthRemoteDataSourceImpl(gh<_i452.ApiClient>()));
     gh.factory<_i614.AuthRemoteDataSource>(
@@ -142,6 +156,10 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i351.AuthRepo>(() => _i683.AuthRepoImpl(
           gh<_i614.AuthRemoteDataSource>(),
+          gh<_i902.AuthLocalDataSource>(),
+        ));
+    gh.factory<_i408.HomeRepository>(() => _i700.HomeRepositoryImpl(
+          gh<_i765.HomeRemoteDataSource>(),
           gh<_i902.AuthLocalDataSource>(),
         ));
     gh.factory<_i937.ApplyUseCase>(
@@ -168,9 +186,15 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i592.ResetPasswordUseCase>(),
           gh<_i1007.VerifyOtpUseCase>(),
         ));
+    gh.factory<_i867.HomeUseCase>(
+        () => _i867.HomeUseCase(gh<_i408.HomeRepository>()));
     gh.factory<_i7.LoginCubit>(() => _i7.LoginCubit(
           gh<_i968.LoginUseCase>(),
           gh<_i597.CacheRememberMeUsecase>(),
+        ));
+    gh.factory<_i955.HomeCubit>(() => _i955.HomeCubit(
+          gh<_i867.HomeUseCase>(),
+          gh<_i408.HomeRepository>(),
         ));
     return this;
   }
