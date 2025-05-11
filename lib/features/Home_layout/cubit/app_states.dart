@@ -10,9 +10,9 @@ class AppState extends Equatable {
     // this.hasProfileData = false,
   });
 
-  factory AppState.initial() =>
-      const AppState(bottomNavBarIndex: 0, isLoggedIn: false, 
-      // hasProfileData: false
+  factory AppState.initial() => const AppState(
+        bottomNavBarIndex: 0, isLoggedIn: false,
+        // hasProfileData: false
       );
 
   AppState copyWith({
