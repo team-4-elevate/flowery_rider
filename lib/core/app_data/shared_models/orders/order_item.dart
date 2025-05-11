@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../shared_data_models/orders/order_product.dart';
+import 'order_product.dart';
 
 class OrderItem extends Equatable {
   final OrderDmProduct? orderProduct;

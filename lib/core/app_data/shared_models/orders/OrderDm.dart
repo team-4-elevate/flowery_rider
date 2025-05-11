@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flowery_rider/features/order_details/domain/entities/payment_type_enum.dart';
-import '../../shared_data_models/OrderDm.dart';
+import 'customerDm.dart';
+import 'order_item.dart';
 
 class OrderDM extends Equatable {
   final String? id;
-  final User? user;
+  final Customer? customer;
   final List<OrderItem>? orderItems;
   final double? totalPrice;
   final PaymentTypeEnum? paymentType;
@@ -18,7 +20,7 @@ class OrderDM extends Equatable {
 
   const OrderDM({
      this.id,
-     this.user,
+     this.customer,
      this.orderItems,
      this.totalPrice,
      this.paymentType,
@@ -34,7 +36,7 @@ class OrderDM extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
-      'user': user?.toJson(),
+      'user': customer?.toJson(),
       'orderItems': orderItems?.map((item) => item.toJson()).toList(),
       'totalPrice': totalPrice,
       'paymentType': paymentType,
@@ -51,7 +53,7 @@ class OrderDM extends Equatable {
   factory OrderDM.fromJson(Map<String, dynamic> json) {
     return OrderDM(
       id: json['_id'] as String,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      customer: Customer.fromJson(json['user'] as Map<String, dynamic>),
       orderItems: (json['orderItems'] as List?)
           ?.map((item) => OrderItem.fromJson(item as Map<String, dynamic>))
           .toList(),
@@ -70,7 +72,7 @@ class OrderDM extends Equatable {
   // Create a copy with updated values
   OrderDM copyWith({
     String? id,
-    User? user,
+    Customer? customer,
     List<OrderItem>? orderItems,
     double? totalPrice,
     PaymentTypeEnum? paymentType,
@@ -84,7 +86,7 @@ class OrderDM extends Equatable {
   }) {
     return OrderDM(
       id: id ?? this.id,
-      user: user ?? this.user,
+      customer: customer ?? this.customer,
       orderItems: orderItems ?? this.orderItems,
       totalPrice: totalPrice ?? this.totalPrice,
       paymentType: paymentType ?? this.paymentType,
@@ -101,7 +103,7 @@ class OrderDM extends Equatable {
   @override
   List<Object?> get props => [
         id,
-        user,
+        customer,
         orderItems,
         totalPrice,
         paymentType,
