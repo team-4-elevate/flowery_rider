@@ -1,15 +1,15 @@
-import 'package:flowery_rider/features/Home_layout/cubit/app_states.dart';
+import 'package:flowery_rider/core/app_manger/app_states.dart';
 import 'package:flowery_rider/features/auth/data/datasources/auth_local_data_source/auth_local_data_source.dart';
-// import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
+import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class AppCubit extends Cubit<AppState> {
-  AppCubit(this._authLocalDataSource) : super(AppState(bottomNavBarIndex: 0));
+  AppCubit(this._authLocalDataSource) : super(const AppState());
 
   final AuthLocalDataSource _authLocalDataSource;
-  // remove this commented code if not used
+  // remove this commented code if not used 
 
   // UserDataEntity? _cachedUserProfileData;
   // DateTime? _lastProfileFetchTime;
@@ -23,9 +23,7 @@ class AppCubit extends Cubit<AppState> {
   //   return DateTime.now().difference(_lastProfileFetchTime!).inMinutes < 30;
   // }
 
-  void changeBottomNavBarIndex(int index) {
-    emit(state.copyWith(bottomNavBarIndex: index));
-  }
+
 
   void getUserLoggedInState() {
     final isLoggedIn = _authLocalDataSource.getRememberMe();
@@ -35,12 +33,12 @@ class AppCubit extends Cubit<AppState> {
   // void saveProfileTabData(UserDataEntity profileData) {
   //   _cachedUserProfileData = profileData;
   //   _lastProfileFetchTime = DateTime.now();
-  //   emit(state.copyWith(haseProfileData: true));
+  //   emit(state.copyWith(hasProfileData: true));
   // }
 
   // void clearProfileData() {
   //   _cachedUserProfileData = null;
   //   _lastProfileFetchTime = null;
-  //   emit(state.copyWith(haseProfileData: false));
+  //   emit(state.copyWith(hasProfileData: false));
   // }
 }
