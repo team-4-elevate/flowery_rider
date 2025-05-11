@@ -29,7 +29,7 @@ class ApplyEntity {
     this.licensePhoto,
     this.idPhoto,
   });
-  
+
   factory ApplyEntity.fromFormData({
     required String firstName,
     required String lastName,

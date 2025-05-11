@@ -15,8 +15,6 @@ class AuthRepositoryImpl implements AuthRepo {
 
   AuthRepositoryImpl(this._remoteDataSource, this._localDataSource);
 
-
-
   //------------------------------apply-----------------------------------
 
   @override
@@ -27,23 +25,24 @@ class AuthRepositoryImpl implements AuthRepo {
 
     final licenseExists = await entity.licensePhoto!.exists();
     final idExists = await entity.idPhoto!.exists();
-    
+
     if (!licenseExists || !idExists) {
-      return Left(Exception('Required files do not exist or cannot be accessed'));
+      return Left(
+          Exception('Required files do not exist or cannot be accessed'));
     }
-    
+
     final request = ApplyRequest.fromEntity(entity);
     final result = await _remoteDataSource.apply(request);
-    
+
     if (result.isLeft) {
       return Left(result.left);
     }
-    
+
     final success = result.right;
     if (success.token != null && success.driver != null) {
       _localDataSource.cacheToken(success.token!);
     }
-    
+
     return Right(success.success);
   }
 }

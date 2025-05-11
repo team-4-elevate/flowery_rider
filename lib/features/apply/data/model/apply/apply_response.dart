@@ -22,6 +22,4 @@ class ApplyResponse {
       token: json['token'],
     );
   }
-  
-
 }

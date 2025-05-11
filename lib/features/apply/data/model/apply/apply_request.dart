@@ -70,30 +70,30 @@ class ApplyRequest {
 
   Future<FormData> toFormData() async {
     final String formattedNID = Validator.formatNationalID(idNumber);
-    
+
     //final String formattedPhone = Validator.formatPhoneForApi(phone);
-    
+
     final String validVehicleTypeId = Validator.isValidObjectId(vehicleType)
         ? vehicleType
         : Validator.getDefaultVehicleTypeId();
-    
+
     final formData = FormData();
     String fullInternationalPhone;
-    
+
     if (phone.startsWith('01')) {
       fullInternationalPhone = '+20${phone.substring(1)}';
     } else if (phone.startsWith('1')) {
       fullInternationalPhone = '+20$phone';
     } else {
-      String cleaned = phone.replaceAll(RegExp(r'[^0-9]'), ''); 
+      String cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
       if (cleaned.startsWith('0')) {
         cleaned = cleaned.substring(1);
       }
       fullInternationalPhone = '+20$cleaned';
     }
-    
+
     String countryCode2Letter = 'EG';
-    
+
     formData.fields.addAll([
       MapEntry('country', countryCode2Letter),
       MapEntry('firstName', firstName),
@@ -107,29 +107,26 @@ class ApplyRequest {
       MapEntry('gender', gender),
       MapEntry('phone', fullInternationalPhone),
     ]);
-    
-    
-      if (licensePhoto != null) {
-        final licenseFile = await MultipartFile.fromFile(
-          licensePhoto!.path,
-          filename: 'license.jpg',
-          contentType: MediaType.parse('image/jpeg'),
-        );
-                formData.files.add(MapEntry('vehicleLicense', licenseFile));
-      }
-      
-      if (idPhoto != null) {
-        final idFile = await MultipartFile.fromFile(
-          idPhoto!.path,
-          filename: 'id.jpg',
-          contentType: MediaType.parse('image/jpeg'),
-        );
-        
-        formData.files.add(MapEntry('NIDImg', idFile));
-      }
-    
-    
+
+    if (licensePhoto != null) {
+      final licenseFile = await MultipartFile.fromFile(
+        licensePhoto!.path,
+        filename: 'license.jpg',
+        contentType: MediaType.parse('image/jpeg'),
+      );
+      formData.files.add(MapEntry('vehicleLicense', licenseFile));
+    }
+
+    if (idPhoto != null) {
+      final idFile = await MultipartFile.fromFile(
+        idPhoto!.path,
+        filename: 'id.jpg',
+        contentType: MediaType.parse('image/jpeg'),
+      );
+
+      formData.files.add(MapEntry('NIDImg', idFile));
+    }
+
     return formData;
   }
-
 }

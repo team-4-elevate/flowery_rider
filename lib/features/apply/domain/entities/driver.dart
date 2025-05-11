@@ -73,6 +73,4 @@ class Driver {
         '_id': id,
         'createdAt': createdAt?.toIso8601String(),
       };
-      
-
 }

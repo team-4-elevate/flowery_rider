@@ -19,7 +19,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
 
   AuthRemoteDataSourceImpl(this._apiClient);
 
-
   @override
   Future<Either<ApiException, ApplyResponse>> apply(
       ApplyRequest request) async {
