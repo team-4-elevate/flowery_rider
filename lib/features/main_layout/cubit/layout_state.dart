@@ -5,7 +5,7 @@ class LayoutState extends Equatable {
   const LayoutState(
     this.bottomNavBarIndex,
   );
-  
+
   factory LayoutState.initial() => const LayoutState(0);
 
   LayoutState copyWith({
@@ -15,6 +15,7 @@ class LayoutState extends Equatable {
       bottomNavBarIndex ?? this.bottomNavBarIndex,
     );
   }
+
   @override
   List<Object> get props => [
         bottomNavBarIndex,

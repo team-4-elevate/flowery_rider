@@ -9,7 +9,7 @@ class AppState extends Equatable {
   });
 
   factory AppState.initial() => const AppState(
-        // hasProfileData: false
+      // hasProfileData: false
       );
 
   AppState copyWith({

@@ -9,7 +9,7 @@ class AppCubit extends Cubit<AppState> {
   AppCubit(this._authLocalDataSource) : super(const AppState());
 
   final AuthLocalDataSource _authLocalDataSource;
-  // remove this commented code if not used 
+  // remove this commented code if not used
 
   // UserDataEntity? _cachedUserProfileData;
   // DateTime? _lastProfileFetchTime;
@@ -22,8 +22,6 @@ class AppCubit extends Cubit<AppState> {
   //   if (_lastProfileFetchTime == null) return false;
   //   return DateTime.now().difference(_lastProfileFetchTime!).inMinutes < 30;
   // }
-
-
 
   void getUserLoggedInState() {
     final isLoggedIn = _authLocalDataSource.getRememberMe();
