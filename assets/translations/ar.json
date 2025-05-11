@@ -99,11 +99,23 @@
       "file_uploaded": "تم تحميل الملف",
       "processing": "جاري المعالجة...",
       "submission_note": "قد يستغرق هذا بعض الوقت. الرجاء عدم إغلاق التطبيق."
+      
     }
   },
-  "select_vehicle_type": "اختر نوع المركبة",
-  "car": "سيارة",
-  "motorcycle": "دراجة نارية",
-  "bicycle": "دراجة هوائية",
-  "van": "شاحنة صغيرة"
+   "home": {
+    "app_title": "فلاوري رايدر",
+    "try_again": "حاول مرة أخرى",
+    "no_pending_orders": "لا توجد طلبات معلقة",
+    "pull_to_refresh": "اسحب لأسفل للتحديث",
+    "accept_order_message": "تم النقر على زر القبول! سيتم تنفيذ صفحة التفاصيل قريبًا.",
+    "flower_order": "طلب زهور",
+    "pickup_address": "عنوان الاستلام",
+    "flowery_store": "متجر فلاوري",
+    "user_address": "عنوان المستخدم",
+    "currency": "جنيه",
+    "reject": "رفض",
+    "accept": "قبول"
+  }
+
+  
 }

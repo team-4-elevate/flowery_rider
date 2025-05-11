@@ -1,8 +1,5 @@
 // features/auth/data/datasource/remote_data_source/auth_remote_data_source_impl.dart
 
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:flowery_rider/core/app_data/api/api_client.dart';
 import 'package:flowery_rider/core/app_data/api/api_constants.dart';
@@ -49,7 +46,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
   Future<Either<ApiException, String>> forgotPassword(String email) async {
     try {
       final response = await _apiClient.post(
-        ApiConstants.forgetPasswordEndPoint,
+        ApiConstants.forgetPassword,
         data: {
           'email': email,
         },
@@ -76,7 +73,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
       String email, String code) async {
     try {
       final response = await _apiClient.post(
-        ApiConstants.verifyPasswordEndPoint,
+        ApiConstants.verifyOtp,
         data: {
           'email': email,
           'resetCode': code,
@@ -103,7 +100,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
       String email, String password) async {
     try {
       final response = await _apiClient.put(
-        ApiConstants.resetPasswordEndPoint,
+        ApiConstants.resetPassword,
         data: {
           'email': email,
           'newPassword': password,

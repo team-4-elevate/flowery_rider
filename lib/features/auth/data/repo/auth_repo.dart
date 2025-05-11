@@ -32,13 +32,11 @@ class AuthRepositoryImpl implements AuthRepo {
       
       final loginResponse = result.right;
       if (loginResponse.token != null) {
-        if (rememberMe) {
-          _localDataSource.cacheToken(loginResponse.token!);
-          _localDataSource.cacheRememberMe(true);
-        } else {
-          _localDataSource.deleteToken();
-          _localDataSource.cacheRememberMe(false);
-        }
+        // Always cache the token regardless of rememberMe to enable current session
+        _localDataSource.cacheToken(loginResponse.token!);
+        
+        // The rememberMe flag only affects persistence settings
+        _localDataSource.cacheRememberMe(rememberMe);
 
         return Right(loginResponse);
       } else {

@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
               context: context,
             );
           } else if (state.signInState is BaseSuccessState) {
-            Navigator.pushReplacementNamed(context, Routes.home);
+            Navigator.pushReplacementNamed(context, Routes.navbar);
           }
         },
         builder: (context, state) {

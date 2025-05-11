@@ -11,5 +11,7 @@ class Routes {
   static const String profile = '/profile';
   static const String settings = '/settings';
   static const String notifications = '/notifications';
+  static const String orders = '/orders';
+  static const String navbar = '/navbar';
   
 }

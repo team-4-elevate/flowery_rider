@@ -37,6 +37,20 @@ import 'package:flowery_rider/features/auth/domain/use_case/login_usecase.dart'
     as _i245;
 import 'package:flowery_rider/features/auth/presentation/cubit/auth_cubit.dart'
     as _i908;
+import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_source/home_remote_data_source.dart'
+    as _i765;
+import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_source/home_remote_data_source_impl.dart'
+    as _i44;
+import 'package:flowery_rider/features/Home_layout/data/repo/home_repo_impl.dart'
+    as _i700;
+import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.dart'
+    as _i408;
+import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart'
+    as _i867;
+import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart'
+    as _i955;
+import 'package:flowery_rider/features/nav/presentation/cubit/nav_cubit.dart'
+    as _i743;
 import 'package:flutter/cupertino.dart' as _i719;
 import 'package:flutter/material.dart' as _i409;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
@@ -71,6 +85,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i944.AppNavigatorObserver>(
         () => _i944.AppNavigatorObserver());
     gh.singleton<_i318.DialogUtils>(() => _i318.DialogUtils());
+    gh.lazySingleton<_i743.NavCubit>(() => _i743.NavCubit());
     gh.singleton<_i983.LocalStorageClient>(() => _i983.LocalStorageClient(
           gh<_i460.SharedPreferences>(),
           gh<_i558.FlutterSecureStorage>(),
@@ -88,8 +103,14 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i692.AuthRemoteDataSourceContract>(
         () => _i318.AuthRemoteDataSourceImpl(gh<_i452.ApiClient>()));
+    gh.factory<_i765.HomeRemoteDataSource>(
+        () => _i44.HomeRemoteDataSourceImpl(gh<_i452.ApiClient>()));
     gh.factory<_i1032.AuthRepo>(() => _i875.AuthRepositoryImpl(
           gh<_i692.AuthRemoteDataSourceContract>(),
+          gh<_i816.AuthLocalDataSourceContract>(),
+        ));
+    gh.factory<_i408.HomeRepository>(() => _i700.HomeRepositoryImpl(
+          gh<_i765.HomeRemoteDataSource>(),
           gh<_i816.AuthLocalDataSourceContract>(),
         ));
     gh.factory<_i149.ApplyUseCase>(
@@ -102,6 +123,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i117.ResetPasswordUseCase(gh<_i1032.AuthRepo>()));
     gh.factory<_i245.LoginUseCase>(
         () => _i245.LoginUseCase(gh<_i1032.AuthRepo>()));
+    gh.factory<_i867.HomeUseCase>(
+        () => _i867.HomeUseCase(gh<_i408.HomeRepository>()));
+    gh.factory<_i955.HomeCubit>(() => _i955.HomeCubit(
+          gh<_i867.HomeUseCase>(),
+          gh<_i408.HomeRepository>(),
+        ));
     gh.factory<_i908.AuthCubit>(() => _i908.AuthCubit(
           gh<_i245.LoginUseCase>(),
           gh<_i1032.AuthRepo>(),
