@@ -56,6 +56,11 @@ dependencies:
   image_picker: ^1.1.2
   pinput: ^5.0.1
   otp_resend_timer: ^1.0.0
+  firebase_auth:
+  firebase_core:
+  firebase_crashlytics:
+  firebase_analytics:
+  firebase_database:
 
 dev_dependencies:
   build_runner: ^2.4.13

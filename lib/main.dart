@@ -1,4 +1,8 @@
+import 'dart:isolate';
+import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flowery_rider/core/app_bloc_observer.dart';
 import 'package:flowery_rider/core/di/injectable.dart';
 import 'package:flowery_rider/core/routes/app_router.dart';
@@ -9,9 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await _configureFirebase();
   await configureDependencies();
   Bloc.observer = AppBlocObserver();
   runApp(
@@ -51,3 +58,24 @@ class FloweryRider extends StatelessWidget {
     );
   }
 }
+Future<void> _configureFirebase() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: false);
+    return true;
+  };
+  Isolate.current.addErrorListener(RawReceivePort((pair) async {
+    final List<dynamic> errorAndStacktrace = pair;
+    await FirebaseCrashlytics.instance.recordError(
+      errorAndStacktrace.first,
+      errorAndStacktrace.last,
+      fatal: true,
+    );
+  }).sendPort);
+}
+
