@@ -1,35 +1,35 @@
 import 'package:equatable/equatable.dart';
 
-class AppStates extends Equatable {
+class AppState extends Equatable {
   final int bottomNavBarIndex;
   final bool isLoggedIn;
-  final bool haseProfileData;
-  const AppStates({
+  final bool hasProfileData;
+  const AppState({
     required this.bottomNavBarIndex,
     this.isLoggedIn = false,
-    this.haseProfileData = false,
+    this.hasProfileData = false,
   });
 
-  factory AppStates.initial() =>
-      const AppStates(bottomNavBarIndex: 0, isLoggedIn: false, 
-      haseProfileData: false
+  factory AppState.initial() =>
+      const AppState(bottomNavBarIndex: 0, isLoggedIn: false, 
+      hasProfileData: false
       );
 
-  AppStates copyWith({
+  AppState copyWith({
     int? bottomNavBarIndex,
     bool? isLoggedIn,
-    bool ? haseProfileData
+    bool ? hasProfileData
   }) =>
-      AppStates(
+      AppState(
         bottomNavBarIndex: bottomNavBarIndex ?? this.bottomNavBarIndex,
         isLoggedIn: isLoggedIn ?? this.isLoggedIn,
-        haseProfileData: haseProfileData ?? this.haseProfileData
+        hasProfileData: hasProfileData ?? this.hasProfileData
       );
 
   @override
   List<Object?> get props => [
         bottomNavBarIndex,
         isLoggedIn,
-        haseProfileData
+        hasProfileData
       ];
 }

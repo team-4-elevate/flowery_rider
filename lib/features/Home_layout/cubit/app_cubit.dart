@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class AppCubit extends Cubit<AppStates> {
-  AppCubit(this._authLocalDataSource) : super(AppStates(bottomNavBarIndex: 0));
+class AppCubit extends Cubit<AppState> {
+  AppCubit(this._authLocalDataSource) : super(AppState(bottomNavBarIndex: 0));
 
   final AuthLocalDataSource _authLocalDataSource;
  // remove this commented code if not used

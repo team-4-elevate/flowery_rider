@@ -19,7 +19,7 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppStates>(
+    return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         return Scaffold(
           body: _screens[state.bottomNavBarIndex],
