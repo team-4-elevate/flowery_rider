@@ -5,6 +5,7 @@ import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.d
 import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/page/home_layout.dart';
+import 'package:flowery_rider/features/Home_layout/presentation/page/order_details.dart';
 import 'package:flowery_rider/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/apply_page.dart';
 import 'package:flowery_rider/features/auth/presentation/pages/apply_success_page.dart';
@@ -110,6 +111,12 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           create: (_) => getIt<NavCubit>(),
           child: const NavbarPage(),
         ),
+      );
+
+    case Routes.orderDetails:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => OrderDetails(),
       );
 
     default:

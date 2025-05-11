@@ -25,25 +25,7 @@ class HomeRepositoryImpl implements HomeRepository {
       }
 
       final response = await _remoteDataSource.getPendingOrders();
-      
-      // Check if we got any orders from the API
-      if (response.right.orders != null && response.right.orders!.isNotEmpty) {
-        // Debug the first order to see all relevant fields
-        final firstOrder = response.right.orders!.first;
-        final nestedOrder = firstOrder.order;
-        print('🔍 First order from API: id=${firstOrder.id}');
-        print('🔍 - state: ${nestedOrder?.state}');
-        print('🔍 - totalPrice: ${nestedOrder?.totalPrice}');
-        print('🔍 - user details: firstName=${nestedOrder?.user?.firstName}, lastName=${nestedOrder?.user?.lastName}');
-      }
-
-      // Override with a test order if needed to verify UI
       final orders = OrderEntity.fromModelList(response.right.orders);
-      
-      // Debug the final entity mapping
-      if (orders.isNotEmpty) {
-        print('🔍 First mapped entity: id=${orders.first.id}, state=${orders.first.state}');
-      }
 
       final Map<String, OrderEntity> uniqueOrdersMap = {};
       for (final order in orders) {

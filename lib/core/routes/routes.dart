@@ -13,5 +13,6 @@ class Routes {
   static const String notifications = '/notifications';
   static const String orders = '/orders';
   static const String navbar = '/navbar';
+  static const String orderDetails = '/order-details';
   
 }

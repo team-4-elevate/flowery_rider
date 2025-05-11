@@ -1,6 +1,7 @@
 // features/Home_layout/presentation/page/home_layout.dart
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/core/base/base_state.dart';
+import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flowery_rider/core/theme/app_styles.dart';
 import 'package:flowery_rider/core/widget/dialog_utils.dart';
@@ -154,11 +155,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   }
 
   void _acceptOrder(OrderEntity order, BuildContext context) {
-    GetIt.I<DialogUtils>().showSnackBar(
-      textColor: AppColors.primary,
-      message: LocaleKeys.home_accept_order_message.tr(),
-      context: context,
-    );
+    Navigator.pushNamed(context, Routes.orderDetails);
   }
 
   void _rejectOrder(OrderEntity order, BuildContext context) {

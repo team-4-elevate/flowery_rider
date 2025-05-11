@@ -17,17 +17,8 @@ class HomeCubit extends Cubit<HomeStates> {
       : super(HomeStates(homeState: BaseInitialState()));
 
   List<OrderEntity> get visibleOrders {
-    print('💡 Total orders in state: ${state.orders.length}');
-    if (state.orders.isNotEmpty) {
-      print('💡 First order state: ${state.orders.first.state}');
-    }
-    
     final pendingOrders = state.orders.where((order) => order.isPending).toList();
-    print('💡 Pending orders after filter: ${pendingOrders.length}');
-    
     final notRejectedOrders = pendingOrders.where((order) => !_rejectedOrderIds.contains(order.id)).toList();
-    print('💡 Final visible orders: ${notRejectedOrders.length}');
-    
     return notRejectedOrders;
   }
 
