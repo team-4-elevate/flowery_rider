@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "998190875190",
+    "project_id": "flowers-app-7e0fd",
+    "storage_bucket": "flowers-app-7e0fd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998190875190:android:872fced85dc8ff28ecce97",
+        "android_client_info": {
+          "package_name": "com.example.flower_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD76c3nsgiyNhZrzjCxThG4f3gMuiGvymA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998190875190:android:1157fa1f41a79ff0ecce97",
+        "android_client_info": {
+          "package_name": "com.example.flowery_rider"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD76c3nsgiyNhZrzjCxThG4f3gMuiGvymA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

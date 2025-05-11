@@ -15,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import '../../features/forget_password/presentation/pages/forget_password_page.dart';
 import '../../features/forget_password/presentation/pages/pin_code_page.dart';
+import '../../features/order_details/presentation/cubit/order_details_cubit.dart';
+import '../../features/order_details/presentation/order_details_page/order_details_page.dart';
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -79,6 +81,11 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         settings: settings,
         builder: (_) => const ApplySuccessPage(),
       );
+    case Routes.orderDetails:
+      return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+              create: (context) => getIt<OrderDetailsCubit>(),
+              child: OrderDetailsPage()));
     default:
       return MaterialPageRoute(
         settings: settings,
