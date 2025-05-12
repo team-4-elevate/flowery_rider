@@ -6,7 +6,8 @@ class ResetPasswordUseCase {
   final ForgetPasswordRepoI _forgetRepo;
 
   ResetPasswordUseCase(this._forgetRepo);
-  Future<void> call({required String email, required String newPassword}) async {
+  Future<void> call(
+      {required String email, required String newPassword}) async {
     await _forgetRepo.resetPassword(email, newPassword);
   }
 }

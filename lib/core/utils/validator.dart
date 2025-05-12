@@ -6,16 +6,24 @@ class Validator {
   Validator._();
 
   static String? phoneNumberValidation(String? number) {
-    final RegExp numberRegex = RegExp(
-      r'^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$',
-    );
-    if (number == null || number.trim().isEmpty || number == '+2') {
+    if (number == null || number.trim().isEmpty) {
       return LocaleKeys.validation_phoneEmpty.tr();
-    } else if (numberRegex.hasMatch(number) == false) {
-      return LocaleKeys.validation_phoneInvalid.tr();
-    } else {
-      return null;
     }
+
+    // Check length first (for immediate user feedback)
+    if (number.length < 11) {
+      return 'Phone number must be 11 digits';
+    }
+
+    // Only validate format if length is correct
+    final RegExp numberRegex = RegExp(
+      r'^(01)[0-2,5]{1}[0-9]{8}$',
+    );
+    if (numberRegex.hasMatch(number) == false) {
+      return LocaleKeys.validation_phoneInvalid.tr();
+    }
+
+    return null;
   }
 
   static String? passwordValidation(String? password) {
@@ -94,10 +102,6 @@ class Validator {
     return null;
   }
 
-
-  
-
-
   //---------------------------------------------------------phone number
 
   static String formatPhoneNumber(String? phone, String? countryCode) {
@@ -140,6 +144,7 @@ class Validator {
     String result = phone.replaceAll(RegExp(r'[^0-9]'), '');
     return result;
   }
+
 //---------------------------------------------------------vehicle number
   static String? validateVehicleNumber(String? vehicleNumber) {
     final RegExp vehicleNumberRegex = RegExp(
@@ -181,7 +186,6 @@ class Validator {
     return null;
   }
 
-
 //--------------------------------------------------------national id
   static bool isValidObjectId(String? str) {
     if (str == null || str.length != 24) return false;
@@ -197,7 +201,6 @@ class Validator {
 
     String digitsOnly = nid.replaceAll(RegExp(r'\D'), '');
 
-
     if (digitsOnly.length != 14) {
       return 'National ID must be exactly 14 digits';
     }
@@ -211,7 +214,6 @@ class Validator {
       int month = int.parse(digitsOnly.substring(3, 5));
       int day = int.parse(digitsOnly.substring(5, 7));
 
-      // Basic date validation
       if (month < 1 || month > 12) {
         return 'National ID contains invalid month';
       }
@@ -222,11 +224,11 @@ class Validator {
       return 'National ID has invalid date format';
     }
 
-    return null; 
+    return null;
   }
 
   static String formatNationalID(String? nid) {
-    if (nid == null || nid.isEmpty) return '00000000000000'; 
+    if (nid == null || nid.isEmpty) return '00000000000000';
 
     String digitsOnly = nid.replaceAll(RegExp(r'\D'), '');
 
@@ -243,5 +245,3 @@ class Validator {
     return '6469945aa4c3eb5241c0dae2';
   }
 }
-
-
