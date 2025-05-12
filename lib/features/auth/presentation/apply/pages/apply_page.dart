@@ -194,7 +194,7 @@ class _ApplyPageState extends State<ApplyPage> {
                   SizedBox(height: 5.h),
                   Text(
                     //LocaleKeys.auth_apply_join_team.tr(),
-                  LocaleKeys.apply_description.tr(),
+                    LocaleKeys.apply_description.tr(),
                     style: getRegularStyle(
                       fontSize: 14.sp,
                       color: AppColors.grey,
@@ -291,7 +291,8 @@ class _ApplyPageState extends State<ApplyPage> {
                                         _idPhoto == null) {
                                       GetIt.I<DialogUtils>().showSnackBar(
                                         textColor: AppColors.error,
-                                        message: LocaleKeys.apply_upload_required_files
+                                        message: LocaleKeys
+                                            .apply_upload_required_files
                                             .tr(),
                                         context: context,
                                       );
@@ -334,12 +335,11 @@ class _ApplyPageState extends State<ApplyPage> {
                                               color: AppColors.white,
                                               strokeWidth: 2.5)),
                                       const SizedBox(width: 10),
-                                      Text(LocaleKeys.apply_processing
-                                          .tr()),
+                                      Text(LocaleKeys.apply_processing.tr()),
                                     ],
                                   )
-                                : Text(LocaleKeys.apply_submit_application
-                                    .tr()),
+                                : Text(
+                                    LocaleKeys.apply_submit_application.tr()),
                           );
                         },
                       ),

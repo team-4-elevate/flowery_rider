@@ -12,7 +12,8 @@ import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_succe
 import 'package:flowery_rider/features/auth/presentation/login_screen/login_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/login_screen/login_screen.dart';
 import 'package:flowery_rider/features/forget_password/presentation/cubit/forget_password_cubit.dart';
-import 'package:flowery_rider/features/forget_password/presentation/pages/forget_password_page.dart' show ForgetPasswordPage;
+import 'package:flowery_rider/features/forget_password/presentation/pages/forget_password_page.dart'
+    show ForgetPasswordPage;
 import 'package:flowery_rider/features/forget_password/presentation/pages/pin_code_page.dart';
 import 'package:flowery_rider/features/forget_password/presentation/pages/reset_password_page.dart';
 import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart';
@@ -35,8 +36,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => BlocProvider(
-          create: (context) => getIt<LayoutCubit>(),
-          child: LayoutScreen()),
+            create: (context) => getIt<LayoutCubit>(), child: LayoutScreen()),
       );
     case Routes.applicationApproved:
       return MaterialPageRoute(

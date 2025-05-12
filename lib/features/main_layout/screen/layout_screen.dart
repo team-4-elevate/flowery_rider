@@ -17,10 +17,9 @@ class LayoutScreen extends StatefulWidget {
 class _LayoutScreenState extends State<LayoutScreen> {
   final List<Widget> _screens = [
     BlocProvider(
-      create: (context) => getIt<HomeCubit>(),
-      child: const HomeScreen()),
-      const OrderDetailsPage(),
-     const Center(child: Text('Profile Screen')),
+        create: (context) => getIt<HomeCubit>(), child: const HomeScreen()),
+    const OrderDetailsPage(),
+    const Center(child: Text('Profile Screen')),
   ];
 
   @override
@@ -44,7 +43,6 @@ class _LayoutScreenState extends State<LayoutScreen> {
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.fact_check_outlined,
-
                 ),
                 label: 'Orders',
               ),

@@ -63,6 +63,7 @@ class FloweryRider extends StatelessWidget {
     );
   }
 }
+
 Future<void> _configureFirebase() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -83,4 +84,3 @@ Future<void> _configureFirebase() async {
     );
   }).sendPort);
 }
-
