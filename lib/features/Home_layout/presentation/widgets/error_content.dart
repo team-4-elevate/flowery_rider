@@ -41,13 +41,10 @@ class ErrorContent extends StatelessWidget {
           ),
           SizedBox(height: 24.h),
           ElevatedButton(
-            onPressed: () => Navigator.pushReplacementNamed(context, Routes.login),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-            ),
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, Routes.login),
             child: Text(
               LocaleKeys.applicationApproved_login.tr(),
-              style: getMediumStyle(fontSize: 14.sp, color: AppColors.white),
             ),
           ),
         ],
