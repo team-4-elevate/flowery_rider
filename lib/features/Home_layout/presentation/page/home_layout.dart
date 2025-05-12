@@ -4,7 +4,6 @@ import 'package:flowery_rider/core/base/base_state.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flowery_rider/core/theme/app_styles.dart';
-import 'package:flowery_rider/core/widget/dialog_utils.dart';
 import 'package:flowery_rider/features/Home_layout/domain/entities/order_entity.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_states.dart';
@@ -14,7 +13,6 @@ import 'package:flowery_rider/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_it/get_it.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key});

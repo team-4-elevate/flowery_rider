@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const validation_firstNameEmpty = 'validation.firstNameEmpty';
   static const validation_firstNameInvalid = 'validation.firstNameInvalid';
   static const validation_lastNameEmpty = 'validation.lastNameEmpty';
@@ -12,9 +12,12 @@ abstract class  LocaleKeys {
   static const validation_passwordEmpty = 'validation.passwordEmpty';
   static const validation_passwordInvalid = 'validation.passwordInvalid';
   static const validation_passwordShort = 'validation.passwordShort';
-  static const validation_confirmPasswordEmpty = 'validation.confirmPasswordEmpty';
-  static const validation_confirmPasswordMismatch = 'validation.confirmPasswordMismatch';
-  static const validation_passwordSamePassword = 'validation.passwordSamePassword';
+  static const validation_confirmPasswordEmpty =
+      'validation.confirmPasswordEmpty';
+  static const validation_confirmPasswordMismatch =
+      'validation.confirmPasswordMismatch';
+  static const validation_passwordSamePassword =
+      'validation.passwordSamePassword';
   static const validation_phoneEmpty = 'validation.phoneEmpty';
   static const validation_phoneInvalid = 'validation.phoneInvalid';
   static const validation_pinCodeError = 'validation.pinCodeError';
@@ -22,7 +25,8 @@ abstract class  LocaleKeys {
   static const validation_required = 'validation.required';
   static const validation_passwordLength = 'validation.passwordLength';
   static const validation_invalidEmail = 'validation.invalidEmail';
-  static const validation_invalidVehicleNumber = 'validation.invalidVehicleNumber';
+  static const validation_invalidVehicleNumber =
+      'validation.invalidVehicleNumber';
   static const validation_vehicleNumber = 'validation.vehicleNumber';
   static const validation = 'validation';
   static const onboarding_welcomeTo = 'onboarding.welcomeTo';
@@ -44,49 +48,63 @@ abstract class  LocaleKeys {
   static const auth_login = 'auth.login';
   static const auth_forgot_password_title = 'auth.forgot_password.title';
   static const auth_forgot_password_heading = 'auth.forgot_password.heading';
-  static const auth_forgot_password_instruction = 'auth.forgot_password.instruction';
-  static const auth_forgot_password_email_label = 'auth.forgot_password.email.label';
-  static const auth_forgot_password_email_hint = 'auth.forgot_password.email.hint';
+  static const auth_forgot_password_instruction =
+      'auth.forgot_password.instruction';
+  static const auth_forgot_password_email_label =
+      'auth.forgot_password.email.label';
+  static const auth_forgot_password_email_hint =
+      'auth.forgot_password.email.hint';
   static const auth_forgot_password_email = 'auth.forgot_password.email';
-  static const auth_forgot_password_confirm_button = 'auth.forgot_password.confirm_button';
+  static const auth_forgot_password_confirm_button =
+      'auth.forgot_password.confirm_button';
   static const auth_forgot_password = 'auth.forgot_password';
   static const auth_verification_title = 'auth.verification.title';
   static const auth_verification_heading = 'auth.verification.heading';
   static const auth_verification_instruction = 'auth.verification.instruction';
-  static const auth_verification_resend_button = 'auth.verification.resend_button';
+  static const auth_verification_resend_button =
+      'auth.verification.resend_button';
   static const auth_verification = 'auth.verification';
   static const auth_resetpassword_title = 'auth.resetpassword.title';
   static const auth_resetpassword_heading = 'auth.resetpassword.heading';
-  static const auth_resetpassword_instruction = 'auth.resetpassword.instruction';
-  static const auth_resetpassword_confirm_label = 'auth.resetpassword.confirm_label';
-  static const auth_resetpassword_confirm_hint = 'auth.resetpassword.confirm_hint';
+  static const auth_resetpassword_instruction =
+      'auth.resetpassword.instruction';
+  static const auth_resetpassword_confirm_label =
+      'auth.resetpassword.confirm_label';
+  static const auth_resetpassword_confirm_hint =
+      'auth.resetpassword.confirm_hint';
   static const auth_resetpassword_button = 'auth.resetpassword.button';
   static const auth_resetpassword_success = 'auth.resetpassword.success';
   static const auth_resetpassword = 'auth.resetpassword';
   static const auth_apply_title = 'auth.apply.title';
   static const auth_apply_welcome = 'auth.apply.welcome';
   static const auth_apply_description = 'auth.apply.description';
-  static const auth_apply_personal_information = 'auth.apply.personal_information';
+  static const auth_apply_personal_information =
+      'auth.apply.personal_information';
   static const auth_apply_first_name = 'auth.apply.first_name';
   static const auth_apply_last_name = 'auth.apply.last_name';
   static const auth_apply_email = 'auth.apply.email';
   static const auth_apply_phone_number = 'auth.apply.phone_number';
   static const auth_apply_gender = 'auth.apply.gender';
-  static const auth_apply_vehicle_information = 'auth.apply.vehicle_information';
-  static const auth_apply_select_vehicle_type = 'auth.apply.select_vehicle_type';
+  static const auth_apply_vehicle_information =
+      'auth.apply.vehicle_information';
+  static const auth_apply_select_vehicle_type =
+      'auth.apply.select_vehicle_type';
   static const auth_apply_car = 'auth.apply.car';
   static const auth_apply_motorcycle = 'auth.apply.motorcycle';
   static const auth_apply_bicycle = 'auth.apply.bicycle';
   static const auth_apply_van = 'auth.apply.van';
   static const auth_apply_vehicle_number = 'auth.apply.vehicle_number';
-  static const auth_apply_upload_vehicle_license = 'auth.apply.upload_vehicle_license';
-  static const auth_apply_account_information = 'auth.apply.account_information';
+  static const auth_apply_upload_vehicle_license =
+      'auth.apply.upload_vehicle_license';
+  static const auth_apply_account_information =
+      'auth.apply.account_information';
   static const auth_apply_id_number = 'auth.apply.id_number';
   static const auth_apply_upload_id_card = 'auth.apply.upload_id_card';
   static const auth_apply_password = 'auth.apply.password';
   static const auth_apply_confirm_password = 'auth.apply.confirm_password';
   static const auth_apply_submit_application = 'auth.apply.submit_application';
-  static const auth_apply_upload_required_files = 'auth.apply.upload_required_files';
+  static const auth_apply_upload_required_files =
+      'auth.apply.upload_required_files';
   static const auth_apply_file_uploaded = 'auth.apply.file_uploaded';
   static const auth_apply_processing = 'auth.apply.processing';
   static const auth_apply_submission_note = 'auth.apply.submission_note';
@@ -105,5 +123,4 @@ abstract class  LocaleKeys {
   static const home_reject = 'home.reject';
   static const home_accept = 'home.accept';
   static const home = 'home';
-
 }

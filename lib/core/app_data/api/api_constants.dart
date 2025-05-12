@@ -8,5 +8,5 @@ class ApiConstants {
   static const String resetPassword = 'drivers/resetPassword';
   static const String applyDriverEndPoint = 'drivers/apply';
   static const String homeEndPoint = 'orders/pending-orders';
-  static const String pendingOrders = 'orders/driver-orders';
+  //static const String pendingOrders = 'orders/driver-orders';
 }

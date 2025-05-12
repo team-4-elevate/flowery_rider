@@ -25,6 +25,7 @@ class HomeRepositoryImpl implements HomeRepository {
       }
 
       final response = await _remoteDataSource.getPendingOrders();
+
       final orders = OrderEntity.fromModelList(response.right.orders);
 
       final Map<String, OrderEntity> uniqueOrdersMap = {};
@@ -39,6 +40,4 @@ class HomeRepositoryImpl implements HomeRepository {
       return Left(ApiException(message: e.toString()));
     }
   }
-
-
 }

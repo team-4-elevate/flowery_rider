@@ -189,7 +189,6 @@ class Validator {
     return null;
   }
 
-
 //--------------------------------------------------------national id
   static bool isValidObjectId(String? str) {
     if (str == null || str.length != 24) return false;
@@ -204,7 +203,6 @@ class Validator {
     }
 
     String digitsOnly = nid.replaceAll(RegExp(r'\D'), '');
-
 
     if (digitsOnly.length != 14) {
       return 'National ID must be exactly 14 digits';
@@ -230,11 +228,11 @@ class Validator {
       return 'National ID has invalid date format';
     }
 
-    return null; 
+    return null;
   }
 
   static String formatNationalID(String? nid) {
-    if (nid == null || nid.isEmpty) return '00000000000000'; 
+    if (nid == null || nid.isEmpty) return '00000000000000';
 
     String digitsOnly = nid.replaceAll(RegExp(r'\D'), '');
 

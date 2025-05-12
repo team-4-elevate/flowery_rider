@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:flowery_rider/features/nav/presentation/cubit/nav_cubit.dart';
 import 'package:flowery_rider/features/nav/presentation/cubit/nav_state.dart';
 import 'package:flowery_rider/features/orders/orders_page.dart';
-import 'package:flowery_rider/features/profile/profile_page.dart';
+import 'package:flowery_rider/features/profile/presentation/page/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

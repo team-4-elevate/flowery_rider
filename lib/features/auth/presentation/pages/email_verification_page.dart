@@ -89,7 +89,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
     final domainPart = parts[1];
 
     if (localPart.length <= 2) {
-      return email; 
+      return email;
     }
 
     final firstChar = localPart[0];

@@ -1,6 +1,7 @@
 // features/Home_layout/domain/entities/order_entity.dart
 
-import 'package:flowery_rider/features/Home_layout/data/model/orders_pending/order.dart';
+import 'package:flowery_rider/core/app_data/shared_Module/driver_order_model.dart';
+import 'package:flowery_rider/core/app_data/shared_Module/full_order_model.dart';
 
 class OrderEntity {
   final String id;
@@ -23,47 +24,90 @@ class OrderEntity {
 
   String get formattedPrice => 'EGP ${price.toStringAsFixed(0)}';
   bool get isPending =>
-      state.toLowerCase() == 'pending' || state.toLowerCase() == 'inprogress';
+      state.toLowerCase() == 'pending' ||
+      state.toLowerCase() == 'inprogress' ||
+      state.toLowerCase() == 'completed';
 
-  factory OrderEntity.fromModel(Order driverOrder) {
-    final nestedOrder = driverOrder.order;
+  factory OrderEntity.fromModel(dynamic orderData) {
+    if (orderData is DriverOrderModel) {
+      final order = orderData;
+      final firstName = order.customer?.firstName ?? '';
+      final lastName = order.customer?.lastName ?? '';
+      final fullName =
+          [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
 
-    // Use a default name if user data is missing
-    final String firstName = nestedOrder?.user?.firstName ?? 'Flowery';
-    final String lastName = nestedOrder?.user?.lastName ?? 'Customer';
-    final fullName = [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
+      String storeAddress = '20th st, Sheikh Zayed, Giza';
 
-    // Use the store address or a default
-    final storeAddress = driverOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
-    final userAddress = storeAddress.contains(',')
-        ? storeAddress
-        : '20th st, Sheikh Zayed, Giza';
-
-    // Set a default price (150) to ensure UI shows actual values
-    double price = 150.0;
-    if (nestedOrder?.totalPrice != null) {
-      try {
-        price = nestedOrder!.totalPrice!.toDouble();
-      } catch (_) {
-        // Keep the default price if conversion fails
+      if (orderData.toJson().containsKey('store') &&
+          orderData.toJson()['store'] != null) {
+        final storeData = orderData.toJson()['store'];
+        if (storeData is Map && storeData.containsKey('address')) {
+          storeAddress = storeData['address'] ?? storeAddress;
+        }
       }
+
+      final userAddress = storeAddress.contains(',')
+          ? storeAddress
+          : '20th st,Sheikh Zayed, Giza';
+
+      double price = 0.0;
+      if (order.totalPrice != null) {
+        price = order.totalPrice!;
+      }
+
+      return OrderEntity(
+        id: order.id ?? '',
+        orderId: order.orderNumber ?? '',
+        storeAddress: storeAddress,
+        userName: fullName.isEmpty ? 'Unknown Customer' : fullName,
+        userAddress: userAddress,
+        price: price,
+        state: order.state ?? '',
+      );
+    } else if (orderData is FullOrderModel) {
+      final fullOrder = orderData;
+      final driverOrder = fullOrder.order;
+
+      final firstName = driverOrder?.customer?.firstName ?? '';
+      final lastName = driverOrder?.customer?.lastName ?? '';
+      final fullName =
+          [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
+
+      final storeAddress =
+          fullOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
+
+      final userAddress = storeAddress.contains(',')
+          ? storeAddress
+          : '20th st,Sheikh Zayed, Giza';
+
+      double price = 0.0;
+      if (driverOrder?.totalPrice != null) {
+        price = driverOrder!.totalPrice!;
+      }
+
+      return OrderEntity(
+        id: fullOrder.id ?? '',
+        orderId: driverOrder?.id ?? '',
+        storeAddress: storeAddress,
+        userName: fullName.isEmpty ? 'Unknown Customer' : fullName,
+        userAddress: userAddress,
+        price: price,
+        state: driverOrder?.state ?? '',
+      );
     }
-    
-    // Default pending state since API returns null
-    final orderState = nestedOrder?.state ?? 'pending';
 
     return OrderEntity(
-      id: driverOrder.id ?? '',
-      orderId: nestedOrder?.id ?? '',
-      storeAddress: driverOrder.store?.address ?? 'Store address unavailable',
-      userName: fullName.isEmpty ? 'Unknown Customer' : fullName,
-      userAddress: userAddress,
-      price: price,
-      state: orderState.toLowerCase(), // Ensure lowercase for consistent comparison
+      id: '',
+      orderId: '',
+      storeAddress: 'Unknown Address',
+      userName: 'Unknown Customer',
+      userAddress: 'Unknown Address',
+      price: 0.0,
+      state: '',
     );
   }
 
-  static List<OrderEntity> fromModelList(List<Order>? orders) {
+  static List<OrderEntity> fromModelList(List<dynamic>? orders) {
     if (orders == null) return [];
     return orders.map((order) => OrderEntity.fromModel(order)).toList();
   }

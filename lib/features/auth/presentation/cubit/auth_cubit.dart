@@ -108,7 +108,6 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-
   Future<void> requestPasswordReset(String email) async {
     if (email.isEmpty || Validator.emailValidate(email) != null) {
       emit(state.copyWith(
@@ -221,21 +220,21 @@ class AuthCubit extends Cubit<AuthState> {
   void resetPasswordResetState() {
     emit(state.copyWith(resetPasswordState: BaseInitialState()));
   }
-  
+
   // Apply as Driver Methods
   Future<void> apply(ApplyEntity entity) async {
     emit(state.copyWith(applyState: BaseLoadingState()));
-    
-    try {
 
-            if (entity.licensePhoto != null && entity.idPhoto != null) {
+    try {
+      if (entity.licensePhoto != null && entity.idPhoto != null) {
         try {
           final licenseExists = await entity.licensePhoto!.exists();
           final idExists = await entity.idPhoto!.exists();
-          
+
           if (!licenseExists || !idExists) {
-            emit(state.copyWith(applyState: 
-              BaseErrorState('Required files could not be accessed. Please try selecting them again.')));
+            emit(state.copyWith(
+                applyState: BaseErrorState(
+                    'Required files could not be accessed. Please try selecting them again.')));
             return;
           }
         } catch (e) {
@@ -244,18 +243,20 @@ class AuthCubit extends Cubit<AuthState> {
       }
 
       final result = await _authRepo.apply(entity);
-      
+
       // Handle success or error
       if (result.isRight) {
-        emit(state.copyWith(applyState: BaseSuccessState<bool>(data: result.right)));
+        emit(state.copyWith(
+            applyState: BaseSuccessState<bool>(data: result.right)));
       } else {
-        emit(state.copyWith(applyState: BaseErrorState(result.left.toString())));
+        emit(
+            state.copyWith(applyState: BaseErrorState(result.left.toString())));
       }
     } catch (e) {
       emit(state.copyWith(applyState: BaseErrorState(e.toString())));
     }
   }
-  
+
   void resetApplyState() {
     emit(state.copyWith(applyState: BaseInitialState()));
   }

@@ -6,11 +6,9 @@ import 'package:flowery_rider/features/auth/data/model/apply/apply_response.dart
 import 'package:flowery_rider/features/auth/data/model/login/login_response.dart';
 
 abstract class AuthRemoteDataSourceContract {
-
   //------------------------------Login-----------------------------------
   Future<Either<ApiException, LoginResponse>> signIn(
       String email, String password);
-
 
 //------------------------------forgot password-----------------------------------
   Future<Either<ApiException, String>> forgotPassword(String email);
@@ -19,7 +17,7 @@ abstract class AuthRemoteDataSourceContract {
 
   Future<Either<ApiException, LoginResponse>> resetPassword(
       String email, String password);
-      
+
   //------------------------------apply-----------------------------------
   Future<Either<ApiException, ApplyResponse>> apply(ApplyRequest request);
 }

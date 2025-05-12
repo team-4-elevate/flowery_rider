@@ -21,7 +21,7 @@ abstract class AuthRepo {
   //-----------------------------Reset Password-----------------------------------
   Future<Either<Exception, ResetpasswordResponse>> resetPassword(
       String email, String password);
-      
+
   //-----------------------------Apply as Driver-----------------------------------
   Future<Either<Exception, bool>> apply(ApplyEntity entity);
 }

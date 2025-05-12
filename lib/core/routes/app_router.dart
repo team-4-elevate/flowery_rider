@@ -17,7 +17,7 @@ import 'package:flowery_rider/features/nav/presentation/cubit/nav_cubit.dart';
 import 'package:flowery_rider/features/nav/presentation/pages/navbar_page.dart';
 import 'package:flowery_rider/features/onboarding/onboarding.dart';
 import 'package:flowery_rider/features/orders/orders_page.dart';
-import 'package:flowery_rider/features/profile/profile_page.dart';
+import 'package:flowery_rider/features/profile/presentation/page/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

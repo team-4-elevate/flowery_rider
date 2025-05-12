@@ -5,6 +5,5 @@ class AppImage {
 
   static const String successApply = 'assets/img/bg-application-approved.png';
 
-  static const String successApplyAnimation =
-      'assets/img/Animation.json';
+  static const String successApplyAnimation = 'assets/img/Animation.json';
 }

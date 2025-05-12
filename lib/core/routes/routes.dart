@@ -3,7 +3,7 @@ class Routes {
   static const String login = '/login';
   static const String onboarding = '/onboarding';
   static const String apply = '/apply';
-  static const String successApply= '/success-apply';
+  static const String successApply = '/success-apply';
   static const String forgetPassword = '/forget-password';
   static const String emailVerification = '/email-verification';
   static const String resetPassword = '/reset-password';
@@ -14,5 +14,4 @@ class Routes {
   static const String orders = '/orders';
   static const String navbar = '/navbar';
   static const String orderDetails = '/order-details';
-  
 }

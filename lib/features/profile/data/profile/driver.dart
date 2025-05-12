@@ -1,7 +1,7 @@
-// features/auth/domain/entities/driver.dart
+// features/profile/data/profile/driver.dart
 
-/// Legacy Driver class - used for backward compatibility
 class Driver {
+  String? id;
   String? country;
   String? firstName;
   String? lastName;
@@ -15,10 +15,13 @@ class Driver {
   String? phone;
   String? photo;
   String? role;
-  String? id;
   DateTime? createdAt;
+  String? passwordResetCode;
+  DateTime? passwordResetExpires;
+  bool? resetCodeVerified;
 
   Driver({
+    this.id,
     this.country,
     this.firstName,
     this.lastName,
@@ -32,11 +35,14 @@ class Driver {
     this.phone,
     this.photo,
     this.role,
-    this.id,
     this.createdAt,
+    this.passwordResetCode,
+    this.passwordResetExpires,
+    this.resetCodeVerified,
   });
 
   factory Driver.fromJson(Map<String, dynamic> json) => Driver(
+        id: json['_id'] as String?,
         country: json['country'] as String?,
         firstName: json['firstName'] as String?,
         lastName: json['lastName'] as String?,
@@ -50,13 +56,18 @@ class Driver {
         phone: json['phone'] as String?,
         photo: json['photo'] as String?,
         role: json['role'] as String?,
-        id: json['_id'] as String?,
         createdAt: json['createdAt'] == null
             ? null
             : DateTime.parse(json['createdAt'] as String),
+        passwordResetCode: json['passwordResetCode'] as String?,
+        passwordResetExpires: json['passwordResetExpires'] == null
+            ? null
+            : DateTime.parse(json['passwordResetExpires'] as String),
+        resetCodeVerified: json['resetCodeVerified'] as bool?,
       );
 
   Map<String, dynamic> toJson() => {
+        '_id': id,
         'country': country,
         'firstName': firstName,
         'lastName': lastName,
@@ -70,7 +81,9 @@ class Driver {
         'phone': phone,
         'photo': photo,
         'role': role,
-        '_id': id,
         'createdAt': createdAt?.toIso8601String(),
+        'passwordResetCode': passwordResetCode,
+        'passwordResetExpires': passwordResetExpires?.toIso8601String(),
+        'resetCodeVerified': resetCodeVerified,
       };
 }

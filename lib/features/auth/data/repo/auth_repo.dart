@@ -17,8 +17,6 @@ class AuthRepositoryImpl implements AuthRepo {
 
   AuthRepositoryImpl(this._remoteDataSource, this._localDataSource);
 
-
-
 //-----------------------------signIn-----------------------------------
   @override
   Future<Either<Exception, LoginResponse>> signIn(
@@ -29,12 +27,12 @@ class AuthRepositoryImpl implements AuthRepo {
       if (result.isLeft) {
         return Left(result.left);
       }
-      
+
       final loginResponse = result.right;
       if (loginResponse.token != null) {
         // Always cache the token regardless of rememberMe to enable current session
         _localDataSource.cacheToken(loginResponse.token!);
-        
+
         // The rememberMe flag only affects persistence settings
         _localDataSource.cacheRememberMe(rememberMe);
 
@@ -58,7 +56,6 @@ class AuthRepositoryImpl implements AuthRepo {
     }
   }
 
-
   //------------------------------forgotPassword-----------------------------------
 
   @override
@@ -69,13 +66,12 @@ class AuthRepositoryImpl implements AuthRepo {
       if (result.isLeft) {
         return Left(Exception(result.left.message));
       }
-      
+
       return Right(result.right);
     } catch (e) {
       return Left(Exception('Forgot password request failed: ${e.toString()}'));
     }
   }
-
 
   //------------------------------verifyOtpCode-----------------------------------
 
@@ -88,13 +84,12 @@ class AuthRepositoryImpl implements AuthRepo {
       if (result.isLeft) {
         return Left(Exception(result.left.message));
       }
-      
+
       return Right(result.right);
     } catch (e) {
       return Left(Exception('OTP verification failed: ${e.toString()}'));
     }
   }
-
 
   //------------------------------resetPassword-----------------------------------
 
@@ -107,16 +102,14 @@ class AuthRepositoryImpl implements AuthRepo {
       if (result.isLeft) {
         return Left(Exception(result.left.message));
       }
-      
+
       final loginResponse = result.right;
       if (loginResponse.token != null) {
         _localDataSource.cacheToken(loginResponse.token!);
         _localDataSource.cacheRememberMe(true);
 
         final resetpasswordResponse = ResetpasswordResponse(
-          message: loginResponse.message,
-          token: loginResponse.token
-        );
+            message: loginResponse.message, token: loginResponse.token);
 
         return Right(resetpasswordResponse);
       } else {
@@ -126,7 +119,6 @@ class AuthRepositoryImpl implements AuthRepo {
       return Left(Exception('Password reset failed: ${e.toString()}'));
     }
   }
-
 
   //------------------------------apply-----------------------------------
 
@@ -138,23 +130,24 @@ class AuthRepositoryImpl implements AuthRepo {
 
     final licenseExists = await entity.licensePhoto!.exists();
     final idExists = await entity.idPhoto!.exists();
-    
+
     if (!licenseExists || !idExists) {
-      return Left(Exception('Required files do not exist or cannot be accessed'));
+      return Left(
+          Exception('Required files do not exist or cannot be accessed'));
     }
-    
+
     final request = ApplyRequest.fromEntity(entity);
     final result = await _remoteDataSource.apply(request);
-    
+
     if (result.isLeft) {
       return Left(result.left);
     }
-    
+
     final success = result.right;
     if (success.token != null && success.driver != null) {
       _localDataSource.cacheToken(success.token!);
     }
-    
+
     return Right(success.success);
   }
 }

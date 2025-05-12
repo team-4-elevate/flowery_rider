@@ -17,8 +17,11 @@ class HomeCubit extends Cubit<HomeStates> {
       : super(HomeStates(homeState: BaseInitialState()));
 
   List<OrderEntity> get visibleOrders {
-    final pendingOrders = state.orders.where((order) => order.isPending).toList();
-    final notRejectedOrders = pendingOrders.where((order) => !_rejectedOrderIds.contains(order.id)).toList();
+    final pendingOrders =
+        state.orders.where((order) => order.isPending).toList();
+    final notRejectedOrders = pendingOrders
+        .where((order) => !_rejectedOrderIds.contains(order.id))
+        .toList();
     return notRejectedOrders;
   }
 
@@ -47,5 +50,4 @@ class HomeCubit extends Cubit<HomeStates> {
       ));
     }
   }
-
 }

@@ -97,7 +97,9 @@ class OrderContent extends StatelessWidget {
                 flex: 2,
                 //// Price
                 child: Text(
-                  price > 0 ? '${LocaleKeys.home_currency.tr()} ${price.toStringAsFixed(0)}' : '${LocaleKeys.home_currency.tr()} 0',
+                  price > 0
+                      ? '${LocaleKeys.home_currency.tr()} ${price.toStringAsFixed(0)}'
+                      : '${LocaleKeys.home_currency.tr()} 0',
                   style: getBoldStyle(
                     fontSize: 16.sp,
                     color: AppColors.black,

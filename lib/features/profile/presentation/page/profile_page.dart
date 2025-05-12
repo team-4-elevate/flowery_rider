@@ -1,4 +1,4 @@
-// features/profile/profile_page.dart
+// features/profile/presentation/page/profile_page.dart
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
