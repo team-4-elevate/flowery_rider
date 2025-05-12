@@ -2,7 +2,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:either_dart/either.dart';
 import 'package:flowery_rider/core/error_handling/exceptions/api_exception.dart';
-import 'package:flowery_rider/features/auth/domain/entities/apply_entity.dart';
+import 'package:flowery_rider/features/apply/domain/entities/apply_entity.dart';
 import 'package:flowery_rider/features/auth/data/datasources/auth_local_data_source/auth_local_data_source.dart';
 import 'package:flowery_rider/features/auth/data/datasources/auth_remote_data_source/auth_remote_data_source.dart';
 import 'package:flowery_rider/features/auth/data/models/apply/apply_request.dart';

@@ -1,17 +1,16 @@
-// features/apply/data/repo/auth_repo.dart
-
 import 'package:either_dart/either.dart';
-import 'package:flowery_rider/features/apply/data/datasource/local_data_source/auth_local_data_source_contract.dart';
 import 'package:flowery_rider/features/apply/data/datasource/remote_data_source/auth_remote_data_source_contract.dart';
-import 'package:flowery_rider/features/apply/data/model/apply/apply_request.dart';
 import 'package:flowery_rider/features/apply/domain/entities/apply_entity.dart';
 import 'package:flowery_rider/features/apply/domain/repo/auth_repo.dart';
+import 'package:flowery_rider/features/auth/data/models/apply/apply_request.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../auth/data/datasources/auth_local_data_source/auth_local_data_source.dart';
 
 @Injectable(as: AuthRepo)
 class AuthRepositoryImpl implements AuthRepo {
   final AuthRemoteDataSourceContract _remoteDataSource;
-  final AuthLocalDataSourceContract _localDataSource;
+  final AuthLocalDataSource _localDataSource;
 
   AuthRepositoryImpl(this._remoteDataSource, this._localDataSource);
 

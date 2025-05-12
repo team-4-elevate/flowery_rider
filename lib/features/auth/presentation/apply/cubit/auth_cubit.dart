@@ -2,11 +2,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flowery_rider/core/base/base_state.dart';
-import 'package:flowery_rider/features/auth/domain/entities/apply_entity.dart';
+import 'package:flowery_rider/features/apply/domain/entities/apply_entity.dart';
 import 'package:flowery_rider/features/auth/domain/repositories/auth_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-
 part 'auth_state.dart';
 
 @injectable

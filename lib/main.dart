@@ -10,10 +10,10 @@ import 'package:flowery_rider/core/routes/app_router.dart';
 import 'package:flowery_rider/core/routes/navigator_observer.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/theme_data/theme_data_light.dart';
-import 'package:flowery_rider/features/Home_layout/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'core/app_manger/app_cubit.dart';
 import 'firebase_options.dart';
 
 void main() async {
