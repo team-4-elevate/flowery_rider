@@ -23,7 +23,7 @@ class AccountInfoSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          LocaleKeys.auth_apply_account_information.tr(),
+          LocaleKeys.apply_account_information.tr(),
           style: getMediumStyle(
             fontSize: 16.sp,
             color: AppColors.black,
@@ -37,8 +37,8 @@ class AccountInfoSection extends StatelessWidget {
             Expanded(
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: LocaleKeys.auth_apply_password_hint.tr(),
-                  labelText: LocaleKeys.auth_apply_password.tr(),
+                  hintText: LocaleKeys.apply_password.tr(),
+                  labelText: LocaleKeys.apply_password_hint.tr(),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -54,8 +54,8 @@ class AccountInfoSection extends StatelessWidget {
             Expanded(
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: LocaleKeys.auth_apply_confirm_password_hint.tr(),
-                  labelText: LocaleKeys.auth_apply_confirm_password.tr(),
+                  hintText: LocaleKeys.apply_confirm_password.tr(),
+                  labelText: LocaleKeys.apply_confirm_password.tr(),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,

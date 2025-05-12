@@ -33,7 +33,7 @@ class IdInfoSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          LocaleKeys.auth_apply_id_number.tr(),
+          LocaleKeys.apply_apply_id_number.tr(),
           style: getMediumStyle(
             fontSize: 16.sp,
             color: AppColors.black,
@@ -42,8 +42,8 @@ class IdInfoSection extends StatelessWidget {
         SizedBox(height: 15.h),
         TextFormField(
           decoration: InputDecoration(
-            hintText: LocaleKeys.auth_apply_id_hint.tr(),
-            labelText: LocaleKeys.auth_apply_id_number.tr(),
+            hintText: LocaleKeys.apply_apply_id_hint.tr(),
+            labelText: LocaleKeys.apply_apply_id_number.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -53,8 +53,8 @@ class IdInfoSection extends StatelessWidget {
         ),
         SizedBox(height: 15.h),
         UploadField(
-          label: LocaleKeys.auth_apply_id_docs.tr(),
-          hintText: LocaleKeys.auth_apply_id_image_hint.tr(),
+          label: LocaleKeys.apply_apply_id_docs.tr(),
+          hintText: LocaleKeys.apply_apply_id_image_hint.tr(),
           file: idPhoto,
           files: idPhotos,
           onTap: onPickIdPhoto,

@@ -1,6 +1,6 @@
 // features/auth/domain/usecases/apply_usecase.dart
 import 'package:either_dart/either.dart';
-import 'package:flowery_rider/features/apply/domain/entities/apply_entity.dart';
+import 'package:flowery_rider/features/auth/domain/entities/apply_entity.dart';
 import 'package:flowery_rider/features/auth/domain/repositories/auth_repo.dart';
 import 'package:injectable/injectable.dart';
 

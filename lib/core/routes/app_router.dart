@@ -6,7 +6,7 @@ import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.d
 import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/page/home_layout.dart';
-import 'package:flowery_rider/features/apply/presentation/cubit/auth_cubit.dart';
+import 'package:flowery_rider/features/auth/presentation/apply/cubit/auth_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_page.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_success_page.dart';
 import 'package:flowery_rider/features/auth/presentation/login_screen/login_cubit.dart';

@@ -23,28 +23,28 @@ class VehicleTypeDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SearchableDropdown<String>(
-      hint: hintText ?? LocaleKeys.auth_apply_select_vehicle_type.tr(),
+      hint: hintText ?? LocaleKeys.apply_select_vehicle_type.tr(),
       value: selectedValue,
       items: options.map((option) => option.value).toList(),
       onChanged: onChanged,
       displayStringForOption: (value) {
-        return options
+        final option = options
             .firstWhere(
               (option) => option.value == value,
               orElse: () =>
-                  VehicleTypeOption('', LocaleKeys.auth_apply_not_found.tr()),
-            )
-            .label;
+                  VehicleTypeOption('', LocaleKeys.apply_apply_not_found.tr()),
+            );
+        return option.label.tr();
       },
       itemBuilder: (value) {
         final option = options.firstWhere(
           (option) => option.value == value,
           orElse: () =>
-              VehicleTypeOption('', LocaleKeys.auth_apply_not_found.tr()),
+              VehicleTypeOption('', LocaleKeys.apply_apply_not_found.tr()),
         );
 
         return Text(
-          option.label,
+          option.label.tr(),
           style: TextStyle(
             fontSize: 14.sp,
             color: value == selectedValue

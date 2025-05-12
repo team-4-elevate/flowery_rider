@@ -23,7 +23,7 @@ class PersonalInfoSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          LocaleKeys.auth_apply_account_information.tr(),
+          LocaleKeys.apply_account_information.tr(),
           style: getMediumStyle(
             fontSize: 16.sp,
             color: AppColors.black,
@@ -34,8 +34,8 @@ class PersonalInfoSection extends StatelessWidget {
         /// First Name
         TextFormField(
           decoration: InputDecoration(
-            hintText: LocaleKeys.auth_apply_first_name_hint.tr(),
-            labelText: LocaleKeys.auth_apply_first_name.tr(),
+            hintText: LocaleKeys.apply_first_name_hint.tr(),
+            labelText: LocaleKeys.apply_first_name.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -48,8 +48,8 @@ class PersonalInfoSection extends StatelessWidget {
         /// Last Name
         TextFormField(
           decoration: InputDecoration(
-            hintText: LocaleKeys.auth_apply_last_name_hint.tr(),
-            labelText: LocaleKeys.auth_apply_last_name.tr(),
+            hintText: LocaleKeys.apply_last_name_hint.tr(),
+            labelText: LocaleKeys.apply_last_name.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,

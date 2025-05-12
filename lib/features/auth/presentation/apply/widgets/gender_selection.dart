@@ -23,8 +23,8 @@ class GenderSelection extends StatelessWidget {
   });
 
   String getLocalizedGender(String value) {
-    if (value == 'male') return LocaleKeys.auth_apply_male.tr();
-    if (value == 'female') return LocaleKeys.auth_apply_female.tr();
+    if (value == 'male') return LocaleKeys.apply_gender_user_male.tr();
+    if (value == 'female') return LocaleKeys.apply_gender_user_female.tr();
     return value.capitalize();
   }
 
@@ -34,20 +34,21 @@ class GenderSelection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label.isNotEmpty ? label : LocaleKeys.auth_apply_gender.tr(),
+          label.isNotEmpty ? label : LocaleKeys.apply_gender_label.tr(),
           style: getRegularStyle(
             fontSize: 14.sp,
             color: Colors.black,
           ),
         ),
         SizedBox(height: 10.h),
-        Row(
+        Wrap(
+          spacing: 8.w,
           children: options.map((option) {
             String optionText = getLocalizedGender(option);
 
-            return Padding(
-              padding: EdgeInsets.only(right: 20.w),
+            return IntrinsicWidth(
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Radio<String>(
                     value: option,
@@ -59,11 +60,14 @@ class GenderSelection extends StatelessWidget {
                       }
                     },
                   ),
-                  Text(
-                    optionText,
-                    style: getRegularStyle(
-                      fontSize: 14.sp,
-                      color: Colors.black,
+                  Flexible(
+                    child: Text(
+                      optionText,
+                      style: getRegularStyle(
+                        fontSize: 14.sp,
+                        color: Colors.black,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],

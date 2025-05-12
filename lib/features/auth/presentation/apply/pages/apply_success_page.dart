@@ -1,7 +1,9 @@
-// features/auth/presentation/pages/apply_success_page.dart
+// features/auth/presentation/apply/pages/apply_success_page.dart
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/core/resources/app_image.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
+import 'package:flowery_rider/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
@@ -68,7 +70,7 @@ class ApplySuccessPage extends StatelessWidget {
                   ),
                   SizedBox(height: 30.h),
                   Text(
-                    'Your application has been submitted!',
+                    LocaleKeys.applicationApproved_title.tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.sp,
@@ -78,7 +80,7 @@ class ApplySuccessPage extends StatelessWidget {
                   ),
                   SizedBox(height: 15.h),
                   Text(
-                    'Thank you for providing your application, we will review your application and will get back to you soon.',
+                    LocaleKeys.applicationApproved_description.tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14.sp,
@@ -91,7 +93,7 @@ class ApplySuccessPage extends StatelessWidget {
                       Navigator.pushReplacementNamed(context, Routes.login);
                     },
                     child: Text(
-                      'Login',
+                      LocaleKeys.applicationApproved_login.tr(),
                     ),
                   ),
                 ],

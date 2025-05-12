@@ -1,10 +1,10 @@
-// features/apply/data/model/apply/apply_request.dart
+// features/auth/data/models/apply/apply_request.dart
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flowery_rider/core/utils/validator.dart';
-import 'package:flowery_rider/features/apply/domain/entities/apply_entity.dart';
+import 'package:flowery_rider/features/auth/domain/entities/apply_entity.dart';
 import 'package:http_parser/http_parser.dart';
 
 class ApplyRequest {
