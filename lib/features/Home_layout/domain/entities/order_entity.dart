@@ -37,14 +37,15 @@ class OrderEntity {
           [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
 
       String storeAddress = '20th st, Sheikh Zayed, Giza';
-      
-      if (orderData.toJson().containsKey('store') && orderData.toJson()['store'] != null) {
+
+      if (orderData.toJson().containsKey('store') &&
+          orderData.toJson()['store'] != null) {
         final storeData = orderData.toJson()['store'];
         if (storeData is Map && storeData.containsKey('address')) {
           storeAddress = storeData['address'] ?? storeAddress;
         }
       }
-      
+
       final userAddress = storeAddress.contains(',')
           ? storeAddress
           : '20th st,Sheikh Zayed, Giza';
@@ -72,7 +73,8 @@ class OrderEntity {
       final fullName =
           [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
 
-      final storeAddress = fullOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
+      final storeAddress =
+          fullOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
 
       final userAddress = storeAddress.contains(',')
           ? storeAddress
@@ -93,7 +95,7 @@ class OrderEntity {
         state: driverOrder?.state ?? '',
       );
     }
-    
+
     return OrderEntity(
       id: '',
       orderId: '',

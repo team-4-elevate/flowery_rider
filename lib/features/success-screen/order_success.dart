@@ -53,7 +53,8 @@ class SuccessOrderPage extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary, // غيّر اللون حسب الثيم
-                    padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 12.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 40.w, vertical: 12.h),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.r),
                     ),

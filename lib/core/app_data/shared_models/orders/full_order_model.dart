@@ -25,8 +25,8 @@ class FullOrderModel extends Equatable {
     return FullOrderModel(
       id: json['_id'] as String?,
       driverId: json['driver'] as String?,
-      order: json['order'] != null 
-          ? DriverOrderModel.fromJson(json['order'] as Map<String, dynamic>) 
+      order: json['order'] != null
+          ? DriverOrderModel.fromJson(json['order'] as Map<String, dynamic>)
           : null,
       store: json['store'] != null
           ? StoreModel.fromJson(json['store'] as Map<String, dynamic>)
@@ -54,7 +54,8 @@ class FullOrderModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, driverId, order, store, createdAt, updatedAt, v];
+  List<Object?> get props =>
+      [id, driverId, order, store, createdAt, updatedAt, v];
 }
 
 class StoreModel extends Equatable {

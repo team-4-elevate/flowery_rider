@@ -12,9 +12,9 @@ class Routes {
   static const String splash = '/splash';
   // static const String home = '/home';
   static const String applicationApproved = '/application-approved';
-  static const String successApply= '/success-apply';
-  static const String apply= '/apply';
-  static const String successorder = '/successorder'; 
+  static const String successApply = '/success-apply';
+  static const String apply = '/apply';
+  static const String successorder = '/successorder';
   static const String successApply = '/success-apply';
   static const String apply = '/apply';
   static const String layoutScreen = '/layout-screen';

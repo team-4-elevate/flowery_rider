@@ -89,10 +89,10 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         builder: (_) => const ApplySuccessPage(),
       );
 
-      case Routes.successorder:
+    case Routes.successorder:
       return MaterialPageRoute(
         settings: settings,
-        builder: (_) =>  SuccessOrderPage(),
+        builder: (_) => SuccessOrderPage(),
       );
     default:
       return MaterialPageRoute(

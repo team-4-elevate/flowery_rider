@@ -6,5 +6,4 @@ import 'package:flowery_rider/features/Home_layout/data/model/home_order_respons
 
 abstract class HomeRemoteDataSource {
   Future<Either<ApiException, HomeOrderResponse>> getPendingOrders();
-
 }

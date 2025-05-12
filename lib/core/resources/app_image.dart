@@ -10,6 +10,5 @@ class AppImage {
 
   static const String successApplyAnimation = 'assets/images/Animation.json';
 
-  static const String successorder ='assets/img/success_order.json';
-
+  static const String successorder = 'assets/img/success_order.json';
 }
