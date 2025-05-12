@@ -6,7 +6,7 @@
     "lastNameInvalid": "Please enter a valid last name",
     "emailEmpty": "Please enter the email",
     "emailInvalid": "Please enter a valid email",
-    "passwordEmpty": "Please enter the password",
+    "passwordEmpty": "enter the password",
     "passwordInvalid": "Invalid password",
     "passwordShort": "Password must be at least 6 characters long",
     "confirmPasswordEmpty": "Please confirm the password",
@@ -56,7 +56,7 @@
   "ReadyMessage": "Didn't receive code?",
   "ResendMessage": " Resend",
     "otpSent": "Otp is sent to your e-mail"
-},
+  },
   "reset_password": {
     "title": "Reset Password",
     "current_password": "Current Password",
@@ -74,20 +74,28 @@
       "same_password": "New password must be different from current password",
       "incorrect_password": "Current password is not correct"
     }
-
   },
+
   "apply": {
     "title": "Apply",
     "welcome": "Welcome!",
     "description": "You want to be a delivery rider? Join our team now!",
     "personal_information": "Personal Information",
-    "first_name": "First Name",
-    "last_name": "Last Name",
+    "first_name": "First Legal Name",
+    "first_name_hint": "Enter first Legal name",
+    "last_name": "Second Legal Name",
+    "last_name_hint": "Enter second Legal name",
     "email": "Email",
+    "email_hint": "Enter email",
     "phone_number": "Phone Number",
-    "gender": "Gender",
-    "male": "Male",
-    "female": "Female",
+    "phone_number_hint": "Enter phone number",
+    "gender": {
+      "label": "Gender",
+      "user_male": "Male",
+      "user_female": "Female"
+    },
+    "country": "Country",
+    "search_country": "Search country",
     "vehicle_information": "Vehicle Information",
     "select_vehicle_type": "Select Vehicle Type",
     "car": "Car",
@@ -97,35 +105,67 @@
     "vehicle_number": "Vehicle Number",
     "upload_vehicle_license": "Upload Vehicle License",
     "account_information": "Account Information",
+    "vehicle_license": "Vehicle License",
+    "vehicle_license_hint": "Enter vehicle license",
+    "vehicle_number_hint": "Enter vehicle number",
+    "vehicle_number_error": "Please enter a valid vehicle number (e.g. AB-12 1234)",
+    "vehicle_number_invalid": "Please enter a valid vehicle number (e.g. AB-12 1234)",
+    "vehicle_number_required": "Please enter vehicle number",
+    "vehicle_number_empty": "Please enter vehicle number",
     "id_number": "ID Number",
     "upload_id_card": "Upload ID Card",
     "password": "Password",
+    "password_hint": "Enter Password",
     "confirm_password": "Confirm Password",
     "submit_application": "Submit Application",
     "upload_required_files": "Please upload all required files",
     "file_uploaded": "File uploaded",
     "processing": "Processing...",
-    "submission_note": "This might take a moment. Please do not close the app."
+    "submission_note": "This might take a moment. Please do not close the app.",
+    "no_results": "No results found",
+    "apply_not_found": "No application found",
+    "apply_id_number": "ID Number",
+    "apply_id_hint": "Enter ID Number",
+    "apply_id_docs": "Upload ID Document",
+    "apply_id_image_hint": "Upload ID Document",
+    "apply_no_results": "No results found"
   },
+
   "somethingWentWrong": "Something went wrong",
   "Dialog": {
     "ok": "OK"
   },
-  "auth": {
-    "apply": {
-      "select_vehicle_type": "Select Vehicle Type",
-      "car": "Car",
-      "motorcycle": "Motorcycle",
-      "bicycle": "Bicycle",
-      "van": "Van",
-      "processing": "Processing...",
-      "submit_application": "Submit Application",
-      "upload_required_files": "Please upload all required files",
-      "title": "Apply",
-      "file_uploaded": "File uploaded",
-      "account_information": "Account Information",
-      "vehicle_information": "Vehicle Information",
-      "id_number": "ID Number"
-    }
+  
+  "home": {
+    "app_title": "Flowery rider",
+    "try_again": "Try Again",
+    "no_pending_orders": "No pending orders",
+    "pull_to_refresh": "Pull down to refresh",
+    "accept_order_message": "Order accepted successfully",
+    "flower_order": "Flower order",
+    "pickup_address": "Pickup address",
+    "flowery_store": "Flowery store",
+    "user_address": "User address",
+    "currency": "EGP",
+    "reject": "Reject",
+    "accept": "Accept"
+  },
+  "order_details": {
+    "title": "Order Details",
+    "order_id": "Order #",
+    "status": "In Progress",
+    "order_details_section": "Order Details",
+    "date": "Date",
+    "total_amount": "Total Amount",
+    "payment_method": "Payment Method",
+    "cash_on_delivery": "Cash on Delivery",
+    "store_information": "Store Information",
+    "store_name": "Store Name",
+    "address": "Address",
+    "phone": "Phone",
+    "customer_information": "Customer Information",
+    "name": "Name",
+    "mark_delivered": "Mark as Delivered",
+    "order_completed": "Order completed successfully!"
   }
 }
