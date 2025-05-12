@@ -1,11 +1,11 @@
 // features/Home_layout/data/model/home_order_response.dart
 import 'package:equatable/equatable.dart';
-import 'package:flowery_rider/core/app_data/shared_models/orders/full_order_model.dart';
+import 'package:flowery_rider/core/app_data/shared_models/orders/driver_order_model.dart';
 
 class HomeOrderResponse extends Equatable {
   final String message;
   final MetadataModel? metadata;
-  final List<FullOrderModel>? orders;
+  final List<DriverOrderModel>? orders;
   
   const HomeOrderResponse({
     required this.message,
@@ -21,7 +21,7 @@ class HomeOrderResponse extends Equatable {
           : null,
       orders: json['orders'] != null
           ? (json['orders'] as List)
-              .map((item) => FullOrderModel.fromJson(item as Map<String, dynamic>))
+              .map((item) => DriverOrderModel.fromJson(item as Map<String, dynamic>))
               .toList()
           : null,
     );

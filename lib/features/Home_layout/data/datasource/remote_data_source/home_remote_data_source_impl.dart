@@ -19,7 +19,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   Future<Either<ApiException, HomeOrderResponse>> getPendingOrders() async {
     try {
       final response = await _apiClient.get(
-        ApiConstants.pendingOrders,
+        ApiConstants.homeEndPoint,
         requiresToken: true,
       );
 
