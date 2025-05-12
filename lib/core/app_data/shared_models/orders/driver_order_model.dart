@@ -19,18 +19,18 @@ class DriverOrderModel extends Equatable {
   final int? version;
 
   const DriverOrderModel({
-     this.id,
-     this.customer,
-     this.orderItems,
-     this.totalPrice,
-     this.paymentType,
-     this.isPaid,
-     this.isDelivered,
-     this.state,
-     this.createdAt,
-     this.updatedAt,
-     this.orderNumber,
-     this.version,
+    this.id,
+    this.customer,
+    this.orderItems,
+    this.totalPrice,
+    this.paymentType,
+    this.isPaid,
+    this.isDelivered,
+    this.state,
+    this.createdAt,
+    this.updatedAt,
+    this.orderNumber,
+    this.version,
   });
 
   Map<String, dynamic> toJson() {
@@ -116,4 +116,3 @@ class DriverOrderModel extends Equatable {
         version,
       ];
 }
-

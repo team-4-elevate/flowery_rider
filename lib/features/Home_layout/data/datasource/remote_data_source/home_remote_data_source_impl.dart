@@ -30,5 +30,4 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       return Left(ApiException(message: 'Failed to fetch pending orders: $e'));
     }
   }
-
 }

@@ -48,16 +48,16 @@ class AddressDM {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          super == other &&
-              other is AddressDM &&
-              runtimeType == other.runtimeType &&
-              id == other.id &&
-              street == other.street &&
-              phone == other.phone &&
-              city == other.city &&
-              lat == other.lat &&
-              long == other.long &&
-              username == other.username;
+      super == other &&
+          other is AddressDM &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          street == other.street &&
+          phone == other.phone &&
+          city == other.city &&
+          lat == other.lat &&
+          long == other.long &&
+          username == other.username;
 
   @override
   int get hashCode =>

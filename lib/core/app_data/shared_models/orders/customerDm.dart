@@ -16,7 +16,7 @@ class Customer extends Equatable {
     required this.email,
     required this.gender,
     required this.phone,
-     this.photo,
+    this.photo,
   });
 
   Map<String, dynamic> toJson() {

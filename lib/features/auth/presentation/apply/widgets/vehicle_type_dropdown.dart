@@ -28,12 +28,11 @@ class VehicleTypeDropdown extends StatelessWidget {
       items: options.map((option) => option.value).toList(),
       onChanged: onChanged,
       displayStringForOption: (value) {
-        final option = options
-            .firstWhere(
-              (option) => option.value == value,
-              orElse: () =>
-                  VehicleTypeOption('', LocaleKeys.apply_apply_not_found.tr()),
-            );
+        final option = options.firstWhere(
+          (option) => option.value == value,
+          orElse: () =>
+              VehicleTypeOption('', LocaleKeys.apply_apply_not_found.tr()),
+        );
         return option.label.tr();
       },
       itemBuilder: (value) {

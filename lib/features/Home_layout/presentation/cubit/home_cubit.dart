@@ -46,5 +46,4 @@ class HomeCubit extends Cubit<HomeStates> {
       ));
     }
   }
-
 }

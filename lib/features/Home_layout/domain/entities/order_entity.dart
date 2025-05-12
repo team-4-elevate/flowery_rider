@@ -23,8 +23,8 @@ class OrderEntity {
 
   String get formattedPrice => 'EGP ${price.toStringAsFixed(0)}';
   bool get isPending =>
-      state.toLowerCase() == 'pending' || 
-      state.toLowerCase() == 'inprogress' || 
+      state.toLowerCase() == 'pending' ||
+      state.toLowerCase() == 'inprogress' ||
       state.toLowerCase() == 'completed';
 
   factory OrderEntity.fromModel(FullOrderModel fullOrder) {
