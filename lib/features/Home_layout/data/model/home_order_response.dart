@@ -6,13 +6,13 @@ class HomeOrderResponse extends Equatable {
   final String message;
   final MetadataModel? metadata;
   final List<DriverOrderModel>? orders;
-  
+
   const HomeOrderResponse({
     required this.message,
     this.metadata,
     this.orders,
   });
-  
+
   factory HomeOrderResponse.fromJson(Map<String, dynamic> json) {
     return HomeOrderResponse(
       message: json['message'] as String? ?? '',
@@ -21,12 +21,13 @@ class HomeOrderResponse extends Equatable {
           : null,
       orders: json['orders'] != null
           ? (json['orders'] as List)
-              .map((item) => DriverOrderModel.fromJson(item as Map<String, dynamic>))
+              .map((item) =>
+                  DriverOrderModel.fromJson(item as Map<String, dynamic>))
               .toList()
           : null,
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'message': message,
@@ -34,7 +35,7 @@ class HomeOrderResponse extends Equatable {
       'orders': orders?.map((order) => order.toJson()).toList(),
     };
   }
-  
+
   @override
   List<Object?> get props => [message, metadata, orders];
 }
@@ -44,14 +45,14 @@ class MetadataModel extends Equatable {
   final int totalPages;
   final int totalItems;
   final int limit;
-  
+
   const MetadataModel({
     required this.currentPage,
     required this.totalPages,
     required this.totalItems,
     required this.limit,
   });
-  
+
   factory MetadataModel.fromJson(Map<String, dynamic> json) {
     return MetadataModel(
       currentPage: json['currentPage'] as int? ?? 1,
@@ -60,7 +61,7 @@ class MetadataModel extends Equatable {
       limit: json['limit'] as int? ?? 10,
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'currentPage': currentPage,
@@ -69,7 +70,7 @@ class MetadataModel extends Equatable {
       'limit': limit,
     };
   }
-  
+
   @override
   List<Object?> get props => [currentPage, totalPages, totalItems, limit];
 }

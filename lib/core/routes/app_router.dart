@@ -16,6 +16,8 @@ import 'package:flowery_rider/features/forget_password/presentation/pages/forget
     show ForgetPasswordPage;
 import 'package:flowery_rider/features/forget_password/presentation/pages/pin_code_page.dart';
 import 'package:flowery_rider/features/forget_password/presentation/pages/reset_password_page.dart';
+import 'package:flowery_rider/features/success-screen/order_success.dart';
+
 import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart';
 import 'package:flowery_rider/features/main_layout/screen/layout_screen.dart';
 import 'package:flowery_rider/features/onboarding/on_boarding_screen.dart';
@@ -85,6 +87,12 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => const ApplySuccessPage(),
+      );
+
+    case Routes.successorder:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => SuccessOrderPage(),
       );
     default:
       return MaterialPageRoute(

@@ -9,4 +9,6 @@ class AppImage {
       'assets/images/bg-application-approved.png';
 
   static const String successApplyAnimation = 'assets/images/Animation.json';
+
+  static const String successorder = 'assets/img/success_order.json';
 }
