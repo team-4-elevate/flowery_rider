@@ -40,6 +40,4 @@ class HomeRepositoryImpl implements HomeRepository {
       return Left(ApiException(message: e.toString()));
     }
   }
-
-
 }

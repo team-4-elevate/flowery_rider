@@ -22,6 +22,7 @@ extension OrderStatusExtension on OrderStatusEnum {
     }
   }
 }
+
 extension ToEnum on String {
   OrderStatusEnum toOrderStatusEnum() {
     switch (this) {
@@ -32,7 +33,7 @@ extension ToEnum on String {
       case 'picked_up':
         return OrderStatusEnum.pickedUp;
       case 'delivered':
-      return OrderStatusEnum.delivered;
+        return OrderStatusEnum.delivered;
       case 'out_for_delivery':
         return OrderStatusEnum.outForDelivery;
       default:

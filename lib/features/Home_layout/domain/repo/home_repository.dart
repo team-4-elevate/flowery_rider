@@ -6,5 +6,4 @@ import 'package:flowery_rider/features/Home_layout/domain/entities/order_entity.
 
 abstract class HomeRepository {
   Future<Either<ApiException, List<OrderEntity>>> getPendingOrders();
-
 }

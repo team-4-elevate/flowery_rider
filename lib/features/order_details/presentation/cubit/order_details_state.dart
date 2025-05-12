@@ -1,4 +1,3 @@
 class OrderDetailsState {
   const OrderDetailsState();
-
 }

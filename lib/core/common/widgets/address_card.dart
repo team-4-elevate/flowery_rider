@@ -16,7 +16,8 @@ class AddressCard extends StatelessWidget {
     this.imagePath,
     required this.title,
     required this.address,
-  }) : assert(icon != null || imagePath != null, 'Either icon or imagePath must be provided');
+  }) : assert(icon != null || imagePath != null,
+            'Either icon or imagePath must be provided');
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +40,16 @@ class AddressCard extends StatelessWidget {
           // Avatar (icon or image)
           _buildAvatar(),
           SizedBox(width: 12.w),
-          
+
           // Content
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(title, style: getMediumStyle(color: AppColors.black, fontSize: 14.sp)),
+                Text(title,
+                    style: getMediumStyle(
+                        color: AppColors.black, fontSize: 14.sp)),
                 SizedBox(height: 4.h),
                 _buildAddressRow(),
               ],
@@ -60,11 +63,13 @@ class AddressCard extends StatelessWidget {
   Widget _buildAvatar() {
     return CircleAvatar(
       radius: 18.r,
-      backgroundColor: imagePath != null ? Colors.transparent : AppColors.primary,
+      backgroundColor:
+          imagePath != null ? Colors.transparent : AppColors.primary,
       child: imagePath != null
           ? ClipRRect(
               borderRadius: BorderRadius.circular(18.r),
-              child: Image.asset(imagePath!, width: 36.r, height: 36.r, fit: BoxFit.cover),
+              child: Image.asset(imagePath!,
+                  width: 36.r, height: 36.r, fit: BoxFit.cover),
             )
           : Icon(icon!, size: 18.sp, color: AppColors.white),
     );

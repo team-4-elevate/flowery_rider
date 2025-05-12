@@ -10,10 +10,10 @@ import 'package:flowery_rider/core/routes/app_router.dart';
 import 'package:flowery_rider/core/routes/navigator_observer.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/theme_data/theme_data_light.dart';
+import 'package:flowery_rider/core/app_manger/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'core/app_manger/app_cubit.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -29,10 +29,10 @@ void main() async {
           Locale('ar'),
         ],
         path: 'assets/translations',
-        fallbackLocale: Locale('en'),
+        fallbackLocale: const Locale('en'),
         child: BlocProvider(
             create: (context) => getIt<AppCubit>()..getUserLoggedInState(),
-            child: FloweryRider())),
+            child: const FloweryRider())),
   );
 }
 
@@ -50,7 +50,7 @@ class FloweryRider extends StatelessWidget {
         navigatorObservers: [getIt<AppNavigatorObserver>()],
         //initialRoute: Routes.login,
         initialRoute: context.read<AppCubit>().state.isLoggedIn
-            ? Routes.homeLayout
+            ? Routes.layoutScreen
             : Routes.onboarding,
         onGenerateRoute: generateRoute,
         theme: getLightTheme(),
@@ -63,6 +63,7 @@ class FloweryRider extends StatelessWidget {
     );
   }
 }
+
 Future<void> _configureFirebase() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -83,4 +84,3 @@ Future<void> _configureFirebase() async {
     );
   }).sendPort);
 }
-
