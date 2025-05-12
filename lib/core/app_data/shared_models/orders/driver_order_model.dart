@@ -1,10 +1,10 @@
+// core/app_data/shared_models/orders/driver_order_model.dart
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flowery_rider/features/order_details/domain/entities/payment_type_enum.dart';
 import 'customerDm.dart';
 import 'order_item.dart';
 
-class OrderDM extends Equatable {
+class DriverOrderModel extends Equatable {
   final String? id;
   final Customer? customer;
   final List<OrderItem>? orderItems;
@@ -18,7 +18,7 @@ class OrderDM extends Equatable {
   final String? orderNumber;
   final int? version;
 
-  const OrderDM({
+  const DriverOrderModel({
      this.id,
      this.customer,
      this.orderItems,
@@ -50,8 +50,8 @@ class OrderDM extends Equatable {
     };
   }
 
-  factory OrderDM.fromJson(Map<String, dynamic> json) {
-    return OrderDM(
+  factory DriverOrderModel.fromJson(Map<String, dynamic> json) {
+    return DriverOrderModel(
       id: json['_id'] as String,
       customer: Customer.fromJson(json['user'] as Map<String, dynamic>),
       orderItems: (json['orderItems'] as List?)
@@ -70,7 +70,7 @@ class OrderDM extends Equatable {
   }
 
   // Create a copy with updated values
-  OrderDM copyWith({
+  DriverOrderModel copyWith({
     String? id,
     Customer? customer,
     List<OrderItem>? orderItems,
@@ -84,7 +84,7 @@ class OrderDM extends Equatable {
     String? orderNumber,
     int? version,
   }) {
-    return OrderDM(
+    return DriverOrderModel(
       id: id ?? this.id,
       customer: customer ?? this.customer,
       orderItems: orderItems ?? this.orderItems,

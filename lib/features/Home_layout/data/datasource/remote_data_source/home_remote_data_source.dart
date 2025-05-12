@@ -2,9 +2,9 @@
 
 import 'package:either_dart/either.dart';
 import 'package:flowery_rider/core/error_handling/exceptions/api_exception.dart';
-import 'package:flowery_rider/features/Home_layout/data/model/orders_pending/orders_pending.dart';
+import 'package:flowery_rider/features/Home_layout/data/model/home_order_response.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<Either<ApiException, OrdersPending>> getPendingOrders();
+  Future<Either<ApiException, HomeOrderResponse>> getPendingOrders();
 
 }

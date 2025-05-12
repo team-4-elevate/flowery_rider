@@ -1,4 +1,5 @@
-class User {
+// features/Home_layout/data/model/orders_pending/customer.dart
+class Customer {
   String? id;
   String? firstName;
   String? lastName;
@@ -7,7 +8,7 @@ class User {
   String? phone;
   String? photo;
 
-  User({
+  Customer({
     this.id,
     this.firstName,
     this.lastName,
@@ -17,7 +18,7 @@ class User {
     this.photo,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory Customer.fromJson(Map<String, dynamic> json) => Customer(
         id: json['_id'] as String?,
         firstName: json['firstName'] as String?,
         lastName: json['lastName'] as String?,

@@ -1,6 +1,6 @@
 // features/Home_layout/domain/entities/order_entity.dart
 
-import 'package:flowery_rider/features/Home_layout/data/model/orders_pending/order.dart';
+import 'package:flowery_rider/core/app_data/shared_models/orders/full_order_model.dart';
 
 class OrderEntity {
   final String id;
@@ -27,38 +27,37 @@ class OrderEntity {
       state.toLowerCase() == 'inprogress' || 
       state.toLowerCase() == 'completed';
 
-  factory OrderEntity.fromModel(Order driverOrder) {
-    final nestedOrder = driverOrder.order;
+  factory OrderEntity.fromModel(FullOrderModel fullOrder) {
+    final driverOrder = fullOrder.order;
 
-    final firstName = nestedOrder?.user?.firstName ?? '';
-    final lastName = nestedOrder?.user?.lastName ?? '';
+    final firstName = driverOrder?.customer?.firstName ?? '';
+    final lastName = driverOrder?.customer?.lastName ?? '';
     final fullName =
         [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
 
-    final storeAddress =
-        driverOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
+    final storeAddress = fullOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
 
     final userAddress = storeAddress.contains(',')
         ? storeAddress
         : '20th st,Sheikh Zayed, Giza';
 
     double price = 0.0;
-    if (nestedOrder?.totalPrice != null) {
-      price = nestedOrder!.totalPrice!.toDouble();
+    if (driverOrder?.totalPrice != null) {
+      price = driverOrder!.totalPrice!;
     }
 
     return OrderEntity(
-      id: driverOrder.id ?? '',
-      orderId: nestedOrder?.id ?? '',
-      storeAddress: driverOrder.store?.address ?? 'Store address unavailable',
+      id: fullOrder.id ?? '',
+      orderId: driverOrder?.id ?? '',
+      storeAddress: fullOrder.store?.address ?? 'Store address unavailable',
       userName: fullName.isEmpty ? 'Unknown Customer' : fullName,
       userAddress: userAddress,
       price: price,
-      state: nestedOrder?.state ?? '',
+      state: driverOrder?.state ?? '',
     );
   }
 
-  static List<OrderEntity> fromModelList(List<Order>? orders) {
+  static List<OrderEntity> fromModelList(List<FullOrderModel>? orders) {
     if (orders == null) return [];
     return orders.map((order) => OrderEntity.fromModel(order)).toList();
   }

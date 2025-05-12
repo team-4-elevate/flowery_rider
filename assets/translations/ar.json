@@ -112,7 +112,8 @@
     "apply_id_number": "رقم الهوية",
     "apply_id_hint": "أدخل رقم الهوية",
     "apply_id_docs": "تحميل مستند الهوية",
-    "apply_id_image_hint": "تحميل مستند الهوية"
+    "apply_id_image_hint": "تحميل مستند الهوية",
+    "apply_no_results": "لا توجد نتائج"
   },
   "login_screen": {
       "login": "تسجيل الدخول",

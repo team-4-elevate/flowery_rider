@@ -6,7 +6,7 @@ import 'package:flowery_rider/core/app_data/api/api_constants.dart';
 import 'package:flowery_rider/core/error_handling/exceptions/api_exception.dart';
 import 'package:flowery_rider/core/logger/app_logger.dart';
 import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_source/home_remote_data_source.dart';
-import 'package:flowery_rider/features/Home_layout/data/model/orders_pending/orders_pending.dart';
+import 'package:flowery_rider/features/Home_layout/data/model/home_order_response.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: HomeRemoteDataSource)
@@ -16,14 +16,14 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(this._apiClient);
 
   @override
-  Future<Either<ApiException, OrdersPending>> getPendingOrders() async {
+  Future<Either<ApiException, HomeOrderResponse>> getPendingOrders() async {
     try {
       final response = await _apiClient.get(
         ApiConstants.pendingOrders,
         requiresToken: true,
       );
 
-      final ordersResponse = OrdersPending.fromJson(response);
+      final ordersResponse = HomeOrderResponse.fromJson(response);
       return Right(ordersResponse);
     } catch (e) {
       Log.e('Error fetching pending orders: $e');

@@ -127,7 +127,8 @@
     "apply_id_number": "ID Number",
     "apply_id_hint": "Enter ID Number",
     "apply_id_docs": "Upload ID Document",
-    "apply_id_image_hint": "Upload ID Document"
+    "apply_id_image_hint": "Upload ID Document",
+    "apply_no_results": "No results found"
   },
 
   "somethingWentWrong": "Something went wrong",

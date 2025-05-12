@@ -149,7 +149,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                                         child: Padding(
                                           padding: EdgeInsets.all(8.w),
                                           child: Text(
-                                            LocaleKeys.apply_no_results
+                                            LocaleKeys.apply_apply_no_results
                                                 .tr(),
                                             style: TextStyle(
                                               fontSize: 14.sp,
