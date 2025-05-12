@@ -1,8 +1,9 @@
-import 'package:flowery_rider/core/app_manger/app_cubit.dart';
-import 'package:flowery_rider/core/app_manger/app_states.dart';
+import 'package:flowery_rider/core/di/injectable.dart';
+import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
+import 'package:flowery_rider/features/Home_layout/presentation/page/home_screen.dart';
 import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart';
 import 'package:flowery_rider/features/main_layout/cubit/layout_state.dart';
-import 'package:flowery_rider/features/profile/presentation/pages/profile_screen.dart';
+import 'package:flowery_rider/features/order_details/presentation/order_details_page/order_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,9 +16,11 @@ class LayoutScreen extends StatefulWidget {
 
 class _LayoutScreenState extends State<LayoutScreen> {
   final List<Widget> _screens = [
-    const Center(child: Text('Home Screen')),
-    const Center(child: Text('Explore Screen')),
-    const ProfileScreen(),
+    BlocProvider(
+      create: (context) => getIt<HomeCubit>(),
+      child: const HomeScreen()),
+      const OrderDetailsPage(),
+     const Center(child: Text('Profile Screen')),
   ];
 
   @override

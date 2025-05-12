@@ -40,7 +40,7 @@ class VehicleInfoSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          LocaleKeys.auth_apply_vehicle_information.tr(),
+          LocaleKeys.apply_vehicle_information.tr(),
           style: getMediumStyle(
             fontSize: 16.sp,
             color: AppColors.black,
@@ -51,15 +51,15 @@ class VehicleInfoSection extends StatelessWidget {
           selectedValue: selectedVehicleType,
           onChanged: onVehicleTypeChanged,
           options: vehicleTypeMap.entries
-              .map((entry) => VehicleTypeOption(entry.key, entry.value.tr()))
+              .map((entry) => VehicleTypeOption(entry.key, entry.value))
               .toList(),
-          hintText: LocaleKeys.auth_apply_select_vehicle_type.tr(),
+          hintText: LocaleKeys.apply_select_vehicle_type.tr(),
         ),
         SizedBox(height: 15.h),
         TextFormField(
           decoration: InputDecoration(
-            hintText: LocaleKeys.auth_apply_vehicle_number_hint.tr(),
-            labelText: LocaleKeys.auth_apply_vehicle_number.tr(),
+            hintText: LocaleKeys.apply_vehicle_number_hint.tr(),
+            labelText: LocaleKeys.apply_vehicle_number.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -69,8 +69,8 @@ class VehicleInfoSection extends StatelessWidget {
         ),
         SizedBox(height: 15.h),
         UploadField(
-          label: LocaleKeys.auth_apply_vehicle_license.tr(),
-          hintText: LocaleKeys.auth_apply_vehicle_license_hint.tr(),
+          label: LocaleKeys.apply_vehicle_license.tr(),
+          hintText: LocaleKeys.apply_vehicle_license_hint.tr(),
           file: licensePhoto,
           files: licensePhotos,
           onTap: onPickLicensePhoto,

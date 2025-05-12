@@ -45,7 +45,7 @@ class _ApplyPageState extends State<ApplyPage> {
   final _imagePickerService = ImagePickerService();
 
   Country? _selectedCountry;
-  String? _selectedVehicleType = 'Car';
+  String? _selectedVehicleType = 'car';
   String _gender = 'male';
   File? _licensePhoto;
   File? _idPhoto;
@@ -55,11 +55,12 @@ class _ApplyPageState extends State<ApplyPage> {
   final List<File> _licensePhotos = [];
   List<Country> _countries = [];
 
+  // Define vehicle types with proper translation keys
   final Map<String, String> _vehicleTypeMap = {
-    'Car': LocaleKeys.auth_apply_car,
-    'Motorcycle': LocaleKeys.auth_apply_motorcycle,
-    'Bicycle': LocaleKeys.auth_apply_bicycle,
-    'Van': LocaleKeys.auth_apply_van,
+    'car': LocaleKeys.apply_car,
+    'motorcycle': LocaleKeys.apply_motorcycle,
+    'bicycle': LocaleKeys.apply_bicycle,
+    'van': LocaleKeys.apply_van,
   };
   List<String> get _vehicleTypes => _vehicleTypeMap.keys.toList();
 
@@ -171,7 +172,7 @@ class _ApplyPageState extends State<ApplyPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(LocaleKeys.auth_apply_title.tr()),
+          title: Text(LocaleKeys.apply_title.tr()),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -184,7 +185,7 @@ class _ApplyPageState extends State<ApplyPage> {
                   // ------------------------------------- Header
                   SizedBox(height: 10.h),
                   Text(
-                    LocaleKeys.auth_apply_welcome.tr(),
+                    LocaleKeys.apply_welcome.tr(),
                     style: getMediumStyle(
                       fontSize: 20.sp,
                       color: AppColors.black,
@@ -192,7 +193,8 @@ class _ApplyPageState extends State<ApplyPage> {
                   ),
                   SizedBox(height: 5.h),
                   Text(
-                    LocaleKeys.auth_apply_join_team.tr(),
+                    //LocaleKeys.auth_apply_join_team.tr(),
+                  LocaleKeys.apply_description.tr(),
                     style: getRegularStyle(
                       fontSize: 14.sp,
                       color: AppColors.grey,
@@ -281,15 +283,15 @@ class _ApplyPageState extends State<ApplyPage> {
                             onPressed: isLoading
                                 ? null
                                 : () {
-                                    if (!_formKey.currentState!.validate())
+                                    if (!_formKey.currentState!.validate()) {
                                       return;
+                                    }
 
                                     if (_licensePhoto == null ||
                                         _idPhoto == null) {
                                       GetIt.I<DialogUtils>().showSnackBar(
                                         textColor: AppColors.error,
-                                        message: LocaleKeys
-                                            .auth_apply_upload_required_files
+                                        message: LocaleKeys.apply_upload_required_files
                                             .tr(),
                                         context: context,
                                       );
@@ -309,7 +311,7 @@ class _ApplyPageState extends State<ApplyPage> {
                                           _selectedCountry?.phoneCode ?? '+20',
                                       'gender': _gender,
                                       'vehicleType':
-                                          _selectedVehicleType ?? 'Car',
+                                          _selectedVehicleType ?? 'car',
                                       'vehicleNumber':
                                           _vehicleNumberController.text.trim(),
                                       'idNumber':
@@ -332,11 +334,11 @@ class _ApplyPageState extends State<ApplyPage> {
                                               color: AppColors.white,
                                               strokeWidth: 2.5)),
                                       const SizedBox(width: 10),
-                                      Text(LocaleKeys.auth_apply_processing
+                                      Text(LocaleKeys.apply_processing
                                           .tr()),
                                     ],
                                   )
-                                : Text(LocaleKeys.auth_apply_submit_application
+                                : Text(LocaleKeys.apply_submit_application
                                     .tr()),
                           );
                         },
@@ -358,18 +360,16 @@ class _ApplyPageState extends State<ApplyPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Add the label directly
         Text(
-          LocaleKeys.auth_apply_country.tr(),
+          LocaleKeys.apply_country.tr(),
           style: getRegularStyle(
             fontSize: 12.sp,
             color: AppColors.grey,
           ),
         ),
         SizedBox(height: 5.h),
-        // Use SearchableDropdown directly
         SearchableDropdown<Country>(
-          hint: LocaleKeys.auth_apply_search_country.tr(),
+          hint: LocaleKeys.apply_search_country.tr(),
           value: _selectedCountry,
           items: _countries,
           displayStringForOption: (Country country) => country.name,

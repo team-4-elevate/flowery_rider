@@ -24,7 +24,7 @@ class EmailPhoneSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          LocaleKeys.auth_apply_account_information.tr(),
+          LocaleKeys.apply_account_information.tr(),
           style: getMediumStyle(
             fontSize: 16.sp,
             color: AppColors.black,
@@ -33,8 +33,8 @@ class EmailPhoneSection extends StatelessWidget {
         SizedBox(height: 15.h),
         TextFormField(
           decoration: InputDecoration(
-            hintText: LocaleKeys.auth_apply_email_hint.tr(),
-            labelText: LocaleKeys.auth_apply_email.tr(),
+            hintText: LocaleKeys.apply_email_hint.tr(),
+            labelText: LocaleKeys.apply_email.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -45,8 +45,8 @@ class EmailPhoneSection extends StatelessWidget {
         SizedBox(height: 15.h),
         TextFormField(
           decoration: InputDecoration(
-            hintText: LocaleKeys.auth_apply_phone_number_hint.tr(),
-            labelText: LocaleKeys.auth_apply_phone_number.tr(),
+            hintText: LocaleKeys.apply_phone_number.tr(),
+            labelText: LocaleKeys.apply_phone_number_hint.tr(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,

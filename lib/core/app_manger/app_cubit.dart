@@ -1,6 +1,5 @@
 import 'package:flowery_rider/core/app_manger/app_states.dart';
 import 'package:flowery_rider/features/auth/data/datasources/auth_local_data_source/auth_local_data_source.dart';
-import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 

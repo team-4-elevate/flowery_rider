@@ -128,7 +128,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                               focusNode: _searchFocusNode,
                               decoration: InputDecoration(
                                 hintText:
-                                    LocaleKeys.auth_apply_search_hint.tr(),
+                                    LocaleKeys.apply_search_country.tr(),
                                 prefixIcon: const Icon(Icons.search),
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 10.w, vertical: 8.h),
@@ -149,7 +149,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                                         child: Padding(
                                           padding: EdgeInsets.all(8.w),
                                           child: Text(
-                                            LocaleKeys.auth_apply_no_results
+                                            LocaleKeys.apply_no_results
                                                 .tr(),
                                             style: TextStyle(
                                               fontSize: 14.sp,

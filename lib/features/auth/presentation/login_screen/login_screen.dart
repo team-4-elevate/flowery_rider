@@ -121,7 +121,7 @@ void _showDoneDialog(BuildContext context) {
             () {
               if (context.mounted) {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  Routes.homeLayout,
+                  Routes.layoutScreen,
                   (route) => false,
                 );
               }
