@@ -126,5 +126,19 @@
       "no_results": "No results found",
       "not_found": "Not Found"
     }
+  },
+  "home": {
+    "app_title": "Flowery rider",
+    "try_again": "Try Again",
+    "no_pending_orders": "No pending orders",
+    "pull_to_refresh": "Pull down to refresh",
+    "accept_order_message": "Accept button clicked! Details page will be implemented soon.",
+    "flower_order": "Flower order",
+    "pickup_address": "Pickup address",
+    "flowery_store": "Flowery store",
+    "user_address": "User address",
+    "currency": "EGP",
+    "reject": "Reject",
+    "accept": "Accept"
   }
 }

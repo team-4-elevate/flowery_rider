@@ -2,21 +2,23 @@
 import 'package:flowery_rider/core/di/injectable.dart';
 import 'package:flowery_rider/application_approved_page.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
-import 'package:flowery_rider/features/Home_layout/screen/home_layout.dart';
-import 'package:flowery_rider/features/auth/presentation/apply/cubit/auth_cubit.dart';
-import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_page.dart';
-import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_success_page.dart';
-import 'package:flowery_rider/features/auth/presentation/login_screen/login_screen.dart';
-import 'package:flowery_rider/features/auth/presentation/login_screen/login_cubit.dart';
+import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.dart';
+import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart';
+import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
+import 'package:flowery_rider/features/Home_layout/presentation/page/home_layout.dart';
+import 'package:flowery_rider/features/apply/presentation/cubit/auth_cubit.dart';
+import 'package:flowery_rider/features/apply/presentation/pages/apply_page.dart';
+import 'package:flowery_rider/features/apply/presentation/pages/apply_success_page.dart';
+import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_screen.dart';
+import 'package:flowery_rider/features/auth/presentation/pages/login_screen/login_cubit.dart';
+import 'package:flowery_rider/features/auth/presentation/pages/onboarding/on_boarding_screen.dart';
 import 'package:flowery_rider/features/forget_password/presentation/pages/reset_password_page.dart';
-import 'package:flowery_rider/features/onboarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import '../../features/forget_password/presentation/pages/forget_password_page.dart';
 import '../../features/forget_password/presentation/pages/pin_code_page.dart';
-import '../../features/order_details/presentation/cubit/order_details_cubit.dart';
-import '../../features/order_details/presentation/order_details_page/order_details_page.dart';
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -31,7 +33,11 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.homeLayout:
       return MaterialPageRoute(
         settings: settings,
-        builder: (_) => HomeLayout(),
+        builder: (_) => BlocProvider(
+          create: (_) =>
+              HomeCubit(getIt<HomeUseCase>(), getIt<HomeRepository>()),
+          child: HomeLayout(),
+        ),
       );
     case Routes.applicationApproved:
       return MaterialPageRoute(
@@ -81,11 +87,6 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         settings: settings,
         builder: (_) => const ApplySuccessPage(),
       );
-    case Routes.orderDetails:
-      return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-              create: (context) => getIt<OrderDetailsCubit>(),
-              child: OrderDetailsPage()));
     default:
       return MaterialPageRoute(
         settings: settings,

@@ -75,8 +75,10 @@ ThemeData getLightTheme() => ThemeData(
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           backgroundColor: AppColors.scaffoldBackground,
+          foregroundColor: AppColors.primary,
           side: const BorderSide(
-            color: AppColors.black,
+            color: AppColors.primary,
+            width: 1.5,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100.r),
