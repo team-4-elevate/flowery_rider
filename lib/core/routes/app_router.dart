@@ -1,11 +1,6 @@
-// core/routes/app_router.dart
 import 'package:flowery_rider/core/di/injectable.dart';
 import 'package:flowery_rider/application_approved_page.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
-import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.dart';
-import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart';
-import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
-import 'package:flowery_rider/features/Home_layout/presentation/page/home_screen.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/cubit/auth_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_page.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_success_page.dart';
@@ -21,6 +16,8 @@ import 'package:flowery_rider/features/main_layout/screen/layout_screen.dart';
 import 'package:flowery_rider/features/onboarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/order_details/presentation/order_details_page/order_details_page.dart';
+import '../app_data/shared_models/orders/driver_order_model.dart';
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -85,6 +82,14 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => const ApplySuccessPage(),
+      );
+    case Routes.orderDetails:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) {
+          final args = settings.arguments as DriverOrderModel;
+          return OrderDetailsPage(order: args);
+        },
       );
     default:
       return MaterialPageRoute(

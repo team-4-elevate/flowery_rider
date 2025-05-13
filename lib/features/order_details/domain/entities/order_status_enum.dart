@@ -1,14 +1,18 @@
 enum OrderStatusEnum {
+  rejected,
   pending,
   accepted,
   pickedUp,
   outForDelivery,
+  arrived,
   delivered,
 }
 
 extension OrderStatusExtension on OrderStatusEnum {
   String get name {
     switch (this) {
+      case OrderStatusEnum.rejected:
+        return 'rejected';
       case OrderStatusEnum.pending:
         return 'pending';
       case OrderStatusEnum.accepted:
@@ -19,6 +23,8 @@ extension OrderStatusExtension on OrderStatusEnum {
         return 'out_for_delivery';
       case OrderStatusEnum.delivered:
         return 'delivered';
+      case OrderStatusEnum.arrived:
+        return 'arrived';
     }
   }
 }
@@ -36,6 +42,10 @@ extension ToEnum on String {
         return OrderStatusEnum.delivered;
       case 'out_for_delivery':
         return OrderStatusEnum.outForDelivery;
+      case 'rejected':
+        return OrderStatusEnum.rejected;
+      case 'arrived':
+        return OrderStatusEnum.arrived;
       default:
         return OrderStatusEnum.pending;
     }

@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:flowery_rider/core/app_data/shared_models/orders/driver.dart';
+import 'package:flowery_rider/features/auth/domain/entities/apply_entity.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,5 +91,31 @@ class LocalStorageClient {
     } catch (e) {
       throw LocalStorageException('Failed to save data: ${e.toString()}');
     }
+  }
+
+  saveUserApplyData(ApplyEntity entity) async {
+    try {
+      final userData = entity.toMap();
+      final jsonString = jsonEncode(userData);
+      await sharedPreferences.setString('userApplyData', jsonString);
+    } catch (e) {
+      throw LocalStorageException('Failed to save data: ${e.toString()}');
+    }
+  }
+
+  Future<ApplyEntity?> getUserApplyData() async {
+    try {
+      final userData = sharedPreferences.getString('userApplyData');
+      if (userData == null || userData.isEmpty) return null;
+      return ApplyEntity.fromJson(jsonDecode(userData));
+    } catch (e) {
+      throw LocalStorageException('Failed to get data: ${e.toString()}');
+    }
+  }
+
+  Future<FirebaseDriverDM?> getDriverData() async {
+    final applyData = await getUserApplyData();
+    if (applyData == null) return null;
+    return applyData.toFirebaseDriver(applyData);
   }
 }

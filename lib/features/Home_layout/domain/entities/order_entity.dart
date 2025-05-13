@@ -1,5 +1,3 @@
-// features/Home_layout/domain/entities/order_entity.dart
-
 import 'package:flowery_rider/core/app_data/shared_models/orders/full_order_model.dart';
 
 class OrderEntity {
@@ -30,10 +28,7 @@ class OrderEntity {
   factory OrderEntity.fromModel(FullOrderModel fullOrder) {
     final driverOrder = fullOrder.order;
 
-    final firstName = driverOrder?.customer?.firstName ?? '';
-    final lastName = driverOrder?.customer?.lastName ?? '';
-    final fullName =
-        [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
+    final name = driverOrder?.customer?.firstName ?? '';
 
     final storeAddress = fullOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
 
@@ -50,10 +45,10 @@ class OrderEntity {
       id: fullOrder.id ?? '',
       orderId: driverOrder?.id ?? '',
       storeAddress: fullOrder.store?.address ?? 'Store address unavailable',
-      userName: fullName.isEmpty ? 'Unknown Customer' : fullName,
+      userName: name.isEmpty ? 'Unknown Customer' : name,
       userAddress: userAddress,
       price: price,
-      state: driverOrder?.state ?? '',
+      state: driverOrder?.status?.name ?? '',
     );
   }
 

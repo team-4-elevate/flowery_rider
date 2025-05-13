@@ -14,6 +14,7 @@ import 'package:flowery_rider/core/app_manger/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'features/Home_layout/presentation/cubit/home_cubit.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -30,9 +31,14 @@ void main() async {
         ],
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
-        child: BlocProvider(
+        child: MultiBlocProvider(providers: [
+          BlocProvider(
             create: (context) => getIt<AppCubit>()..getUserLoggedInState(),
-            child: const FloweryRider())),
+          ),
+          BlocProvider(
+            create: (context) => getIt<HomeCubit>(),
+          ),
+        ], child: const FloweryRider())),
   );
 }
 
