@@ -1,3 +1,0 @@
-class OrderDetailsState {
-  const OrderDetailsState();
-}

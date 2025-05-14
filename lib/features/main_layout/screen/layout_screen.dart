@@ -18,7 +18,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   final List<Widget> _screens = [
     BlocProvider(
         create: (context) => getIt<HomeCubit>(), child: const HomeScreen()),
-    const OrderDetailsPage(),
+    const Scaffold(backgroundColor: Colors.red,),
     const Center(child: Text('Profile Screen')),
   ];
 

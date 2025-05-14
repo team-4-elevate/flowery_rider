@@ -1,4 +1,6 @@
 // features/auth/data/repositories/auth_repo_impl.dart
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:either_dart/either.dart';
 import 'package:flowery_rider/core/error_handling/exceptions/api_exception.dart';
@@ -27,8 +29,8 @@ class AuthRepoImpl implements AuthRepo {
       if (response.token == null) {
         return Left(ApiException(message: LocaleKeys.somethingWentWrong.tr()));
       }
+      await _authLocalDataSource.cacheToken(response.token!);
       if (rememberMe) {
-        await _authLocalDataSource.cacheToken(response.token!);
         await cacheRememberMe(rememberMe);
       }
       return Right(response);
@@ -68,6 +70,8 @@ class AuthRepoImpl implements AuthRepo {
     if (success.token != null && success.driver != null) {
       _authLocalDataSource.cacheToken(success.token!);
     }
+    await _authLocalDataSource.saveUserApplyData(entity);
+
 
     return Right(success.success);
   }

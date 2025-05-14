@@ -1,36 +1,40 @@
-// core/app_data/shared_models/orders/driver_order_model.dart
 import 'package:equatable/equatable.dart';
+import 'package:flowery_rider/core/app_data/shared_models/orders/pickup_address.dart';
+import 'package:flowery_rider/features/order_details/domain/entities/order_status_enum.dart';
 import 'package:flowery_rider/features/order_details/domain/entities/payment_type_enum.dart';
 import 'customerDm.dart';
 import 'order_item.dart';
+import 'order_product.dart';
 
 class DriverOrderModel extends Equatable {
-  final String? id;
+  final String id;
   final Customer? customer;
   final List<OrderItem>? orderItems;
-  final double? totalPrice;
+  final double totalPrice;
   final PaymentTypeEnum? paymentType;
   final bool? isPaid;
   final bool? isDelivered;
-  final String? state;
   final String? createdAt;
   final String? updatedAt;
   final String? orderNumber;
   final int? version;
+  final OrderStatusEnum? status;
+  final PickupAddress? pickupAddress;
 
   const DriverOrderModel({
-    this.id,
+    required this.id,
     this.customer,
     this.orderItems,
-    this.totalPrice,
+    required this.totalPrice,
     this.paymentType,
     this.isPaid,
     this.isDelivered,
-    this.state,
     this.createdAt,
     this.updatedAt,
     this.orderNumber,
     this.version,
+    this.status,
+    this.pickupAddress,
   });
 
   Map<String, dynamic> toJson() {
@@ -42,10 +46,10 @@ class DriverOrderModel extends Equatable {
       'paymentType': paymentType,
       'isPaid': isPaid,
       'isDelivered': isDelivered,
-      'state': state,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'orderNumber': orderNumber,
+      'pickupAddress': pickupAddress?.toJson(),
       '__v': version,
     };
   }
@@ -57,19 +61,80 @@ class DriverOrderModel extends Equatable {
       orderItems: (json['orderItems'] as List?)
           ?.map((item) => OrderItem.fromJson(item as Map<String, dynamic>))
           .toList(),
-      totalPrice: (json['totalPrice'] as num?)?.toDouble(),
-      paymentType: (json['paymentType'] as String?)?.toOrderStatusEnum(),
+      totalPrice: (json['totalPrice'] as num).toDouble(),
+      paymentType: (json['paymentType'] as String?)?.toPaymentEnum(),
       isPaid: json['isPaid'] as bool?,
       isDelivered: json['isDelivered'] as bool?,
-      state: json['state'] as String?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
       orderNumber: json['orderNumber'] as String?,
+      pickupAddress: PickupAddress.fromJson(json),
       version: json['__v'] as int?,
     );
   }
 
-  // Create a copy with updated values
+  factory DriverOrderModel.fromFirebase(Map json, String orderId) {
+    List<OrderItem> items = [];
+    if (json['items'] != null) {
+      final itemsData = json['items'] as List?;
+      itemsData?.forEach(
+        (e) {
+          final OrderDmProduct product = OrderDmProduct(
+            id: e['productId'] as String?,
+            price: (e['price'] as num?)?.toDouble(),
+          );
+          items.add(OrderItem(
+            id: e['productId'] as String?,
+            orderProduct: product,
+            price: (e['price'] as num?)?.toDouble(),
+            quantity: e['quantity'] as int?,
+            name: e['title'] as String?,
+          ));
+        },
+      );
+    }
+    Customer? customer;
+    if (json['user'] != null) {
+      final itemsData = json['user'] as Map<dynamic, dynamic>;
+      itemsData.forEach((key, value) {
+        final userId = key['id'] as String;
+        final email = key['email'] as String;
+        final name = key['name'] as String;
+        final phone = key['phoneNumber'] as String?;
+        final address = key['address'] as String;
+        customer = Customer(
+            id: userId,
+            firstName: name,
+            email: email,
+            gender: '',
+            address: address,
+            phone: phone);
+      });
+    }
+    final pickupAddress = PickupAddress.fromJson(json);
+
+    OrderStatusEnum status = json['state'] != null
+        ? (json['state'] as String).toOrderStatusEnum()
+        : OrderStatusEnum.pending;
+    double totalPrice = (json['totalPrice']).toDouble();
+    return DriverOrderModel(
+      id: orderId,
+      customer: customer,
+      orderItems: items,
+      totalPrice: totalPrice,
+      isPaid: json['isPaid'] as bool?,
+      isDelivered: json['isDelivered'] as bool?,
+      createdAt: json['createdAt'] as String?,
+      orderNumber: json.containsKey('_id') ? json['_id'] as String? : null,
+      status: status,
+      paymentType: (json['isPaid'] as bool? ?? false)
+          ? PaymentTypeEnum.card
+          : PaymentTypeEnum.cash,
+      pickupAddress: pickupAddress,
+      updatedAt: DateTime.now().toString(),
+    );
+  }
+
   DriverOrderModel copyWith({
     String? id,
     Customer? customer,
@@ -78,11 +143,12 @@ class DriverOrderModel extends Equatable {
     PaymentTypeEnum? paymentType,
     bool? isPaid,
     bool? isDelivered,
-    String? state,
     String? createdAt,
     String? updatedAt,
     String? orderNumber,
     int? version,
+    OrderStatusEnum? status,
+    PickupAddress? pickupAddress,
   }) {
     return DriverOrderModel(
       id: id ?? this.id,
@@ -92,11 +158,12 @@ class DriverOrderModel extends Equatable {
       paymentType: paymentType ?? this.paymentType,
       isPaid: isPaid ?? this.isPaid,
       isDelivered: isDelivered ?? this.isDelivered,
-      state: state ?? this.state,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       orderNumber: orderNumber ?? this.orderNumber,
       version: version ?? this.version,
+      status: status ?? this.status,
+      pickupAddress: pickupAddress ?? this.pickupAddress,
     );
   }
 
@@ -109,10 +176,10 @@ class DriverOrderModel extends Equatable {
         paymentType,
         isPaid,
         isDelivered,
-        state,
         createdAt,
         updatedAt,
         orderNumber,
         version,
+        pickupAddress
       ];
 }

@@ -15,7 +15,7 @@ extension PaymentTypeExtension on PaymentTypeEnum {
 }
 
 extension ToEnum on String {
-  PaymentTypeEnum? toOrderStatusEnum() {
+  PaymentTypeEnum? toPaymentEnum() {
     switch (this) {
       case 'cash':
         return PaymentTypeEnum.cash;

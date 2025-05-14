@@ -1,6 +1,3 @@
-// features/Home_layout/domain/entities/order_entity.dart
-
-import 'package:flowery_rider/core/app_data/shared_models/orders/driver_order_model.dart';
 import 'package:flowery_rider/core/app_data/shared_models/orders/full_order_model.dart';
 
 class OrderEntity {
@@ -28,86 +25,34 @@ class OrderEntity {
       state.toLowerCase() == 'inprogress' ||
       state.toLowerCase() == 'completed';
 
-  factory OrderEntity.fromModel(dynamic orderData) {
-    if (orderData is DriverOrderModel) {
-      final order = orderData;
-      final firstName = order.customer?.firstName ?? '';
-      final lastName = order.customer?.lastName ?? '';
-      final fullName =
-          [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
+  factory OrderEntity.fromModel(FullOrderModel fullOrder) {
+    final driverOrder = fullOrder.order;
 
-      String storeAddress = '20th st, Sheikh Zayed, Giza';
+    final name = driverOrder?.customer?.firstName ?? '';
 
-      if (orderData.toJson().containsKey('store') &&
-          orderData.toJson()['store'] != null) {
-        final storeData = orderData.toJson()['store'];
-        if (storeData is Map && storeData.containsKey('address')) {
-          storeAddress = storeData['address'] ?? storeAddress;
-        }
-      }
+    final storeAddress = fullOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
 
-      final userAddress = storeAddress.contains(',')
-          ? storeAddress
-          : '20th st,Sheikh Zayed, Giza';
+    final userAddress = storeAddress.contains(',')
+        ? storeAddress
+        : '20th st,Sheikh Zayed, Giza';
 
-      double price = 0.0;
-      if (order.totalPrice != null) {
-        price = order.totalPrice!;
-      }
-
-      return OrderEntity(
-        id: order.id ?? '',
-        orderId: order.orderNumber ?? '',
-        storeAddress: storeAddress,
-        userName: fullName.isEmpty ? 'Unknown Customer' : fullName,
-        userAddress: userAddress,
-        price: price,
-        state: order.state ?? '',
-      );
-    } else if (orderData is FullOrderModel) {
-      final fullOrder = orderData;
-      final driverOrder = fullOrder.order;
-
-      final firstName = driverOrder?.customer?.firstName ?? '';
-      final lastName = driverOrder?.customer?.lastName ?? '';
-      final fullName =
-          [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
-
-      final storeAddress =
-          fullOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
-
-      final userAddress = storeAddress.contains(',')
-          ? storeAddress
-          : '20th st,Sheikh Zayed, Giza';
-
-      double price = 0.0;
-      if (driverOrder?.totalPrice != null) {
-        price = driverOrder!.totalPrice!;
-      }
-
-      return OrderEntity(
-        id: fullOrder.id ?? '',
-        orderId: driverOrder?.id ?? '',
-        storeAddress: storeAddress,
-        userName: fullName.isEmpty ? 'Unknown Customer' : fullName,
-        userAddress: userAddress,
-        price: price,
-        state: driverOrder?.state ?? '',
-      );
+    double price = 0.0;
+    if (driverOrder?.totalPrice != null) {
+      price = driverOrder!.totalPrice!;
     }
 
     return OrderEntity(
-      id: '',
-      orderId: '',
-      storeAddress: 'Unknown Address',
-      userName: 'Unknown Customer',
-      userAddress: 'Unknown Address',
-      price: 0.0,
-      state: '',
+      id: fullOrder.id ?? '',
+      orderId: driverOrder?.id ?? '',
+      storeAddress: fullOrder.store?.address ?? 'Store address unavailable',
+      userName: name.isEmpty ? 'Unknown Customer' : name,
+      userAddress: userAddress,
+      price: price,
+      state: driverOrder?.status?.name ?? '',
     );
   }
 
-  static List<OrderEntity> fromModelList(List<dynamic>? orders) {
+  static List<OrderEntity> fromModelList(List<FullOrderModel>? orders) {
     if (orders == null) return [];
     return orders.map((order) => OrderEntity.fromModel(order)).toList();
   }
