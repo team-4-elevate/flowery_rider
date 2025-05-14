@@ -25,8 +25,9 @@ class OrderItem extends Equatable {
 
   factory OrderItem.fromJson(Map<String, dynamic> json) {
     return OrderItem(
-      orderProduct:
-          OrderDmProduct.fromJson(json['product'] as Map<String, dynamic>),
+      orderProduct: json['product'] != null
+          ? OrderDmProduct.fromJson(json['product'] as Map<String, dynamic>)
+          : null,
       price: (json['price'] as num?)?.toDouble(),
       quantity: json['quantity'] as int?,
       id: json['_id'] as String?,

@@ -15,7 +15,7 @@ class Routes {
   static const String successApply = '/success-apply';
   static const String apply = '/apply';
   static const String successorder = '/successorder';
-  static const String successApply = '/success-apply';
-  static const String apply = '/apply';
+  // static const String successApply = '/success-apply';
+  // static const String apply = '/apply';
   static const String layoutScreen = '/layout-screen';
 }

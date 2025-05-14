@@ -9,4 +9,7 @@ class ApiConstants {
   static const String applyDriverEndPoint = 'drivers/apply';
   static const String homeEndPoint = 'orders/pending-orders';
   static const String pendingOrders = 'orders/driver-orders';
+  static const String updateDriverProfile = 'drivers/editProfile';
+  static const String uploadProfileImage = 'drivers/upload-photo';
+  static const String getDriverProfile = 'drivers/profile-data';
 }
