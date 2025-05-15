@@ -14,10 +14,8 @@ class CompletedOrdersDetails extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackground,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
-        title: Text(
-          'Order details',
-        ),
+        title: Text('Order details'),
+        surfaceTintColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),

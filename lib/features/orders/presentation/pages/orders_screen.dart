@@ -14,9 +14,11 @@ class OrdersScreen extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: Scaffold(
+        backgroundColor: AppColors.scaffoldBackground,
         appBar: AppBar(
           title: const Text('My Orders'),
           automaticallyImplyLeading: false,
+          surfaceTintColor: Colors.transparent,
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(16.w),

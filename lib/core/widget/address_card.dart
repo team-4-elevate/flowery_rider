@@ -1,4 +1,4 @@
-// features/Home_layout/presentation/widgets/address_card.dart
+// core/widget/address_card.dart
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flowery_rider/core/theme/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -59,9 +59,9 @@ class AddressCard extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Optional trailing widget
-          if (trailing != null) ...[  
+          if (trailing != null) ...[
             SizedBox(width: 8.w),
             trailing!,
           ],
@@ -88,7 +88,7 @@ class AddressCard extends StatelessWidget {
   Widget _buildAddressRow() {
     return Row(
       children: [
-        if (showLocationIcon) ...[  
+        if (showLocationIcon) ...[
           Icon(Icons.location_on_outlined, size: 14.sp, color: AppColors.grey),
           SizedBox(width: 4.w),
         ],
