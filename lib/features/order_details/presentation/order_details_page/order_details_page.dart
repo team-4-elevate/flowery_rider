@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flowery_rider/core/app_data/shared_models/orders/driver_order_model.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_states.dart';
@@ -121,40 +123,59 @@ class OrderDetailsPage extends StatelessWidget {
 
   String _setButtonTitle(int currentStep) {
     switch (currentStep) {
-      case 1:
+      case 0:
         return 'Arrived at Pickup point';
-      case 2:
+      case 1:
         return 'Start deliver';
-      case 3:
+      case 2:
         return 'Arrived to user';
-      case 4:
+      case 3 || 4:
         return 'Delivered to user';
       default:
         return 'Accept Order';
     }
   }
 
-  OrderStatusEnum _getNextStatus(OrderStatusEnum currentStatus) {
-    switch (currentStatus) {
-      case OrderStatusEnum.pending:
-        return OrderStatusEnum.accepted;
-      case OrderStatusEnum.accepted:
+  OrderStatusEnum _getNextStatus(
+      HomeStates state) {
+    // switch (currentStatus) {
+    //   case OrderStatusEnum.pending:
+    //     return OrderStatusEnum.accepted;
+    //   case OrderStatusEnum.accepted:
+    //     return OrderStatusEnum.pickedUp;
+    //   case OrderStatusEnum.pickedUp:
+    //     return OrderStatusEnum.outForDelivery;
+    //   case OrderStatusEnum.outForDelivery:
+    //     return OrderStatusEnum.arrived;
+    //   case OrderStatusEnum.arrived:
+    //     return OrderStatusEnum.delivered;
+    //   default:
+    //     return currentStatus;
+    // }
+    switch (state.currentStep) {
+      case 0:
         return OrderStatusEnum.pickedUp;
-      case OrderStatusEnum.pickedUp:
+      case 1:
         return OrderStatusEnum.outForDelivery;
-      case OrderStatusEnum.outForDelivery:
+      case 2:
         return OrderStatusEnum.arrived;
-      case OrderStatusEnum.arrived:
+      case 3:
+        return OrderStatusEnum.delivered;
+      case 4:
         return OrderStatusEnum.delivered;
       default:
-        return currentStatus;
+        return OrderStatusEnum.accepted;
     }
   }
 
   Future<void> _setOrderStatus(BuildContext context, HomeStates state) async {
     if (state.currentStep == 4) return;
     final cubit = context.read<HomeCubit>();
-    final nextStatus = _getNextStatus(order.status ?? OrderStatusEnum.accepted);
+    log(order.status?.name??'22');
+    log('33');
+    final nextStatus = _getNextStatus(state);
+    log('newd');
+    log(nextStatus.name);
     await cubit.changeOrderStatus(
       orderId: order.id,
       status: nextStatus,

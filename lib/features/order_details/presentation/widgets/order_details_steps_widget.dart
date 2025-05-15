@@ -24,26 +24,31 @@ class _OrderDetailsStepsWidgetState extends State<OrderDetailsStepsWidget> {
     return BlocBuilder<HomeCubit, HomeStates>(
       buildWhen: (p, c) => p.currentStep != c.currentStep,
       builder: (context, state) {
-        return Row(
-          children: List.generate(
-            totalSteps,
-            (index) {
-              log('message');
-              log(index.toString());
-              log(state.currentStep.toString());
-              return Expanded(
-                child: Container(
-                  height: 4.h,
-                  margin: EdgeInsets.symmetric(horizontal: 2.w),
-                  decoration: BoxDecoration(
-                    color: state.currentStep == index
-                        ? Color(0xFF0CB359)
-                        : AppColors.grey.withValues(alpha: 0.3),
-                    borderRadius: BorderRadius.circular(2.r),
+        return PopScope(
+          onPopInvokedWithResult: (didPop, result) {
+            context.read<HomeCubit>().changeCurrentStep(0);
+          },
+          child: Row(
+            children: List.generate(
+              totalSteps,
+              (index) {
+                log('message');
+                log(index.toString());
+                log(state.currentStep.toString());
+                return Expanded(
+                  child: Container(
+                    height: 4.h,
+                    margin: EdgeInsets.symmetric(horizontal: 2.w),
+                    decoration: BoxDecoration(
+                      color: state.currentStep == index
+                          ? Color(0xFF0CB359)
+                          : AppColors.grey.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(2.r),
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         );
       },

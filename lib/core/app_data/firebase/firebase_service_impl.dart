@@ -38,7 +38,7 @@ class FirebaseDriverServiceImpl implements IDeliveryFirebaseService {
       List<DriverOrderModel> ordersList = [];
       if (ordersMap is Map<dynamic, dynamic>) {
         ordersMap.forEach((orderId, orderData) {
-          try {
+          // try {
             if (orderData is Map<dynamic, dynamic>) {
               DriverOrderModel order = DriverOrderModel.fromFirebase(
                 orderData,
@@ -46,9 +46,9 @@ class FirebaseDriverServiceImpl implements IDeliveryFirebaseService {
               );
               ordersList.add(order);
             }
-          } catch (e) {
-            log(e.toString());
-          }
+          // } catch (e) {
+          //   log(e.toString());
+          // }
         });
       }
       return ordersList
@@ -84,9 +84,13 @@ class FirebaseDriverServiceImpl implements IDeliveryFirebaseService {
     required OrderStatusEnum status,
   }) async {
     try {
+      log(status.name);
+      log('1');
       await _ordersRef.child(orderId).update({
         'state': status.name,
       });
+      log(status.name);
+      log('1');
     } catch (e) {
       throw Exception('Failed to update order status: $e');
     }

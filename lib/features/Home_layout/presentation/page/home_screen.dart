@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/core/app_data/shared_models/orders/driver_order_model.dart';
 import 'package:flowery_rider/core/base/base_state.dart';
@@ -68,8 +66,6 @@ class _HomeLayoutState extends State<HomeScreen> {
                     } else {
                       return BlocBuilder<HomeCubit, HomeStates>(
                         builder: (context, _) {
-                          // final visibleOrders =
-                          //     context.read<HomeCubit>().visibleOrders;
 
                           return state.firebaseOrders == null ||
                                   state.firebaseOrders!.isEmpty

@@ -13,12 +13,12 @@ class OrderDetailsAddressWidget extends StatelessWidget {
   final String? userName;
 
   const OrderDetailsAddressWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.address,
     this.isStore = false,
     this.userName,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

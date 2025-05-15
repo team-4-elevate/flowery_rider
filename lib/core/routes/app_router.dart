@@ -19,6 +19,9 @@ import 'package:flowery_rider/features/onboarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/order_details/presentation/order_details_page/order_details_page.dart';
+import '../app_data/shared_models/orders/driver_order_model.dart';
+
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case Routes.onboarding:
