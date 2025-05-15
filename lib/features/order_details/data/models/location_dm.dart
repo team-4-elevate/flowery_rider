@@ -9,17 +9,17 @@ class LocationDM extends Equatable {
     required this.lng,
   });
 
-  factory LocationDM.fromJson(Map<String, dynamic> json) {
+  factory LocationDM.fromJson(Map json) {
     return LocationDM(
-      lat: (json['lat'] as num?)?.toDouble() ?? 0.0,
-      lng: (json['lng'] as num?)?.toDouble() ?? 0.0,
+      lat: double.parse(json['lat'] ?? '0'),
+      lng: double.parse(json['lng'] ?? '0'),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'lat': lat,
-      'lng': lng,
+      'lat': lat.toString(),
+      'lng': lng.toString(),
     };
   }
 

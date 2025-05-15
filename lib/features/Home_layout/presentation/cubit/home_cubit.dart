@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:flowery_rider/core/app_data/firebase/firebase_service_interface.dart';
 import 'package:flowery_rider/core/base/base_state.dart';
@@ -55,23 +56,40 @@ class HomeCubit extends Cubit<HomeStates> {
     required String orderId,
     required OrderStatusEnum status,
   }) async {
+    log(status.name);
     status == OrderStatusEnum.accepted
         ? await _firebase.acceptOrder(orderId: orderId)
         : await _firebase.updateOrderStatus(
             orderId: orderId,
             status: status,
           );
-    emit(state.copyWith(
-        currentStep: status != OrderStatusEnum.rejected &&
-                status != OrderStatusEnum.accepted &&
-                status != OrderStatusEnum.pending
-            ? state.currentStep + 1
-            : null));
+    emit(state.copyWith(currentStep: _setCurrentStep(status)));
   }
 
   @override
   Future<void> close() async {
     await _sub?.cancel();
     return super.close();
+  }
+
+  _setCurrentStep(OrderStatusEnum status) {
+    switch (status) {
+      case OrderStatusEnum.accepted:
+        return 0;
+      case OrderStatusEnum.pickedUp:
+        return 1;
+      case OrderStatusEnum.outForDelivery:
+        return 2;
+      case OrderStatusEnum.arrived:
+        return 3;
+        case OrderStatusEnum.delivered:
+        return 4;
+      default:
+        return 0;
+    }
+  }
+
+  void changeCurrentStep(int i) {
+    emit(state.copyWith(currentStep: i));
   }
 }

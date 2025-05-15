@@ -12,7 +12,7 @@ class HomeUseCase {
 
   HomeUseCase(this._homeRepository);
 
-  Future<Either<ApiException, List<OrderEntity>>> call() async {
-    return await _homeRepository.getPendingOrders();
-  }
+  // Future<Either<ApiException, List<OrderEntity>>> call() async {
+  //   return await _homeRepository.getPendingOrders();
+  // }
 }

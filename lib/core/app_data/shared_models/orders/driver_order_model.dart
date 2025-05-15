@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flowery_rider/core/app_data/shared_models/orders/pickup_address.dart';
+import 'package:flowery_rider/features/order_details/data/models/location_dm.dart';
 import 'package:flowery_rider/features/order_details/domain/entities/order_status_enum.dart';
 import 'package:flowery_rider/features/order_details/domain/entities/payment_type_enum.dart';
 import 'customerDm.dart';
@@ -96,20 +97,20 @@ class DriverOrderModel extends Equatable {
     Customer? customer;
     if (json['user'] != null) {
       final itemsData = json['user'] as Map<dynamic, dynamic>;
-      itemsData.forEach((key, value) {
-        final userId = key['id'] as String;
-        final email = key['email'] as String;
-        final name = key['name'] as String;
-        final phone = key['phoneNumber'] as String?;
-        final address = key['address'] as String;
-        customer = Customer(
-            id: userId,
-            firstName: name,
-            email: email,
-            gender: '',
-            address: address,
-            phone: phone);
-      });
+      final userId = itemsData['_id'] as String;
+      final email = itemsData['email'] as String?;
+      final name = itemsData['name'] as String?;
+      final phone = itemsData['phone'] as String?;
+      final address = itemsData['address'] as String?;
+      final location = itemsData['location'] != null
+          ? LocationDM.fromJson(itemsData['location'] as Map)
+          : null;
+      customer = Customer(
+          id: userId,
+          firstName: name,
+          address: address,
+          location: location,
+          phone: phone);
     }
     final pickupAddress = PickupAddress.fromJson(json);
 

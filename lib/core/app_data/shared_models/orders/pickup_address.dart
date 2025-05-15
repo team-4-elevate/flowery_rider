@@ -1,10 +1,17 @@
 class PickupAddress {
   String? address;
-  String? lat;
-  String? lng;
+  int? lat;
+  int? lng;
 
-  PickupAddress toJson() => PickupAddress(address: address, lat: lat, lng: lng);
-  factory PickupAddress.fromJson(Map<dynamic, dynamic> json) => PickupAddress(
-      address: json['address'], lat: json['lat'], lng: json['lng']);
+  Map<String, String?> toJson() => {
+        'address': address,
+        'lat': lat.toString(),
+        'lng': lng.toString(),
+      };
+  factory PickupAddress.fromJson(Map? json) => PickupAddress(
+        address: json?['address'],
+        lat: json?['lat'] != null ? int.parse(json?['lat']) : null,
+        lng: json?['lng'] != null ? int.parse(json?['lng']) : null,
+      );
   PickupAddress({this.address, this.lat, this.lng});
 }
