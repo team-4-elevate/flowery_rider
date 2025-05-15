@@ -5,6 +5,7 @@ import 'package:flowery_rider/features/Home_layout/presentation/page/home_screen
 import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart';
 import 'package:flowery_rider/features/main_layout/cubit/layout_state.dart';
 import 'package:flowery_rider/features/order_details/presentation/order_details_page/order_details_page.dart';
+import 'package:flowery_rider/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:flowery_rider/features/orders/presentation/pages/orders_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
   final List<Widget> _screens = [
     BlocProvider(
         create: (context) => getIt<HomeCubit>(), child: const HomeScreen()),
-    const OrdersScreen(),
+    BlocProvider(
+        create: (context) => OrdersCubit(getIt()), child: const OrdersScreen()),
     const Center(child: Text('Profile Screen')),
   ];
 

@@ -3,26 +3,40 @@ import 'package:flowery_rider/core/widget/address_card.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flowery_rider/core/theme/app_styles.dart';
+import 'package:flowery_rider/core/app_data/shared_models/orders/driver_order_model.dart';
 import 'package:flowery_rider/features/orders/presentation/pages/completed_orders_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderCard extends StatelessWidget {
   final String orderNumber;
   final String status;
   final bool isCompleted;
+  final DriverOrderModel? orderModel;
+  final VoidCallback? onTap;
 
   const OrderCard({
     super.key,
     required this.orderNumber,
     required this.status,
     required this.isCompleted,
+    this.orderModel,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, Routes.completedDetailsScreen),
+      onTap: onTap ?? () {
+        // If we have an order model, pass it to the details page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CompletedOrdersDetails(order: orderModel),
+          ),
+        );
+      },
       child: Container(
         margin: EdgeInsets.only(bottom: 16.h),
         decoration: BoxDecoration(

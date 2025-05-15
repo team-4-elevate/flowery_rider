@@ -167,5 +167,37 @@
     "name": "Name",
     "mark_delivered": "Mark as Delivered",
     "order_completed": "Order completed successfully!"
+  },
+  
+  "orders": {
+    "title": "My Orders",
+    "failed_to_load": "Failed to load orders",
+    "retry": "Retry",
+    "cancelled": "Cancelled",
+    "completed": "Completed",
+    "recent_orders": "Recent orders",
+    "loading": "Loading orders...",
+    "no_orders_found": "No orders found",
+    "no_orders_message": "You currently have no orders"
+  },
+  
+  "completed_orders_details": {
+    "title": "Order details",
+    "pickup_address": "Pickup address",
+    "user_address": "User address",
+    "order_details": "Order details",
+    "total": "Total",
+    "payment_method": "Payment method",
+    "cash_on_delivery": "Cash on delivery",
+    "card_payment": "Card payment",
+    "fallback_id": "123456",
+    "fallback_store_name": "Flowery store",
+    "fallback_address": "20th st, Sheikh Zayed, Giza",
+    "fallback_customer_name": "Nour mohamed",
+    "fallback_product_name": "Red roses,15 Pink Rose Bouquet",
+    "fallback_price": "600",
+    "fallback_quantity": "1",
+    "fallback_total": "3000",
+    "currency": "EGP"
   }
 }
