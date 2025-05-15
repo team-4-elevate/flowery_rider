@@ -9,6 +9,8 @@ class AddressCard extends StatelessWidget {
   final String? imagePath;
   final String title;
   final String address;
+  final Widget? trailing;
+  final bool showLocationIcon;
 
   const AddressCard({
     super.key,
@@ -16,6 +18,8 @@ class AddressCard extends StatelessWidget {
     this.imagePath,
     required this.title,
     required this.address,
+    this.trailing,
+    this.showLocationIcon = true,
   }) : assert(icon != null || imagePath != null,
             'Either icon or imagePath must be provided');
 
@@ -55,6 +59,12 @@ class AddressCard extends StatelessWidget {
               ],
             ),
           ),
+          
+          // Optional trailing widget
+          if (trailing != null) ...[  
+            SizedBox(width: 8.w),
+            trailing!,
+          ],
         ],
       ),
     );
@@ -78,8 +88,10 @@ class AddressCard extends StatelessWidget {
   Widget _buildAddressRow() {
     return Row(
       children: [
-        Icon(Icons.location_on_outlined, size: 14.sp, color: AppColors.grey),
-        SizedBox(width: 4.w),
+        if (showLocationIcon) ...[  
+          Icon(Icons.location_on_outlined, size: 14.sp, color: AppColors.grey),
+          SizedBox(width: 4.w),
+        ],
         Expanded(
           child: Text(
             address,

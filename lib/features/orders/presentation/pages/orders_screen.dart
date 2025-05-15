@@ -30,7 +30,7 @@ class OrdersScreen extends StatelessWidget {
                     child: SummaryCard(
                       count: 4,
                       status: 'Cancelled',
-                      statusIcon: Icons.cancel,
+                      statusIcon: Icons.cancel_outlined,
                       statusColor: AppColors.error,
                       backgroundColor: AppColors.lightPink,
                     ),
@@ -40,7 +40,7 @@ class OrdersScreen extends StatelessWidget {
                     child: SummaryCard(
                       count: 100,
                       status: 'Completed',
-                      statusIcon: Icons.check_circle,
+                      statusIcon: Icons.check_circle_outline,
                       statusColor: AppColors.success,
                       backgroundColor: AppColors.success.withAlpha(20),
                     ),

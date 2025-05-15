@@ -71,8 +71,6 @@ import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_s
     as _i765;
 import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_source/home_remote_data_source_impl.dart'
     as _i44;
-import 'package:flowery_rider/features/Home_layout/data/repo/home_repo_impl.dart'
-    as _i700;
 import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.dart'
     as _i408;
 import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart'
@@ -116,6 +114,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i944.AppNavigatorObserver());
     gh.singleton<_i318.DialogUtils>(() => _i318.DialogUtils());
     gh.singleton<_i105.LayoutCubit>(() => _i105.LayoutCubit());
+    gh.factory<_i867.HomeUseCase>(
+        () => _i867.HomeUseCase(gh<_i408.HomeRepository>()));
     gh.singleton<_i983.LocalStorageClient>(() => _i983.LocalStorageClient(
           gh<_i460.SharedPreferences>(),
           gh<_i558.FlutterSecureStorage>(),
@@ -153,22 +153,18 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i614.AuthRemoteDataSource>(),
           gh<_i902.AuthLocalDataSource>(),
         ));
-    gh.factory<_i408.HomeRepository>(() => _i700.HomeRepositoryImpl(
-          gh<_i765.HomeRemoteDataSource>(),
-          gh<_i902.AuthLocalDataSource>(),
-        ));
     gh.factory<_i442.ForgetPasswordUseCase>(
         () => _i442.ForgetPasswordUseCase(gh<_i78.ForgetPasswordRepoI>()));
     gh.factory<_i542.ResendOtpUseCase>(
         () => _i542.ResendOtpUseCase(gh<_i78.ForgetPasswordRepoI>()));
     gh.factory<_i1007.VerifyOtpUseCase>(
         () => _i1007.VerifyOtpUseCase(gh<_i78.ForgetPasswordRepoI>()));
+    gh.factory<_i929.ApplyUseCase>(
+        () => _i929.ApplyUseCase(gh<_i351.AuthRepo>()));
     gh.factory<_i597.CacheRememberMeUsecase>(
         () => _i597.CacheRememberMeUsecase(gh<_i351.AuthRepo>()));
     gh.factory<_i968.LoginUseCase>(
         () => _i968.LoginUseCase(gh<_i351.AuthRepo>()));
-    gh.factory<_i929.ApplyUseCase>(
-        () => _i929.ApplyUseCase(gh<_i351.AuthRepo>()));
     gh.factory<_i394.AuthCubit>(() => _i394.AuthCubit(gh<_i351.AuthRepo>()));
     gh.factory<_i592.ResetPasswordUseCase>(
         () => _i592.ResetPasswordUseCase(gh<_i78.ForgetPasswordRepoI>()));
@@ -178,8 +174,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i592.ResetPasswordUseCase>(),
           gh<_i1007.VerifyOtpUseCase>(),
         ));
-    gh.factory<_i867.HomeUseCase>(
-        () => _i867.HomeUseCase(gh<_i408.HomeRepository>()));
     gh.factory<_i364.LoginCubit>(() => _i364.LoginCubit(
           gh<_i968.LoginUseCase>(),
           gh<_i597.CacheRememberMeUsecase>(),

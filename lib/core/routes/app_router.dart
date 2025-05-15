@@ -14,6 +14,7 @@ import 'package:flowery_rider/features/forget_password/presentation/pages/forget
 import 'package:flowery_rider/features/forget_password/presentation/pages/pin_code_page.dart';
 import 'package:flowery_rider/features/forget_password/presentation/pages/reset_password_page.dart';
 import 'package:flowery_rider/features/order_details/presentation/order_details_page/order_details_page.dart';
+import 'package:flowery_rider/features/orders/presentation/pages/completed_orders_details.dart';
 import 'package:flowery_rider/features/orders/presentation/pages/orders_screen.dart';
 import 'package:flowery_rider/features/success-screen/order_success.dart';
 
@@ -105,9 +106,15 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         },
       );
     case Routes.ordersScreen:
-     return MaterialPageRoute(
+      return MaterialPageRoute(
         settings: settings,
         builder: (_) => OrdersScreen(),
+      );
+
+    case Routes.completedDetailsScreen:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const CompletedOrdersDetails(),
       );
     default:
       return MaterialPageRoute(
