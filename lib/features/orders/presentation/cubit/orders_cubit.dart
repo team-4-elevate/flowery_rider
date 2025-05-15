@@ -30,7 +30,9 @@ class OrdersCubit extends Cubit<OrdersStates> {
           _processOrdersData(snapshot.value);
         } catch (_) {}
       }
-    }, onError: (error) => emit(OrdersStates(ordersState: BaseErrorState(error.toString()))));
+    },
+        onError: (error) =>
+            emit(OrdersStates(ordersState: BaseErrorState(error.toString()))));
 
     final ordersStream = _firebase.fireMappedOrdersStream();
     if (ordersStream == null) return;
@@ -43,13 +45,16 @@ class OrdersCubit extends Cubit<OrdersStates> {
           } catch (_) {}
         }
       });
-    }, onError: (error) => emit(OrdersStates(ordersState: BaseErrorState(error.toString()))));
+    },
+        onError: (error) =>
+            emit(OrdersStates(ordersState: BaseErrorState(error.toString()))));
   }
 
   void _processOrdersData(dynamic snapshot) {
-    final ordersData = Map<String, dynamic>.from(snapshot as Map<Object?, Object?>);
+    final ordersData =
+        Map<String, dynamic>.from(snapshot as Map<Object?, Object?>);
     final allOrders = <DriverOrderModel>[];
-    
+
     ordersData.forEach((orderId, orderData) {
       if (orderData is Map<dynamic, dynamic>) {
         try {
@@ -57,14 +62,17 @@ class OrdersCubit extends Cubit<OrdersStates> {
         } catch (_) {}
       }
     });
-    
-    final completed = allOrders.where((order) =>
-        order.status == OrderStatusEnum.delivered ||
-        order.status == OrderStatusEnum.accepted).toList();
-        
-    final cancelled = allOrders.where((order) => 
-        order.status == OrderStatusEnum.rejected).toList();
-    
+
+    final completed = allOrders
+        .where((order) =>
+            order.status == OrderStatusEnum.delivered ||
+            order.status == OrderStatusEnum.accepted)
+        .toList();
+
+    final cancelled = allOrders
+        .where((order) => order.status == OrderStatusEnum.rejected)
+        .toList();
+
     emit(OrdersStates(
       ordersState: BaseSuccessState(),
       completedOrders: completed,

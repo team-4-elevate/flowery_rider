@@ -72,7 +72,6 @@ class AuthRepoImpl implements AuthRepo {
     }
     await _authLocalDataSource.saveUserApplyData(entity);
 
-
     return Right(success.success);
   }
 }

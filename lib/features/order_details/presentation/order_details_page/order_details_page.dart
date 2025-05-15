@@ -136,8 +136,7 @@ class OrderDetailsPage extends StatelessWidget {
     }
   }
 
-  OrderStatusEnum _getNextStatus(
-      HomeStates state) {
+  OrderStatusEnum _getNextStatus(HomeStates state) {
     // switch (currentStatus) {
     //   case OrderStatusEnum.pending:
     //     return OrderStatusEnum.accepted;
@@ -171,7 +170,7 @@ class OrderDetailsPage extends StatelessWidget {
   Future<void> _setOrderStatus(BuildContext context, HomeStates state) async {
     if (state.currentStep == 4) return;
     final cubit = context.read<HomeCubit>();
-    log(order.status?.name??'22');
+    log(order.status?.name ?? '22');
     log('33');
     final nextStatus = _getNextStatus(state);
     log('newd');

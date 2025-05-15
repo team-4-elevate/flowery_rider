@@ -12,17 +12,18 @@ class OrdersStates extends Equatable {
     this.completedOrders = const [],
     this.cancelledOrders = const [],
   });
-  
+
   @override
   List<Object?> get props => [ordersState, completedOrders, cancelledOrders];
-  
+
   OrdersStates copyWith({
     BaseState? ordersState,
     List<DriverOrderModel>? completedOrders,
     List<DriverOrderModel>? cancelledOrders,
-  }) => OrdersStates(
-    ordersState: ordersState ?? this.ordersState,
-    completedOrders: completedOrders ?? this.completedOrders,
-    cancelledOrders: cancelledOrders ?? this.cancelledOrders,
-  );
+  }) =>
+      OrdersStates(
+        ordersState: ordersState ?? this.ordersState,
+        completedOrders: completedOrders ?? this.completedOrders,
+        cancelledOrders: cancelledOrders ?? this.cancelledOrders,
+      );
 }

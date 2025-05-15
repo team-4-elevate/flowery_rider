@@ -66,7 +66,6 @@ class _HomeLayoutState extends State<HomeScreen> {
                     } else {
                       return BlocBuilder<HomeCubit, HomeStates>(
                         builder: (context, _) {
-
                           return state.firebaseOrders == null ||
                                   state.firebaseOrders!.isEmpty
                               ? LayoutBuilder(

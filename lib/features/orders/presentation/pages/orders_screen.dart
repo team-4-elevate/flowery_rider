@@ -21,7 +21,7 @@ class OrdersScreen extends StatelessWidget {
       builder: (context, state) {
         final completedCount = state.completedOrders.length;
         final cancelledCount = state.cancelledOrders.length;
-        
+
         return PopScope(
           canPop: false,
           child: Scaffold(
@@ -32,48 +32,49 @@ class OrdersScreen extends StatelessWidget {
               surfaceTintColor: Colors.transparent,
             ),
             body: state.ordersState is BaseErrorState
-              ? _buildErrorState(context)
-              
-              : SingleChildScrollView(
-                  padding: EdgeInsets.all(16.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //-------------------------------------------------summary cards
-                      Row(
-                        children: [
-                          Expanded(
-                            child: SummaryCard(
-                              count: cancelledCount,
-                              status: LocaleKeys.orders_cancelled.tr(),
-                              statusIcon: Icons.cancel_outlined,
-                              statusColor: AppColors.error,
-                              backgroundColor: AppColors.lightPink,
+                ? _buildErrorState(context)
+                : SingleChildScrollView(
+                    padding: EdgeInsets.all(16.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //-------------------------------------------------summary cards
+                        Row(
+                          children: [
+                            Expanded(
+                              child: SummaryCard(
+                                count: cancelledCount,
+                                status: LocaleKeys.orders_cancelled.tr(),
+                                statusIcon: Icons.cancel_outlined,
+                                statusColor: AppColors.error,
+                                backgroundColor: AppColors.lightPink,
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 16.w),
-                          Expanded(
-                            child: SummaryCard(
-                              count: completedCount,
-                              status: LocaleKeys.orders_completed.tr(),
-                              statusIcon: Icons.check_circle_outline,
-                              statusColor: AppColors.success,
-                              backgroundColor: AppColors.success.withAlpha(20),
+                            SizedBox(width: 16.w),
+                            Expanded(
+                              child: SummaryCard(
+                                count: completedCount,
+                                status: LocaleKeys.orders_completed.tr(),
+                                statusIcon: Icons.check_circle_outline,
+                                statusColor: AppColors.success,
+                                backgroundColor:
+                                    AppColors.success.withAlpha(20),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 24.h),
-                      //-------------------------------------------------recent orders
-                      Text(
-                        LocaleKeys.orders_recent_orders.tr(),
-                        style: getBoldStyle(color: AppColors.black, fontSize: 16.sp),
-                      ),
-                      SizedBox(height: 16.h),
-                      _buildOrdersList(state),
-                    ],
+                          ],
+                        ),
+                        SizedBox(height: 24.h),
+                        //-------------------------------------------------recent orders
+                        Text(
+                          LocaleKeys.orders_recent_orders.tr(),
+                          style: getBoldStyle(
+                              color: AppColors.black, fontSize: 16.sp),
+                        ),
+                        SizedBox(height: 16.h),
+                        _buildOrdersList(state),
+                      ],
+                    ),
                   ),
-                ),
           ),
         );
       },
@@ -94,15 +95,15 @@ class OrdersScreen extends StatelessWidget {
           TextButton(
             onPressed: () => context.read<OrdersCubit>().fetchOrders(),
             child: Text(LocaleKeys.orders_retry.tr(),
-                style: getMediumStyle(
-                    color: AppColors.primary, fontSize: 14.sp)),
+                style:
+                    getMediumStyle(color: AppColors.primary, fontSize: 14.sp)),
           ),
         ],
       ),
     );
   }
 
-   // ------------------------------------------------- loading indicator during initial data fetch
+  // ------------------------------------------------- loading indicator during initial data fetch
   Widget _buildOrdersList(OrdersStates state) {
     if (state.ordersState is BaseLoadingState) {
       return Center(

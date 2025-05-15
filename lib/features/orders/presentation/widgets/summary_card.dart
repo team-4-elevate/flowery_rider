@@ -47,7 +47,6 @@ class SummaryCard extends StatelessWidget {
               ),
             ],
           ),
-         
         ],
       ),
     );

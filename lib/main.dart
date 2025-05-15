@@ -59,7 +59,6 @@ class FloweryRider extends StatelessWidget {
 
         // initialRoute: Routes.successorder,
 
-
         initialRoute: context.read<AppCubit>().state.isLoggedIn
             ? Routes.layoutScreen
             : Routes.onboarding,

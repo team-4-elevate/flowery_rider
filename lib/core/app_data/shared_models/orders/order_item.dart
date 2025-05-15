@@ -6,14 +6,13 @@ class OrderItem extends Equatable {
   final double? price;
   final int? quantity;
   final String? id;
-final String? name;
-  const OrderItem({
-    required this.orderProduct,
-    required this.price,
-    required this.quantity,
-    required this.id,
-    this.name
-  });
+  final String? name;
+  const OrderItem(
+      {required this.orderProduct,
+      required this.price,
+      required this.quantity,
+      required this.id,
+      this.name});
 
   Map<String, dynamic> toJson() {
     return {
@@ -37,5 +36,5 @@ final String? name;
   }
 
   @override
-  List<Object?> get props => [orderProduct, price, quantity, id,name];
+  List<Object?> get props => [orderProduct, price, quantity, id, name];
 }

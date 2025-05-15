@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CompletedOrdersDetails extends StatelessWidget {
   final DriverOrderModel? order;
-  
+
   const CompletedOrdersDetails({super.key, this.order});
 
   @override
@@ -29,22 +29,30 @@ class CompletedOrdersDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           //------------------------------------------------ Order Status and Number
+            //------------------------------------------------ Order Status and Number
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
                     Icon(
-                      order?.status == OrderStatusEnum.delivered ? Icons.check_circle_outline : Icons.cancel_outlined,
-                      color: order?.status == OrderStatusEnum.delivered ? AppColors.success : AppColors.error,
+                      order?.status == OrderStatusEnum.delivered
+                          ? Icons.check_circle_outline
+                          : Icons.cancel_outlined,
+                      color: order?.status == OrderStatusEnum.delivered
+                          ? AppColors.success
+                          : AppColors.error,
                       size: 20.sp,
                     ),
                     SizedBox(width: 4.w),
                     Text(
-                      order?.status == OrderStatusEnum.delivered ? LocaleKeys.orders_completed.tr() : LocaleKeys.orders_cancelled.tr(),
+                      order?.status == OrderStatusEnum.delivered
+                          ? LocaleKeys.orders_completed.tr()
+                          : LocaleKeys.orders_cancelled.tr(),
                       style: getMediumStyle(
-                        color: order?.status == OrderStatusEnum.delivered ? AppColors.success : AppColors.error,
+                        color: order?.status == OrderStatusEnum.delivered
+                            ? AppColors.success
+                            : AppColors.error,
                         fontSize: 16.sp,
                       ),
                     ),
@@ -66,8 +74,10 @@ class CompletedOrdersDetails extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             AddressCard(
-              title: order?.pickupAddress?.address ?? LocaleKeys.completed_orders_details_fallback_store_name.tr(),
-              address: order?.pickupAddress?.address ?? LocaleKeys.completed_orders_details_fallback_address.tr(),
+              title: order?.pickupAddress?.address ??
+                  LocaleKeys.completed_orders_details_fallback_store_name.tr(),
+              address: order?.pickupAddress?.address ??
+                  LocaleKeys.completed_orders_details_fallback_address.tr(),
               icon: Icons.store,
             ),
             SizedBox(height: 16.h),
@@ -79,8 +89,11 @@ class CompletedOrdersDetails extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             AddressCard(
-              title: order?.customer?.firstName ?? LocaleKeys.completed_orders_details_fallback_customer_name.tr(),
-              address: order?.customer?.address ?? LocaleKeys.completed_orders_details_fallback_address.tr(),
+              title: order?.customer?.firstName ??
+                  LocaleKeys.completed_orders_details_fallback_customer_name
+                      .tr(),
+              address: order?.customer?.address ??
+                  LocaleKeys.completed_orders_details_fallback_address.tr(),
               icon: Icons.person,
             ),
             SizedBox(height: 24.h),
@@ -97,13 +110,18 @@ class CompletedOrdersDetails extends StatelessWidget {
               ...order!.orderItems!.map((item) => Column(
                     children: [
                       AddressCard(
-                        title: item.name ?? LocaleKeys.completed_orders_details_fallback_product_name.tr(),
-                        address: '${LocaleKeys.completed_orders_details_currency.tr()} ${item.price?.toString() ?? LocaleKeys.completed_orders_details_fallback_price.tr()}',
+                        title: item.name ??
+                            LocaleKeys
+                                .completed_orders_details_fallback_product_name
+                                .tr(),
+                        address:
+                            '${LocaleKeys.completed_orders_details_currency.tr()} ${item.price?.toString() ?? LocaleKeys.completed_orders_details_fallback_price.tr()}',
                         icon: Icons.local_florist,
                         showLocationIcon: false,
                         trailing: Text(
                           'x${item.quantity?.toString() ?? LocaleKeys.completed_orders_details_fallback_quantity.tr()}',
-                          style: getMediumStyle(color: AppColors.primary, fontSize: 14.sp),
+                          style: getMediumStyle(
+                              color: AppColors.primary, fontSize: 14.sp),
                         ),
                       ),
                       SizedBox(height: 8.h),
@@ -111,23 +129,33 @@ class CompletedOrdersDetails extends StatelessWidget {
                   ))
             else
               AddressCard(
-                title: LocaleKeys.completed_orders_details_fallback_product_name.tr(),
-                address: '${LocaleKeys.completed_orders_details_currency.tr()} ${LocaleKeys.completed_orders_details_fallback_price.tr()}',
+                title: LocaleKeys.completed_orders_details_fallback_product_name
+                    .tr(),
+                address:
+                    '${LocaleKeys.completed_orders_details_currency.tr()} ${LocaleKeys.completed_orders_details_fallback_price.tr()}',
                 icon: Icons.local_florist,
                 showLocationIcon: false,
                 trailing: Text(
                   'x${LocaleKeys.completed_orders_details_fallback_quantity.tr()}',
-                  style: getMediumStyle(color: AppColors.primary, fontSize: 14.sp),
+                  style:
+                      getMediumStyle(color: AppColors.primary, fontSize: 14.sp),
                 ),
               ),
             SizedBox(height: 24.h),
 
             // Total Section
-            InfoRow(label: LocaleKeys.completed_orders_details_total.tr(), value: '${LocaleKeys.completed_orders_details_currency.tr()} ${order?.totalPrice.toString() ?? LocaleKeys.completed_orders_details_fallback_total.tr()}'),
+            InfoRow(
+                label: LocaleKeys.completed_orders_details_total.tr(),
+                value:
+                    '${LocaleKeys.completed_orders_details_currency.tr()} ${order?.totalPrice.toString() ?? LocaleKeys.completed_orders_details_fallback_total.tr()}'),
             SizedBox(height: 20.h),
 
             // Payment Method
-            InfoRow(label: LocaleKeys.completed_orders_details_payment_method.tr(), value: order?.paymentType == PaymentTypeEnum.cash ? LocaleKeys.completed_orders_details_cash_on_delivery.tr() : LocaleKeys.completed_orders_details_card_payment.tr()),
+            InfoRow(
+                label: LocaleKeys.completed_orders_details_payment_method.tr(),
+                value: order?.paymentType == PaymentTypeEnum.cash
+                    ? LocaleKeys.completed_orders_details_cash_on_delivery.tr()
+                    : LocaleKeys.completed_orders_details_card_payment.tr()),
           ],
         ),
       ),

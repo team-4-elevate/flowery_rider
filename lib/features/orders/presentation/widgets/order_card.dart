@@ -28,15 +28,16 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap ?? () {
-        // If we have an order model, pass it to the details page
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CompletedOrdersDetails(order: orderModel),
-          ),
-        );
-      },
+      onTap: onTap ??
+          () {
+            // If we have an order model, pass it to the details page
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CompletedOrdersDetails(order: orderModel),
+              ),
+            );
+          },
       child: Container(
         margin: EdgeInsets.only(bottom: 16.h),
         decoration: BoxDecoration(
