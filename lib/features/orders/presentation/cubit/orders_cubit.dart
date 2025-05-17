@@ -25,7 +25,7 @@ class OrdersCubit extends Cubit<OrdersStates> {
     _authLocalDataSource = GetIt.instance<AuthLocalDataSource>();
     _initialize();
   }
-  
+
   Future<void> _initialize() async {
     await _getCurrentDriverId();
     fetchOrders();
@@ -33,19 +33,19 @@ class OrdersCubit extends Cubit<OrdersStates> {
 
   Future<void> _getCurrentDriverId() async {
     String? storedDriverId = await _authLocalDataSource.getDriverId();
-    
+
     if (storedDriverId != null && storedDriverId.isNotEmpty) {
       _currentDriverId = storedDriverId;
       print('Retrieved driver ID from storage: $_currentDriverId');
       return;
     }
-    
+
     final User? currentUser = FirebaseAuth.instance.currentUser;
-    
+
     if (currentUser != null) {
       _currentDriverId = currentUser.uid;
       print('Current Driver ID from auth: $_currentDriverId');
-      
+
       if (_currentDriverId != null && _currentDriverId!.isNotEmpty) {
         await _authLocalDataSource.cacheDriverId(_currentDriverId!);
         print('Saved driver ID to storage: $_currentDriverId');
@@ -53,7 +53,7 @@ class OrdersCubit extends Cubit<OrdersStates> {
     } else {
       _currentDriverId = '30001004305454';
       print('Using test driver ID: $_currentDriverId (DEVELOPMENT ONLY)');
-      
+
       await _authLocalDataSource.cacheDriverId(_currentDriverId!);
     }
   }
@@ -94,7 +94,7 @@ class OrdersCubit extends Cubit<OrdersStates> {
     final ordersData =
         Map<String, dynamic>.from(snapshot as Map<Object?, Object?>);
     final allOrders = <DriverOrderModel>[];
-    
+
     print('Processing orders with current driver ID: $_currentDriverId');
     print('Total orders in Firebase: ${ordersData.length}');
     int filteredCount = 0;
@@ -105,7 +105,7 @@ class OrdersCubit extends Cubit<OrdersStates> {
           if (orderData['driver'] != null && orderData['driver'] is Map) {
             final driverData = orderData['driver'] as Map;
             final driverId = driverData['id'] as String?;
-            
+
             print('Order $orderId - Driver ID in order: $driverId');
 
             if (_currentDriverId == null || driverId == _currentDriverId) {
@@ -122,7 +122,7 @@ class OrdersCubit extends Cubit<OrdersStates> {
     });
 
     print('Orders after filtering: $filteredCount');
-    
+
     final completed = allOrders
         .where((order) =>
             order.status == OrderStatusEnum.delivered ||
@@ -132,8 +132,9 @@ class OrdersCubit extends Cubit<OrdersStates> {
     final cancelled = allOrders
         .where((order) => order.status == OrderStatusEnum.rejected)
         .toList();
-        
-    print('Completed orders: ${completed.length}, Cancelled orders: ${cancelled.length}');
+
+    print(
+        'Completed orders: ${completed.length}, Cancelled orders: ${cancelled.length}');
 
     emit(OrdersStates(
       ordersState: BaseSuccessState(),
