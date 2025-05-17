@@ -8,10 +8,16 @@ abstract class AuthLocalDataSource {
   Future<String?> getToken();
   Future<void> deleteToken();
   Future<String?> checkSavedToken();
+  
   //-----------------------------cacheRememberMe-----------------------------------
   Future<bool> cacheRememberMe(bool rememberMe);
   bool getRememberMe();
   Future<void> deleteRememberMe();
 
+  //-----------------------------DriverID-----------------------------------
+  Future<void> cacheDriverId(String driverId);
+  Future<String?> getDriverId();
+  Future<void> deleteDriverId();
+  
   saveUserApplyData(ApplyEntity entity);
 }
