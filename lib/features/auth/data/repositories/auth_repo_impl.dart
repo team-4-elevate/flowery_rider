@@ -30,9 +30,9 @@ class AuthRepoImpl implements AuthRepo {
       if (response.token == null) {
         return Left(ApiException(message: LocaleKeys.somethingWentWrong.tr()));
       }
-      
+
       await _authLocalDataSource.cacheToken(response.token!);
-      
+
       if (rememberMe) {
         await cacheRememberMe(rememberMe);
       }
@@ -71,16 +71,16 @@ class AuthRepoImpl implements AuthRepo {
     }
 
     if (success.token != null) {
-    _authLocalDataSource.cacheToken(success.token!);
-    if (entity.idNumber.isNotEmpty) {
-      await _authLocalDataSource.cacheDriverId(entity.idNumber);
-      Log.i('Cached driver ID (national ID) from application form: ${entity.idNumber}');
+      _authLocalDataSource.cacheToken(success.token!);
+      if (entity.idNumber.isNotEmpty) {
+        await _authLocalDataSource.cacheDriverId(entity.idNumber);
+        Log.i(
+            'Cached driver ID (national ID) from application form: ${entity.idNumber}');
+      } else if (success.driver != null && success.driver!.id != null) {
+        await _authLocalDataSource.cacheDriverId(success.driver!.id!);
+        Log.i('Cached driver ID from API response: ${success.driver!.id}');
+      }
     }
-    else if (success.driver != null && success.driver!.id != null) {
-      await _authLocalDataSource.cacheDriverId(success.driver!.id!);
-      Log.i('Cached driver ID from API response: ${success.driver!.id}');
-    }
-  }
     await _authLocalDataSource.saveUserApplyData(entity);
 
     return Right(success.success);
