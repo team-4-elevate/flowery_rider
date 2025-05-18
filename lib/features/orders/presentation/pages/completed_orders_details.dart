@@ -151,8 +151,8 @@ class CompletedOrdersDetails extends StatelessWidget {
             InfoRow(
               label: LocaleKeys.completed_orders_details_total.tr(),
               value:
-                  '${LocaleKeys.completed_orders_details_currency.tr()} ${order!.totalPrice.toString()}',
-            ),
+                  '${LocaleKeys.completed_orders_details_currency.tr()} ${order!.totalPrice.toString()}',),
+            
             SizedBox(height: 20.h),
 
             // Payment Method
