@@ -36,21 +36,25 @@ class CompletedOrdersDetails extends StatelessWidget {
                 Row(
                   children: [
                     Icon(
-                      order?.status == OrderStatusEnum.delivered || order?.status == OrderStatusEnum.accepted
+                      order?.status == OrderStatusEnum.delivered ||
+                              order?.status == OrderStatusEnum.accepted
                           ? Icons.check_circle_outline
                           : Icons.cancel_outlined,
-                      color: order?.status == OrderStatusEnum.delivered || order?.status == OrderStatusEnum.accepted
+                      color: order?.status == OrderStatusEnum.delivered ||
+                              order?.status == OrderStatusEnum.accepted
                           ? AppColors.success
                           : AppColors.error,
                       size: 20.sp,
                     ),
                     SizedBox(width: 4.w),
                     Text(
-                      order?.status == OrderStatusEnum.delivered || order?.status == OrderStatusEnum.accepted
+                      order?.status == OrderStatusEnum.delivered ||
+                              order?.status == OrderStatusEnum.accepted
                           ? LocaleKeys.orders_completed.tr()
                           : LocaleKeys.orders_cancelled.tr(),
                       style: getMediumStyle(
-                        color: order?.status == OrderStatusEnum.delivered || order?.status == OrderStatusEnum.accepted
+                        color: order?.status == OrderStatusEnum.delivered ||
+                                order?.status == OrderStatusEnum.accepted
                             ? AppColors.success
                             : AppColors.error,
                         fontSize: 16.sp,
@@ -146,7 +150,8 @@ class CompletedOrdersDetails extends StatelessWidget {
             // Total Section
             InfoRow(
               label: LocaleKeys.completed_orders_details_total.tr(),
-              value: '${LocaleKeys.completed_orders_details_currency.tr()} 600.00',
+              value:
+                  '${LocaleKeys.completed_orders_details_currency.tr()} ${order!.totalPrice.toString()}',
             ),
             SizedBox(height: 20.h),
 
