@@ -79,8 +79,8 @@ import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit
     as _i955;
 import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart'
     as _i105;
-import 'package:flowery_rider/features/orders/presentation/cubit/orders_cubit.dart'
-    as _i533;
+import 'package:flowery_rider/features/orders/domain/usecase/order_usecase.dart'
+    as _i315;
 import 'package:flutter/cupertino.dart' as _i719;
 import 'package:flutter/material.dart' as _i409;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
@@ -132,6 +132,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i316.ForgetPasswordLocalDsImpl(gh<_i983.LocalStorageClient>()));
     gh.lazySingleton<_i767.IDeliveryFirebaseService>(
         () => _i20.FirebaseDriverServiceImpl(gh<_i983.LocalStorageClient>()));
+    gh.factory<_i315.OdersUsecase>(
+        () => _i315.OdersUsecase(gh<_i902.AuthLocalDataSource>()));
     gh.singleton<_i452.ApiClient>(() => _i862.DioApiClient(
           gh<_i983.LocalStorageClient>(),
           gh<_i388.DioErrorHandler>(),
@@ -143,8 +145,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i785.ForgetPasswordRemoteDsImpl(gh<_i452.ApiClient>()));
     gh.factory<_i955.HomeCubit>(
         () => _i955.HomeCubit(gh<_i767.IDeliveryFirebaseService>()));
-    gh.factory<_i533.OrdersCubit>(
-        () => _i533.OrdersCubit(gh<_i767.IDeliveryFirebaseService>()));
     gh.factory<_i765.HomeRemoteDataSource>(
         () => _i44.HomeRemoteDataSourceImpl(gh<_i452.ApiClient>()));
     gh.factory<_i614.AuthRemoteDataSource>(

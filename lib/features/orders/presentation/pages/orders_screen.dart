@@ -1,26 +1,76 @@
 // features/orders/presentation/pages/orders_screen.dart
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flowery_rider/core/app_data/shared_models/orders/driver_order_model.dart';
 import 'package:flowery_rider/core/base/base_state.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flowery_rider/core/theme/app_styles.dart';
-import 'package:flowery_rider/features/orders/presentation/cubit/orders_cubit.dart';
-import 'package:flowery_rider/features/orders/presentation/cubit/orders_states.dart';
+import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
+import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_states.dart';
+import 'package:flowery_rider/features/order_details/domain/entities/order_status_enum.dart';
+import 'package:flowery_rider/features/orders/domain/usecase/order_usecase.dart';
 import 'package:flowery_rider/features/orders/presentation/widgets/order_card.dart';
 import 'package:flowery_rider/features/orders/presentation/widgets/summary_card.dart';
 import 'package:flowery_rider/generated/locale_keys.g.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 
-class OrdersScreen extends StatelessWidget {
+class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
 
   @override
+  State<OrdersScreen> createState() => _OrdersScreenState();
+}
+
+class _OrdersScreenState extends State<OrdersScreen> {
+  String? _driverId;
+  final _getDriverIdUseCase = GetIt.I<OdersUsecase>();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDriverId();
+  }
+
+  Future<void> _loadDriverId() async {
+    final driverId = await _getDriverIdUseCase.execute();
+    if (mounted) {
+      setState(() {
+        _driverId = driverId;
+      });
+    }
+  }
+
+  List<DriverOrderModel> _filterOrdersByDriverId(
+      List<DriverOrderModel>? orders) {
+    if (orders == null || orders.isEmpty) return [];
+    if (_driverId == null) return [];
+    return orders;
+  }
+
+  // Filter orders by status
+  List<DriverOrderModel> _getCompletedOrders(List<DriverOrderModel> orders) {
+    return orders
+        .where((order) =>
+            order.status == OrderStatusEnum.delivered ||
+            order.status == OrderStatusEnum.accepted)
+        .toList();
+  }
+
+  List<DriverOrderModel> _getCancelledOrders(List<DriverOrderModel> orders) {
+    return orders
+        .where((order) => order.status == OrderStatusEnum.rejected)
+        .toList();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrdersCubit, OrdersStates>(
+    return BlocBuilder<HomeCubit, HomeStates>(
       builder: (context, state) {
-        final completedCount = state.completedOrders.length;
-        final cancelledCount = state.cancelledOrders.length;
+        final filteredOrders = _filterOrdersByDriverId(state.firebaseOrders);
+        final completedOrders = _getCompletedOrders(filteredOrders);
+        final cancelledOrders = _getCancelledOrders(filteredOrders);
 
         return PopScope(
           canPop: false,
@@ -31,7 +81,7 @@ class OrdersScreen extends StatelessWidget {
               automaticallyImplyLeading: false,
               surfaceTintColor: Colors.transparent,
             ),
-            body: state.ordersState is BaseErrorState
+            body: state.homeState is BaseErrorState
                 ? _buildErrorState(context)
                 : SingleChildScrollView(
                     padding: EdgeInsets.all(16.w),
@@ -43,7 +93,7 @@ class OrdersScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: SummaryCard(
-                                count: cancelledCount,
+                                count: cancelledOrders.length,
                                 status: LocaleKeys.orders_cancelled.tr(),
                                 statusIcon: Icons.cancel_outlined,
                                 statusColor: AppColors.error,
@@ -53,7 +103,7 @@ class OrdersScreen extends StatelessWidget {
                             SizedBox(width: 16.w),
                             Expanded(
                               child: SummaryCard(
-                                count: completedCount,
+                                count: completedOrders.length,
                                 status: LocaleKeys.orders_completed.tr(),
                                 statusIcon: Icons.check_circle_outline,
                                 statusColor: AppColors.success,
@@ -71,7 +121,8 @@ class OrdersScreen extends StatelessWidget {
                               color: AppColors.black, fontSize: 16.sp),
                         ),
                         SizedBox(height: 16.h),
-                        _buildOrdersList(state),
+                        _buildOrdersList(
+                            state, completedOrders, cancelledOrders),
                       ],
                     ),
                   ),
@@ -93,7 +144,7 @@ class OrdersScreen extends StatelessWidget {
           ),
           SizedBox(height: 16.h),
           TextButton(
-            onPressed: () => context.read<OrdersCubit>().fetchOrders(),
+            onPressed: () => context.read<HomeCubit>().listenToOrders(),
             child: Text(LocaleKeys.orders_retry.tr(),
                 style:
                     getMediumStyle(color: AppColors.primary, fontSize: 14.sp)),
@@ -104,8 +155,11 @@ class OrdersScreen extends StatelessWidget {
   }
 
   // ------------------------------------------------- loading indicator during initial data fetch
-  Widget _buildOrdersList(OrdersStates state) {
-    if (state.ordersState is BaseLoadingState) {
+  Widget _buildOrdersList(
+      HomeStates state,
+      List<DriverOrderModel> completedOrders,
+      List<DriverOrderModel> cancelledOrders) {
+    if (state.homeState is BaseLoadingState) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -120,9 +174,9 @@ class OrdersScreen extends StatelessWidget {
         ),
       );
     }
-    if (state.ordersState is BaseSuccessState &&
-        state.completedOrders.isEmpty &&
-        state.cancelledOrders.isEmpty) {
+
+    // If no orders found after filtering
+    if (completedOrders.isEmpty && cancelledOrders.isEmpty) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -146,7 +200,7 @@ class OrdersScreen extends StatelessWidget {
     return Column(
       children: [
         // Completed orders
-        ...state.completedOrders.map((order) => OrderCard(
+        ...completedOrders.map((order) => OrderCard(
               orderNumber: order.id,
               status: LocaleKeys.orders_completed.tr(),
               isCompleted: true,
@@ -154,7 +208,7 @@ class OrdersScreen extends StatelessWidget {
             )),
 
         // Cancelled orders
-        ...state.cancelledOrders.map((order) => OrderCard(
+        ...cancelledOrders.map((order) => OrderCard(
               orderNumber: order.id,
               status: LocaleKeys.orders_cancelled.tr(),
               isCompleted: false,

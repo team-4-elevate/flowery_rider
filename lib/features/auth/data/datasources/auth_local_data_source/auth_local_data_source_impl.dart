@@ -60,7 +60,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     await _localStorageClient.deleteData('rememberMe');
   }
 
-  //-----------------------------DriverID-----------------------------------
+  //-----------------------------Driver ID-----------------------------------
   @override
   Future<void> cacheDriverId(String driverId) async {
     await _localStorageClient.saveSecuredData('driver_id', driverId);

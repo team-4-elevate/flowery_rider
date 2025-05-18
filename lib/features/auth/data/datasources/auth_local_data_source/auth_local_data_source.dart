@@ -14,7 +14,7 @@ abstract class AuthLocalDataSource {
   bool getRememberMe();
   Future<void> deleteRememberMe();
 
-  //-----------------------------DriverID-----------------------------------
+  //-----------------------------Driver ID-----------------------------------
   Future<void> cacheDriverId(String driverId);
   Future<String?> getDriverId();
   Future<void> deleteDriverId();

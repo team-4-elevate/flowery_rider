@@ -1,5 +1,6 @@
 // features/auth/data/repositories/auth_repo_impl.dart
-import 'dart:developer';
+import 'dart:developer' as dev;
+import 'package:flowery_rider/core/logger/app_logger.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:either_dart/either.dart';
@@ -29,7 +30,9 @@ class AuthRepoImpl implements AuthRepo {
       if (response.token == null) {
         return Left(ApiException(message: LocaleKeys.somethingWentWrong.tr()));
       }
+      
       await _authLocalDataSource.cacheToken(response.token!);
+      
       if (rememberMe) {
         await cacheRememberMe(rememberMe);
       }
@@ -67,9 +70,17 @@ class AuthRepoImpl implements AuthRepo {
       return Left(result.left);
     }
 
-    if (success.token != null && success.driver != null) {
-      _authLocalDataSource.cacheToken(success.token!);
+    if (success.token != null) {
+    _authLocalDataSource.cacheToken(success.token!);
+    if (entity.idNumber.isNotEmpty) {
+      await _authLocalDataSource.cacheDriverId(entity.idNumber);
+      Log.i('Cached driver ID (national ID) from application form: ${entity.idNumber}');
     }
+    else if (success.driver != null && success.driver!.id != null) {
+      await _authLocalDataSource.cacheDriverId(success.driver!.id!);
+      Log.i('Cached driver ID from API response: ${success.driver!.id}');
+    }
+  }
     await _authLocalDataSource.saveUserApplyData(entity);
 
     return Right(success.success);
