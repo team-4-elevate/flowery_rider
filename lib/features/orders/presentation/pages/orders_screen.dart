@@ -7,49 +7,24 @@ import 'package:flowery_rider/core/theme/app_styles.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_states.dart';
 import 'package:flowery_rider/features/order_details/domain/entities/order_status_enum.dart';
-import 'package:flowery_rider/features/orders/domain/usecase/order_usecase.dart';
 import 'package:flowery_rider/features/orders/presentation/widgets/order_card.dart';
 import 'package:flowery_rider/features/orders/presentation/widgets/summary_card.dart';
 import 'package:flowery_rider/generated/locale_keys.g.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_it/get_it.dart';
 
-class OrdersScreen extends StatefulWidget {
-  const OrdersScreen({super.key});
-
-  @override
-  State<OrdersScreen> createState() => _OrdersScreenState();
-}
-
-class _OrdersScreenState extends State<OrdersScreen> {
-  String? _driverId;
-  final _getDriverIdUseCase = GetIt.I<OdersUsecase>();
-
-  @override
-  void initState() {
-    super.initState();
-    _loadDriverId();
-  }
-
-  Future<void> _loadDriverId() async {
-    final driverId = await _getDriverIdUseCase.execute();
-    if (mounted) {
-      setState(() {
-        _driverId = driverId;
-      });
-    }
-  }
+class OrdersScreen extends StatelessWidget {
+  final String? driverId;
+  
+  const OrdersScreen({super.key, required this.driverId});
 
   List<DriverOrderModel> _filterOrdersByDriverId(
       List<DriverOrderModel>? orders) {
-    if (orders == null || orders.isEmpty) return [];
-    if (_driverId == null) return [];
-    return orders;
+    if (orders == null) return [];
+        return orders;
   }
 
-  // Filter orders by status
   List<DriverOrderModel> _getCompletedOrders(List<DriverOrderModel> orders) {
     return orders
         .where((order) =>

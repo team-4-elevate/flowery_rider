@@ -16,6 +16,7 @@ import 'package:flowery_rider/features/forget_password/presentation/pages/reset_
 import 'package:flowery_rider/features/order_details/presentation/order_details_page/order_details_page.dart';
 import 'package:flowery_rider/features/orders/presentation/pages/completed_orders_details.dart';
 import 'package:flowery_rider/features/orders/presentation/pages/orders_screen.dart';
+import 'package:flowery_rider/features/orders/domain/usecase/order_usecase.dart';
 import 'package:flowery_rider/features/success-screen/order_success.dart';
 
 import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart';
@@ -108,7 +109,17 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.ordersScreen:
       return MaterialPageRoute(
         settings: settings,
-        builder: (_) => OrdersScreen(),
+        builder: (context) {
+          final driverId = settings.arguments as String?;
+          if (driverId != null) {
+            return OrdersScreen(driverId: driverId);
+          }
+          
+          return FutureBuilder<String?>(
+            future: getIt<OdersUsecase>().execute(),
+            builder: (context, snapshot) => OrdersScreen(driverId: snapshot.data),
+          );
+        },
       );
 
     case Routes.completedDetailsScreen:
