@@ -114,10 +114,11 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           if (driverId != null) {
             return OrdersScreen(driverId: driverId);
           }
-          
+
           return FutureBuilder<String?>(
             future: getIt<OdersUsecase>().execute(),
-            builder: (context, snapshot) => OrdersScreen(driverId: snapshot.data),
+            builder: (context, snapshot) =>
+                OrdersScreen(driverId: snapshot.data),
           );
         },
       );

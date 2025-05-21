@@ -24,11 +24,11 @@ class _LayoutScreenState extends State<LayoutScreen> {
     /*    BlocProvider(
         create: (context) => OrdersCubit(getIt()), child: const OrdersScreen()), */
     BlocProvider(
-        create: (context) => getIt<HomeCubit>(), 
-        child: FutureBuilder<String?>(
-          future: getIt<OdersUsecase>().execute(),
-          builder: (context, snapshot) => OrdersScreen(driverId: snapshot.data),
-        ),
+      create: (context) => getIt<HomeCubit>(),
+      child: FutureBuilder<String?>(
+        future: getIt<OdersUsecase>().execute(),
+        builder: (context, snapshot) => OrdersScreen(driverId: snapshot.data),
+      ),
     ),
     const Center(child: Text('Profile Screen')),
   ];

@@ -16,13 +16,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrdersScreen extends StatelessWidget {
   final String? driverId;
-  
+
   const OrdersScreen({super.key, required this.driverId});
 
   List<DriverOrderModel> _filterOrdersByDriverId(
       List<DriverOrderModel>? orders) {
     if (orders == null) return [];
-        return orders;
+    return orders;
   }
 
   List<DriverOrderModel> _getCompletedOrders(List<DriverOrderModel> orders) {
