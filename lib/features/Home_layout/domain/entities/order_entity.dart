@@ -30,7 +30,8 @@ class OrderEntity {
 
     final name = driverOrder?.customer?.firstName ?? '';
 
-    final storeAddress = fullOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
+    final storeAddress =
+        fullOrder.store?.address ?? '20th st, Sheikh Zayed, Giza';
 
     final userAddress = storeAddress.contains(',')
         ? storeAddress

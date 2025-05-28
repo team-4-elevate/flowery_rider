@@ -169,5 +169,37 @@
     "name": "الاسم",
     "mark_delivered": "تمييز كمسلم",
     "order_completed": "تم إكمال الطلب بنجاح!"
+  },
+  
+  "orders": {
+    "title": "طلباتي",
+    "failed_to_load": "فشل في تحميل الطلبات",
+    "retry": "إعادة المحاولة",
+    "cancelled": "ملغاة",
+    "completed": "مكتملة",
+    "recent_orders": "الطلبات الأخيرة",
+    "loading": "جاري تحميل الطلبات...",
+    "no_orders_found": "لا توجد طلبات",
+    "no_orders_message": "ليس لديك طلبات حالياً"
+  },
+  
+  "completed_orders_details": {
+    "title": "تفاصيل الطلب",
+    "pickup_address": "عنوان الاستلام",
+    "user_address": "عنوان المستخدم",
+    "order_details": "تفاصيل الطلب",
+    "total": "المجموع",
+    "payment_method": "طريقة الدفع",
+    "cash_on_delivery": "الدفع عند الاستلام",
+    "card_payment": "الدفع بالبطاقة",
+    "fallback_id": "123456",
+    "fallback_store_name": "متجر فلاوري",
+    "fallback_address": "شارع العشرين، الشيخ زايد، الجيزة",
+    "fallback_customer_name": "نور محمد",
+    "fallback_product_name": "ورود حمراء، باقة ورد وردي 15 قطعة",
+    "fallback_price": "600",
+    "fallback_quantity": "1",
+    "fallback_total": "3000",
+    "currency": "جنيه"
   }
 }

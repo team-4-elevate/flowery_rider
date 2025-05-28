@@ -1,7 +1,8 @@
+// features/order_details/presentation/widgets/order_details_address_widget.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/common/widgets/address_card.dart';
+import '../../../../core/widget/address_card.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_styles.dart';

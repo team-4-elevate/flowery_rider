@@ -82,7 +82,7 @@ class HomeCubit extends Cubit<HomeStates> {
         return 2;
       case OrderStatusEnum.arrived:
         return 3;
-        case OrderStatusEnum.delivered:
+      case OrderStatusEnum.delivered:
         return 4;
       default:
         return 0;

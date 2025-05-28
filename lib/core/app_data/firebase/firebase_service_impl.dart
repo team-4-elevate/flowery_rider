@@ -39,13 +39,13 @@ class FirebaseDriverServiceImpl implements IDeliveryFirebaseService {
       if (ordersMap is Map<dynamic, dynamic>) {
         ordersMap.forEach((orderId, orderData) {
           // try {
-            if (orderData is Map<dynamic, dynamic>) {
-              DriverOrderModel order = DriverOrderModel.fromFirebase(
-                orderData,
-                orderId.toString(),
-              );
-              ordersList.add(order);
-            }
+          if (orderData is Map<dynamic, dynamic>) {
+            DriverOrderModel order = DriverOrderModel.fromFirebase(
+              orderData,
+              orderId.toString(),
+            );
+            ordersList.add(order);
+          }
           // } catch (e) {
           //   log(e.toString());
           // }

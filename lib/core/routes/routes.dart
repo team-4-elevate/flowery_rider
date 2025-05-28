@@ -4,7 +4,6 @@ class Routes {
   static const String signup = '/signup';
   static const String forgetPassword = '/forget_password-password';
   static const String onboarding = '/onboarding';
-  // static const String homeLayout = '/homeLayout';
   static const String pinCode = '/pin-code';
   static const String resetPassword = '/reset-password';
   static const String profile = '/profile';
@@ -16,4 +15,7 @@ class Routes {
   static const String successorder = '/successorder';
   static const String layoutScreen = '/layout-screen';
   static const String orderDetails = '/order_details';
+  static const String ordersScreen = '/orders-screen';
+  static const String completedDetailsScreen =
+      '/completed-orders-details-screen';
 }

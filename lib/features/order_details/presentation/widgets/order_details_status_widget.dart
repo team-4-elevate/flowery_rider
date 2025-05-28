@@ -28,7 +28,7 @@ class OrderDetailsStatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit,HomeStates>(
+    return BlocBuilder<HomeCubit, HomeStates>(
       builder: (context, state) => Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
