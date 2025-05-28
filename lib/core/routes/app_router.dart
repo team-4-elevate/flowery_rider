@@ -2,10 +2,6 @@
 import 'package:flowery_rider/core/di/injectable.dart';
 import 'package:flowery_rider/application_approved_page.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
-import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.dart';
-import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart';
-import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
-import 'package:flowery_rider/features/Home_layout/presentation/page/home_screen.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/cubit/auth_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_page.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_success_page.dart';
@@ -16,6 +12,10 @@ import 'package:flowery_rider/features/forget_password/presentation/pages/forget
     show ForgetPasswordPage;
 import 'package:flowery_rider/features/forget_password/presentation/pages/pin_code_page.dart';
 import 'package:flowery_rider/features/forget_password/presentation/pages/reset_password_page.dart';
+import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
+import 'package:flowery_rider/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:flowery_rider/features/profile/presentation/pages/change_password_screen.dart';
+import 'package:flowery_rider/features/profile/presentation/pages/edit_profile_screen.dart';
 import 'package:flowery_rider/features/success-screen/order_success.dart';
 
 import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart';
@@ -93,6 +93,28 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => SuccessOrderPage(),
+      );
+    case Routes.editProfile:
+      final args = settings.arguments as Map<String, dynamic>;
+      final userData = args['userData'] as UserDataEntity;
+      final isEditUserData = args['isEditUserData'] as bool;
+      final profileCubit = args['profileCubit'] as ProfileCubit;
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider.value(
+          value: profileCubit,
+          child: EditProfileScreen(
+              userdata: userData, isEditUserData: isEditUserData),
+        ),
+      );
+    case Routes.changePassword:
+      var cubit = settings.arguments as ProfileCubit;
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider.value(
+          value: cubit,
+          child: ChangePasswordScreen(
+            profileCubit: cubit,
+          ),
+        ),
       );
     default:
       return MaterialPageRoute(

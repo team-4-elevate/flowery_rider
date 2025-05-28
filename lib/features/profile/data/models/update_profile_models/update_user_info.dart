@@ -7,14 +7,10 @@ class UpdateUserInfoModel extends Equatable {
   final String? lName;
   final String? email;
   final String? phone;
-  // final File ? userProfileImage;
+  final String? userProfileImage;
 
   const UpdateUserInfoModel(
-      {this.fName,
-      this.lName,
-      this.email,
-      // this.userProfileImage,
-      this.phone});
+      {this.fName, this.lName, this.email, this.userProfileImage, this.phone});
 
   // UpdateUserInfo formJson(Map<String, dynamic> json) {
   //   return UpdateUserInfo(
@@ -37,11 +33,5 @@ class UpdateUserInfoModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        fName,
-        lName,
-        email,
-        // userProfileImage,
-        phone
-      ];
+  List<Object?> get props => [fName, lName, email, userProfileImage, phone];
 }

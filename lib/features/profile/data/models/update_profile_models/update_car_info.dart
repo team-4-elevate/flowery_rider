@@ -3,12 +3,11 @@ import 'dart:io';
 import 'package:equatable/equatable.dart';
 
 class UpdateCarInfoModel extends Equatable {
-  
- final String? vehicleType;
- final String? vehicleNumber;
- final File? vehicleLicense;
+  final String? vehicleType;
+  final String? vehicleNumber;
+  final File? vehicleLicense;
 
- const UpdateCarInfoModel({
+  const UpdateCarInfoModel({
     this.vehicleType,
     this.vehicleNumber,
     this.vehicleLicense,
@@ -21,11 +20,11 @@ class UpdateCarInfoModel extends Equatable {
       'vehicleLicense': vehicleLicense,
     };
   }
- 
+
   @override
   List<Object?> get props => [
-    vehicleType,
-    vehicleNumber,
-    vehicleLicense,
-  ];
+        vehicleType,
+        vehicleNumber,
+        vehicleLicense,
+      ];
 }

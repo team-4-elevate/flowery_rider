@@ -169,5 +169,91 @@
     "name": "الاسم",
     "mark_delivered": "تمييز كمسلم",
     "order_completed": "تم إكمال الطلب بنجاح!"
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "vehicle_info": "معلومات المركبة",
+    "language": "اللغة",
+    "language_value": "العربية",
+    "logout": "تسجيل الخروج",
+    "version_text": "إصدار 6.3.0 - (446)",
+    "error": {
+      "load_failure": "فشل في تحميل بيانات الملف الشخصي",
+      "retry": "إعادة المحاولة"
+    },
+    "no_data": "لا توجد بيانات متاحة",
+    
+    "edit_profile": {
+      "title": "تعديل الملف الشخصي",
+      "update_button": "تحديث",
+      "gender": {
+        "label": "الجنس",
+        "female": "أنثى",
+        "male": "ذكر"
+      },
+      "success": {
+        "profile_updated": "تم تحديث الملف الشخصي بنجاح",
+        "vehicle_updated": "تم تحديث معلومات المركبة بنجاح"
+      },
+       "user_info_form": {
+    "first_name": "الاسم الأول",
+    "last_name": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "change_button": "تغيير"
+  }
+    },
+    
+    "vehicle": {
+      "type": {
+        "hint": "اختر نوع المركبة",
+        "car": "سيارة",
+        "motorcycle": "دراجة نارية",
+        "bicycle": "دراجة هوائية",
+        "van": "شاحنة صغيرة"
+      },
+      "number": {
+        "label": "رقم المركبة",
+        "hint": "أدخل رقم المركبة"
+      },
+      "license": {
+        "hint": "رخصة المركبة",
+        "label": "رخصة المركبة"
+      }
+    },
+    
+    "logout_dialog": {
+      "title": "تسجيل الخروج",
+      "message": "تأكيد تسجيل الخروج؟",
+      "cancel": "إلغاء",
+      "confirm": "تسجيل الخروج",
+      "error": "فشل تسجيل الخروج: {error}"
+    },
+    
+    "change_password": {
+      "title": "إعادة تعيين كلمة المرور",
+      "current_password": {
+        "label": "كلمة المرور الحالية",
+        "hint": "كلمة المرور الحالية" 
+      },
+      "new_password": {
+        "label": "كلمة المرور الجديدة",
+        "hint": "كلمة المرور الجديدة"
+      },
+      "confirm_password": {
+        "label": "تأكيد كلمة المرور",
+        "hint": "تأكيد كلمة المرور"
+      },
+      "button": "إعادة تعيين كلمة المرور",
+      "success_message": "تم تغيير كلمة المرور بنجاح",
+      "error_message": "فشل تحديث كلمة المرور. يرجى المحاولة مرة أخرى.",
+      "errors": {
+        "confirm_password_required": "يرجى تأكيد كلمة المرور",
+        "passwords_not_match": "كلمتا المرور غير متطابقتين",
+        "same_password": "يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية",
+        "incorrect_password": "كلمة المرور الحالية غير صحيحة"
+      }
+    }
   }
 }

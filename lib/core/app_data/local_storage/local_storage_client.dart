@@ -23,7 +23,7 @@ class LocalStorageClient {
     }
   }
 
-  String? getData(String key) {
+  Future<String?> getData(String key) async {
     try {
       Log.d('getting $key');
       return sharedPreferences.getString(

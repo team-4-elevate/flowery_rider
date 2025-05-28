@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flowery_rider/features/profile/data/models/user_data_model/driver.dart';
 
 class UserDataEntity {
+  final String driverId;
   final String userLname;
   final String userFname;
   final String userPhone;
@@ -14,6 +15,7 @@ class UserDataEntity {
   final String? userImage;
 
   UserDataEntity({
+    required this.driverId,
     required this.userLname,
     required this.userFname,
     required this.userPhone,
@@ -42,6 +44,7 @@ class UserDataEntity {
   // Static method to create entity from Driver model
   static UserDataEntity fromDriver(DriverData? driver) {
     return UserDataEntity(
+      driverId: driver?.id ?? '',
       userLname: driver?.lastName ?? '',
       userFname: driver?.firstName ?? '',
       userPhone: driver?.phone ?? '',
@@ -50,7 +53,7 @@ class UserDataEntity {
       vehicleType: driver?.vehicleType ?? '',
       vehicleNumber: driver?.vehicleNumber ?? '',
       vehicleLicense: driver?.vehicleLicense ?? '',
-      userImage: driver?.photo??'',
+      userImage: driver?.photo ?? '',
     );
   }
 }

@@ -9,7 +9,8 @@ class UpdateCarInfoUseCase {
   final ProfileRepo _repo;
   UpdateCarInfoUseCase(this._repo);
 
-  Future<Either<ApiException, void>> call(UpdateCarInfoModel updateCarInfoModel) async {
-   return  await _repo.updateDriverCarInfo(updateCarInfoModel);
+  Future<Either<ApiException, void>> call(
+      UpdateCarInfoModel updateCarInfoModel, String driverId) async {
+    return await _repo.updateDriverCarInfo(updateCarInfoModel, driverId);
   }
 }

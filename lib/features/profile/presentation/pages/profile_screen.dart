@@ -1,25 +1,43 @@
-import 'package:flowery_rider/core/base/base_state.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flowery_rider/core/app_manger/app_cubit.dart';
 import 'package:flowery_rider/core/di/injectable.dart';
+import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
 import 'package:flowery_rider/core/theme/app_styles.dart';
 import 'package:flowery_rider/core/utils/extensions.dart';
 import 'package:flowery_rider/core/widget/dialog_utils.dart';
-import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
+import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart';
 import 'package:flowery_rider/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:flowery_rider/features/profile/presentation/cubit/profile_state.dart';
-import 'package:flowery_rider/features/profile/presentation/pages/edit_user_profile_data_screen.dart';
+import 'package:flowery_rider/features/profile/presentation/widgets/lang_bottom_sheet.dart';
+import 'package:flowery_rider/features/profile/presentation/widgets/logout_dilog.dart';
 import 'package:flowery_rider/features/profile/presentation/widgets/profile_custom_container.dart';
 import 'package:flowery_rider/features/profile/presentation/widgets/profile_custom_row.dart';
+import 'package:flowery_rider/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  late final ProfileCubit _profileCubit;
+
+  @override
+  void initState() {
+    _profileCubit = getIt<ProfileCubit>();
+    _profileCubit.getUserData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<ProfileCubit>()..getUserData(),
+    return BlocProvider.value(
+      value: _profileCubit,
       child: PopScope(
         canPop: false,
         child: Scaffold(
@@ -28,8 +46,8 @@ class ProfileScreen extends StatelessWidget {
               icon: const Icon(Icons.arrow_back_ios_new_rounded),
               onPressed: () {},
             ),
-            title: const Text(
-              'Profile',
+            title: Text(
+              LocaleKeys.profile_title.tr(),
             ),
             leadingWidth: 30,
             actions: [
@@ -46,141 +64,181 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: BlocBuilder<ProfileCubit, ProfileState>(
               builder: (context, state) {
-                if (state.getUserDataState is BaseLoadingState) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primary,
-                    ),
-                  );
-                }
-                if (state.getUserDataState is BaseErrorState) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    getIt<DialogUtils>().showSnackBar(
-                      textColor: AppColors.error,
-                      message: (state.getUserDataState as BaseErrorState)
-                          .errorMessage,
-                      context: context,
+                return state.userData.maybeWhen(
+                  loading: () {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
                     );
-                  });
-                }
-
-                if (state.getUserDataState is! BaseSuccessState) {
-                  return const Center(child: Text('No data available'));
-                }
-
-                UserDataEntity userData =
-                    (state.getUserDataState as BaseSuccessState).data;
-
-                return RefreshIndicator(
-                  color: AppColors.primary,
-                  backgroundColor: Colors.white,
-                  onRefresh: () {
-                    context.read<ProfileCubit>().refreshUserData();
-                    return Future<void>.value();
                   },
-                  child: ListView(
-                    children: [
-                      // User info
-                      ProfileCustomContainer(
-                        isEditUserData: true,
-                        imageUrl: userData.userImage,
-                        textNameOrInfo:
-                            '${userData.userFname} ${userData.userLname}',
-                        emailOrType: userData.userEmail,
-                        phoneOrVehicleNum: userData.userPhone,
-                        onTap: () {
-                          final profileCubit = context.read<ProfileCubit>();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BlocProvider.value(
-                                value: profileCubit,
-                                child: EditUserProfileDataScreen(
-                                  isEditUserData: true,
-                                  userdata: userData,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                  success: (userData) {
+                    return RefreshIndicator(
+                      color: AppColors.primary,
+                      backgroundColor: Colors.white,
+                      onRefresh: () {
+                        context.read<ProfileCubit>().refreshUserData();
+                        return Future<void>.value();
+                      },
+                      child: ListView(
+                        children: [
+                          // User info
+                          ProfileCustomContainer(
+                            isEditUserData: true,
+                            imageUrl: userData.userImage,
+                            textNameOrInfo:
+                                '${userData.userFname} ${userData.userLname}',
+                            emailOrType: userData.userEmail,
+                            phoneOrVehicleNum: userData.userPhone,
+                            onTap: () async {
+                              await Navigator.pushNamed(
+                                context,
+                                Routes.editProfile,
+                                arguments: {
+                                  'userData': userData,
+                                  'isEditUserData': true,
+                                  'profileCubit': _profileCubit,
+                                },
+                              );
+                            },
+                          ),
 
-                      // Vehicle info
-                      ProfileCustomContainer(
-                        isEditUserData: false,
-                        textNameOrInfo: 'Vehicle info',
-                        emailOrType: userData.vehicleType,
-                        phoneOrVehicleNum: userData.vehicleNumber,
-                        onTap: () {
-                          final profileCubit = context.read<ProfileCubit>();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BlocProvider.value(
-                                value: profileCubit,
-                                child: EditUserProfileDataScreen(
-                                  isEditUserData: false,
-                                  userdata: userData,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: context.heightPercent(2.4),
-                      ),
+                          // Vehicle info
+                          ProfileCustomContainer(
+                            isEditUserData: false,
+                            textNameOrInfo:
+                                LocaleKeys.profile_vehicle_info.tr(),
+                            emailOrType: userData.vehicleType,
+                            phoneOrVehicleNum: userData.vehicleNumber,
+                            onTap: () async {
+                              await Navigator.pushNamed(
+                                context,
+                                Routes.editProfile,
+                                arguments: {
+                                  'userData': userData,
+                                  'isEditUserData': false,
+                                  'profileCubit': _profileCubit,
+                                },
+                              );
+                            },
+                          ),
+                          SizedBox(
+                            height: context.heightPercent(2.4),
+                          ),
 
-                      // Language Row
-                      ProfileCustomRow(
-                        title: 'Language',
-                        leftWidget: const Icon(
-                          Icons.translate_outlined,
-                          color: AppColors.black,
-                          size: 16,
-                        ),
-                        rightWidget: Text('English',
+                          // Language Row
+                          ProfileCustomRow(
+                            title: LocaleKeys.profile_language.tr(),
+                            leftWidget: const Icon(
+                              Icons.translate_outlined,
+                              color: AppColors.black,
+                              size: 16,
+                            ),
+                            rightWidget: Text(
+                                context.read<AppCubit>().state.appLocale == 'ar'
+                                    ? 'العربية'
+                                    : 'English',
+                                style: getRegularStyle(
+                                  fontSize: 13,
+                                  color: AppColors.primary,
+                                )),
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: EdgeInsets.all(
+                                      context.widthPercent(3.5),
+                                    ),
+                                    child: LangBottomSheet(),
+                                  );
+                                },
+                              ).then(
+                                (value) {
+                                  // if (context.mounted) {
+                                  //   context.read<LayoutCubit>().changeIndex(0);
+                                  // }
+                                },
+                              );
+                            },
+                          ),
+                          SizedBox(
+                            height: context.heightPercent(.8),
+                          ),
+                          // logout Row
+                          ProfileCustomRow(
+                            title: LocaleKeys.profile_logout.tr(),
+                            leftWidget: const Icon(
+                              Icons.logout,
+                              color: AppColors.grey,
+                            ),
+                            rightWidget: const Icon(
+                              Icons.logout_outlined,
+                              color: AppColors.grey,
+                              size: 24,
+                            ),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return LogoutDialog(
+                                    cubit: _profileCubit,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          SizedBox(height: context.heightPercent(20)),
+                          Text(
+                            LocaleKeys.profile_version_text.tr(),
                             style: getRegularStyle(
-                              fontSize: 13,
-                              color: AppColors.primary,
-                            )),
-                        onTap: () {
-                          // Handle language selection action
-                        },
+                              fontSize: 12,
+                              color: AppColors.grey,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: context.heightPercent(2.4),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: context.heightPercent(.8),
+                    );
+                  },
+                  error: (errorMessage) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      getIt<DialogUtils>().showSnackBar(
+                        textColor: AppColors.error,
+                        message: errorMessage,
+                        context: context,
+                      );
+                    });
+
+                    return Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            LocaleKeys.profile_error_load_failure.tr(),
+                            style: getRegularStyle(
+                              fontSize: 16,
+                              color: AppColors.grey,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () =>
+                                context.read<ProfileCubit>().refreshUserData(),
+                            child: Text(LocaleKeys.profile_error_retry.tr()),
+                          ),
+                        ],
                       ),
-                      // logout Row
-                      ProfileCustomRow(
-                        title: 'logout',
-                        leftWidget: const Icon(
-                          Icons.logout,
-                          color: AppColors.grey,
-                        ),
-                        rightWidget: const Icon(
-                          Icons.logout_outlined,
-                          color: AppColors.grey,
-                          size: 24,
-                        ),
-                        onTap: () {
-                          // Handle logout action
-                        },
-                      ),
-                      SizedBox(height: context.heightPercent(20)),
-                      Text(
-                        'v 6.3.0 - (446)',
-                        style: getRegularStyle(
-                          fontSize: 12,
-                          color: AppColors.grey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: context.heightPercent(2.4),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
+                  orElse: () {
+                    return Center(
+                      child: Text(LocaleKeys.profile_no_data.tr()),
+                    );
+                  },
                 );
               },
             ),

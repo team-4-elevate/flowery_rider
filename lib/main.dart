@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flowery_rider/core/app_bloc_observer.dart';
+import 'package:flowery_rider/core/app_manger/app_states.dart';
 import 'package:flowery_rider/core/di/injectable.dart';
 import 'package:flowery_rider/core/routes/app_router.dart';
 import 'package:flowery_rider/core/routes/navigator_observer.dart';
@@ -22,45 +23,67 @@ void main() async {
   await _configureFirebase();
   await configureDependencies();
   Bloc.observer = AppBlocObserver();
+  final appCubit = getIt<AppCubit>();
+  await appCubit.getUserLoggedInState();
+  final appLocale = await appCubit.getAppLocale();
   runApp(
     EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-          Locale('ar'),
-        ],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
-        child: BlocProvider(
-            create: (context) => getIt<AppCubit>()..getUserLoggedInState(),
-            child: const FloweryRider())),
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+      ],
+      path: 'assets/translations',
+      fallbackLocale: Locale(appLocale),
+      child: BlocProvider.value(
+        value: appCubit,
+        child: const FloweryRider(),
+      ),
+    ),
   );
 }
 
-class FloweryRider extends StatelessWidget {
+class FloweryRider extends StatefulWidget {
   const FloweryRider({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorObservers: [getIt<AppNavigatorObserver>()],
-        //initialRoute: Routes.login,
-        // initialRoute: Routes.successorder,
+  State<FloweryRider> createState() => _FloweryRiderState();
+}
 
-        initialRoute: context.read<AppCubit>().state.isLoggedIn
-            ? Routes.layoutScreen
-            : Routes.onboarding,
-        onGenerateRoute: generateRoute,
-        theme: getLightTheme(),
-        darkTheme: ThemeData(),
-        themeMode: ThemeMode.light,
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
+class _FloweryRiderState extends State<FloweryRider> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<AppCubit, AppState>(
+      listenWhen: (previous, current) =>
+          previous.appLocale != current.appLocale,
+      listener: (context, state) {
+        context.setLocale(Locale(state.appLocale));
+        setState(() {
+          // Force rebuild to apply new locale
+        });
+      },
+      child: BlocBuilder<AppCubit, AppState>(
+        buildWhen: (previous, current) =>
+            previous.isLoggedIn != current.isLoggedIn,
+        builder: (context, state) {
+          return ScreenUtilInit(
+            designSize: const Size(375, 812),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (context, child) => MaterialApp(
+              debugShowCheckedModeBanner: false,
+              navigatorObservers: [getIt<AppNavigatorObserver>()],
+              initialRoute:
+                  state.isLoggedIn ? Routes.layoutScreen : Routes.onboarding,
+              onGenerateRoute: generateRoute,
+              theme: getLightTheme(),
+              darkTheme: ThemeData(),
+              themeMode: ThemeMode.light,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+            ),
+          );
+        },
       ),
     );
   }

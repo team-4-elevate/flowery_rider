@@ -147,16 +147,17 @@ class Validator {
 
 //---------------------------------------------------------vehicle number
   static String? validateVehicleNumber(String? vehicleNumber) {
-    final RegExp vehicleNumberRegex = RegExp(
-      r'^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$',
-    );
-    if (vehicleNumber == null || vehicleNumber.trim().isEmpty) {
-      return LocaleKeys.validation_required.tr();
-    } else if (vehicleNumberRegex.hasMatch(vehicleNumber) == false) {
-      return LocaleKeys.validation_vehicleNumber.tr();
-    } else {
-      return null;
-    }
+    return null;
+    // final RegExp vehicleNumberRegex = RegExp(
+    //   r'^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$',
+    // );
+    // if (vehicleNumber == null || vehicleNumber.trim().isEmpty) {
+    //   return LocaleKeys.validation_required.tr();
+    // } else if (vehicleNumberRegex.hasMatch(vehicleNumber) == false) {
+    //   return LocaleKeys.validation_vehicleNumber.tr();
+    // } else {
+    //   return null;
+    // }
   }
 
   //---------------------------------------------------------vehicle license

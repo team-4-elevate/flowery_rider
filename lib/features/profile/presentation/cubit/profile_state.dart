@@ -1,32 +1,44 @@
 import 'package:equatable/equatable.dart';
-import 'package:flowery_rider/core/base/base_state.dart';
+import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
+import 'package:flowery_rider/features/profile/presentation/cubit/result.dart';
 
 class ProfileState extends Equatable {
-  final BaseState ? getUserDataState;
-  final BaseState ? updateUserDataState;
-  final BaseState ? updateCarInfoState;
-  const ProfileState({
-    this.getUserDataState,
-    this.updateUserDataState,
-    this.updateCarInfoState,
+  final Result<UserDataEntity> userData;
+  final Result<UserDataEntity> updateUserData;
+  final Result<void> updateCarInfo;
+  final Result<void> changePassword;
+  final Result<void> logout;
+
+    const ProfileState({
+    this.userData = const Result<UserDataEntity>.initial(),
+    this.updateUserData = const Result<UserDataEntity>.initial(),
+    this.updateCarInfo = const Result<void>.initial(),
+    this.changePassword = const Result<void>.initial(),
+    this.logout = const Result<void>.initial(),
   });
 
-ProfileState copyWith({
-    BaseState? getUserDataState,
-    BaseState? updateUserDataState,
-    BaseState? updateCarInfoState,
+  ProfileState copyWith({
+    Result<UserDataEntity>? userData,
+    Result<UserDataEntity>? updateUserData,
+    Result<void>? updateCarInfo,
+    Result<void>? changePassword,
+    Result<void>? logout,
   }) {
     return ProfileState(
-      getUserDataState: getUserDataState ?? this.getUserDataState,
-      updateUserDataState: updateUserDataState ?? this.updateUserDataState,
-      updateCarInfoState: updateCarInfoState ?? this.updateCarInfoState,
+      userData: userData ?? this.userData,
+      updateUserData: updateUserData ?? this.updateUserData,
+      updateCarInfo: updateCarInfo ?? this.updateCarInfo,
+      changePassword: changePassword ?? this.changePassword,
+      logout: logout ?? this.logout,
     );
   }
 
   @override
   List<Object?> get props => [
-        getUserDataState,
-        updateUserDataState,
-        updateCarInfoState
-  ];
+        userData,
+        updateUserData,
+        updateCarInfo,
+        changePassword,
+        logout,
+      ];
 }

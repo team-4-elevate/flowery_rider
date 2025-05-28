@@ -8,6 +8,6 @@ abstract class AuthLocalDataSource {
   Future<String?> checkSavedToken();
   //-----------------------------cacheRememberMe-----------------------------------
   Future<bool> cacheRememberMe(bool rememberMe);
-  bool getRememberMe();
+  Future<bool> getRememberMe();
   Future<void> deleteRememberMe();
 }

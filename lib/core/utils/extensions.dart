@@ -1,5 +1,11 @@
+import 'dart:async';
+
+import 'package:flowery_rider/core/routes/routes.dart';
 import 'package:flowery_rider/core/theme/app_colors.dart';
+import 'package:flowery_rider/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 extension BuildContextExtension on BuildContext {
   // Screen dimensions
@@ -16,8 +22,8 @@ extension BuildContextExtension on BuildContext {
   double get mediumSize => screenWidth * 0.04;
   double get largeSize => screenWidth * 0.06;
   double get extraLargeSize => screenWidth * 0.08;
-  
-   void showLoadingIndicator() {
+
+  void showLoadingIndicator() {
     showDialog(
       context: this,
       barrierDismissible: false,
@@ -28,8 +34,12 @@ extension BuildContextExtension on BuildContext {
       ),
     );
   }
+   void hideLoadingIndicator() {
+    if (mounted && Navigator.of(this).canPop()) {
+      Navigator.of(this).pop();
+    }
+  }
 
-  
 
   // // Text sizes
   // double get bodyText => screenWidth * 0.035;

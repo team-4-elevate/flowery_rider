@@ -49,8 +49,8 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   }
 
   @override
-  bool getRememberMe() {
-    final value = _localStorageClient.getData('rememberMe');
+  Future<bool> getRememberMe() async{
+    final value = await _localStorageClient.getData('rememberMe');
     return value != null ? value.toLowerCase() == 'true' : false;
   }
 

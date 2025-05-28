@@ -18,4 +18,6 @@ class Routes {
   // static const String successApply = '/success-apply';
   // static const String apply = '/apply';
   static const String layoutScreen = '/layout-screen';
+  static const String editProfile = '/edit-profile';
+  static const String changePassword = '/change-password';
 }

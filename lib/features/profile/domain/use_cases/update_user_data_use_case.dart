@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:either_dart/either.dart';
 import 'package:flowery_rider/core/error_handling/exceptions/api_exception.dart';
 import 'package:flowery_rider/features/profile/data/models/update_profile_models/update_user_info.dart';
+import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
 import 'package:flowery_rider/features/profile/domain/repositories/profile_repo.dart';
 import 'package:injectable/injectable.dart';
 
@@ -11,7 +12,8 @@ class UpdateUserDataUseCase {
   final ProfileRepo _repo;
   UpdateUserDataUseCase(this._repo);
 
-  Future<Either<ApiException, void>>call(UpdateUserInfoModel updateUserInfoModel, File? userProfileImage) async {
+  Future<Either<ApiException, UserDataEntity>> call(
+      UpdateUserInfoModel updateUserInfoModel, File? userProfileImage) async {
     return await _repo.updateUserInfo(updateUserInfoModel, userProfileImage);
   }
 }

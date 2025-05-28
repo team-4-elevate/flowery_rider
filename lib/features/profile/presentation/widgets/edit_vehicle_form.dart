@@ -1,13 +1,11 @@
-import 'dart:io';
-
-import 'package:flowery_rider/core/services/image_picker_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery_rider/core/utils/extensions.dart';
 import 'package:flowery_rider/core/utils/validator.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/widgets/searchable_dropdown.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/widgets/upload_field.dart';
 import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.dart';
+import 'package:flowery_rider/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class EditVehicleForm extends StatelessWidget {
   final TextEditingController vehicleNumberController;
@@ -23,7 +21,7 @@ class EditVehicleForm extends StatelessWidget {
     return Column(
       children: [
         SearchableDropdown(
-          hint: 'Select vehicle type',
+          hint: LocaleKeys.profile_vehicle_type_hint.tr(),
           items: const [],
           onChanged: (value) {},
           displayStringForOption: (option) => option.toString(),
@@ -37,20 +35,19 @@ class EditVehicleForm extends StatelessWidget {
             FocusManager.instance.primaryFocus?.unfocus();
           },
           validator: (value) => Validator.validateVehicleNumber(value),
-          decoration: const InputDecoration(
-            labelText: 'vehicle Number',
+          decoration: InputDecoration(
+            labelText: LocaleKeys.profile_vehicle_number_hint.tr(),
           ),
           controller: vehicleNumberController,
         ),
         SizedBox(height: context.heightPercent(2)),
         UploadField(
-          hintText: 'Vehicle License',
+          hintText: LocaleKeys.profile_vehicle_license_hint.tr(),
           file: null,
-          label: 'Vehicle License',
+          label: LocaleKeys.profile_vehicle_license_label.tr(),
           onTap: () {},
         ),
       ],
     );
   }
-
 }

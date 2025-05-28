@@ -167,5 +167,91 @@
     "name": "Name",
     "mark_delivered": "Mark as Delivered",
     "order_completed": "Order completed successfully!"
+  },
+  "profile": {
+    "title": "Profile",
+    "vehicle_info": "Vehicle info",
+    "language": "Language",
+    "language_value": "English",
+    "logout": "Logout",
+    "version_text": "v 6.3.0 - (446)",
+    "error": {
+      "load_failure": "Failed to load profile data",
+      "retry": "Retry"
+    },
+    "no_data": "No data available",
+    
+    "edit_profile": {
+      "title": "Edit Profile",
+      "update_button": "Update",
+      "gender": {
+        "label": "Gender",
+        "female": "Female",
+        "male": "Male"
+      },
+      "success": {
+        "profile_updated": "Profile updated successfully",
+        "vehicle_updated": "Vehicle info updated successfully"
+      },
+        "user_info_form": {
+    "first_name": "First name",
+    "last_name": "Last name", 
+    "email": "Email",
+    "phone": "Phone number",
+    "password": "Password",
+    "change_button": "Change"
+  }
+    },
+    
+    "vehicle": {
+      "type": {
+        "hint": "Select vehicle type",
+        "car": "Car",
+        "motorcycle": "Motorcycle",
+        "bicycle": "Bicycle",
+        "van": "Van"
+      },
+      "number": {
+        "label": "Vehicle Number",
+        "hint": "Enter vehicle number"
+      },
+      "license": {
+        "hint": "Vehicle License",
+        "label": "Vehicle License"
+      }
+    },
+    
+    "logout_dialog": {
+      "title": "LOGOUT",
+      "message": "Confirm logout?",
+      "cancel": "Cancel",
+      "confirm": "Logout",
+      "error": "Logout failed: {error}"
+    },
+    
+    "change_password": {
+      "title": "Reset Password",
+      "current_password": {
+        "label": "Current Password",
+        "hint": "Current Password" 
+      },
+      "new_password": {
+        "label": "New Password",
+        "hint": "New Password"
+      },
+      "confirm_password": {
+        "label": "Confirm Password",
+        "hint": "Confirm Password"
+      },
+      "button": "Reset Password",
+      "success_message": "Password Changed Successfully",
+      "error_message": "Failed to update password. Please try again.",
+      "errors": {
+        "confirm_password_required": "Please confirm your password",
+        "passwords_not_match": "Passwords do not match",
+        "same_password": "New password must be different from current password",
+        "incorrect_password": "Current password is not correct"
+      }
+    }
   }
 }
