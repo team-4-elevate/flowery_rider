@@ -98,7 +98,7 @@ class DriverOrderModel extends Equatable {
     }
     Customer? customer;
     if (json['user'] != null) {
-      try {
+      
         final itemsData = json['user'] as Map<dynamic, dynamic>;
         final userId = itemsData['_id']?.toString() ?? 'unknown';
         final email = itemsData['email'] as String?;
@@ -114,9 +114,7 @@ class DriverOrderModel extends Equatable {
             address: address,
             location: location,
             phone: phone);
-      } catch (e) {
-        debugPrint('Error parsing customer data: $e');
-      }
+   
     }
 
     PickupAddress? pickupAddress;

@@ -1,3 +1,4 @@
+// features/order_details/data/models/location_dm.dart
 import 'package:equatable/equatable.dart';
 
 class LocationDM extends Equatable {
@@ -10,9 +11,22 @@ class LocationDM extends Equatable {
   });
 
   factory LocationDM.fromJson(Map json) {
+    double parseSafeDouble(dynamic value) {
+      if (value == null) return 0.0;
+      if (value is num) return value.toDouble();
+      if (value is String) {
+        try {
+          return double.parse(value);
+        } catch (_) {
+          return 0.0;
+        }
+      }
+      return 0.0;
+    }
+
     return LocationDM(
-      lat: double.parse(json['lat'] ?? '0'),
-      lng: double.parse(json['lng'] ?? '0'),
+      lat: parseSafeDouble(json['lat']),
+      lng: parseSafeDouble(json['lng']),
     );
   }
 
