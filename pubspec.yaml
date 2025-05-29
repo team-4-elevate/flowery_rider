@@ -75,7 +75,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/icons/flower_img.png"
+  image_path: "assets/icons/rider_logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following order_details_page: https://dart.dev/tools/pub/pubspec
