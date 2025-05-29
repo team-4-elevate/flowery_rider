@@ -1,8 +1,10 @@
+// core/app_data/shared_models/orders/driver_order_model.dart
 import 'package:equatable/equatable.dart';
 import 'package:flowery_rider/core/app_data/shared_models/orders/pickup_address.dart';
 import 'package:flowery_rider/features/order_details/data/models/location_dm.dart';
 import 'package:flowery_rider/features/order_details/domain/entities/order_status_enum.dart';
 import 'package:flowery_rider/features/order_details/domain/entities/payment_type_enum.dart';
+import 'package:flutter/material.dart';
 import 'customerDm.dart';
 import 'order_item.dart';
 import 'order_product.dart';
@@ -96,28 +98,45 @@ class DriverOrderModel extends Equatable {
     }
     Customer? customer;
     if (json['user'] != null) {
-      final itemsData = json['user'] as Map<dynamic, dynamic>;
-      final userId = itemsData['_id'] as String;
-      final email = itemsData['email'] as String?;
-      final name = itemsData['name'] as String?;
-      final phone = itemsData['phone'] as String?;
-      final address = itemsData['address'] as String?;
-      final location = itemsData['location'] != null
-          ? LocationDM.fromJson(itemsData['location'] as Map)
-          : null;
-      customer = Customer(
-          id: userId,
-          firstName: name,
-          address: address,
-          location: location,
-          phone: phone);
+      try {
+        final itemsData = json['user'] as Map<dynamic, dynamic>;
+        final userId = itemsData['_id']?.toString() ?? 'unknown';
+        final email = itemsData['email'] as String?;
+        final name = itemsData['name'] as String?;
+        final phone = itemsData['phone'] as String?;
+        final address = itemsData['address'] as String?;
+        final location = itemsData['location'] != null
+            ? LocationDM.fromJson(itemsData['location'] as Map)
+            : null;
+        customer = Customer(
+            id: userId,
+            firstName: name,
+            address: address,
+            location: location,
+            phone: phone);
+      } catch (e) {
+        debugPrint('Error parsing customer data: $e');
+      }
     }
-    final pickupAddress = PickupAddress.fromJson(json);
 
-    OrderStatusEnum status = json['state'] != null
-        ? (json['state'] as String).toOrderStatusEnum()
+    PickupAddress? pickupAddress;
+
+    pickupAddress = PickupAddress.fromJson(json);
+
+    OrderStatusEnum status;
+
+    status = json['state'] != null
+        ? (json['state'].toString()).toOrderStatusEnum()
         : OrderStatusEnum.pending;
-    double totalPrice = (json['totalPrice']).toDouble();
+
+    double totalPrice;
+
+    totalPrice = json['totalPrice'] != null
+        ? (json['totalPrice'] is num
+            ? (json['totalPrice'] as num).toDouble()
+            : double.tryParse(json['totalPrice'].toString()) ?? 0.0)
+        : 0.0;
+
     return DriverOrderModel(
       id: orderId,
       customer: customer,
