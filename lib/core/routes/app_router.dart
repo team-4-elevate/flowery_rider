@@ -1,7 +1,9 @@
 // core/routes/app_router.dart
+import 'package:flowery_rider/core/app_data/shared_models/orders/driver_order_model.dart';
 import 'package:flowery_rider/core/di/injectable.dart';
 import 'package:flowery_rider/application_approved_page.dart';
 import 'package:flowery_rider/core/routes/routes.dart';
+import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/cubit/auth_cubit.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_page.dart';
 import 'package:flowery_rider/features/auth/presentation/apply/pages/apply_success_page.dart';
@@ -16,6 +18,10 @@ import 'package:flowery_rider/features/profile/domain/entities/user_data_enitiy.
 import 'package:flowery_rider/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:flowery_rider/features/profile/presentation/pages/change_password_screen.dart';
 import 'package:flowery_rider/features/profile/presentation/pages/edit_profile_screen.dart';
+import 'package:flowery_rider/features/order_details/presentation/order_details_page/order_details_page.dart';
+import 'package:flowery_rider/features/orders/presentation/pages/completed_orders_details.dart';
+import 'package:flowery_rider/features/orders/presentation/pages/orders_screen.dart';
+import 'package:flowery_rider/features/orders/domain/usecase/order_usecase.dart';
 import 'package:flowery_rider/features/success-screen/order_success.dart';
 
 import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart';
@@ -37,8 +43,15 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.layoutScreen:
       return MaterialPageRoute(
         settings: settings,
-        builder: (_) => BlocProvider(
-            create: (context) => getIt<LayoutCubit>(), child: LayoutScreen()),
+        builder: (_) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => getIt<HomeCubit>(),
+            )
+          ],
+          child: BlocProvider(
+              create: (context) => getIt<LayoutCubit>(), child: LayoutScreen()),
+        ),
       );
     case Routes.applicationApproved:
       return MaterialPageRoute(
@@ -109,12 +122,42 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.changePassword:
       var cubit = settings.arguments as ProfileCubit;
       return MaterialPageRoute(
-        builder: (context) => BlocProvider.value(
-          value: cubit,
-          child: ChangePasswordScreen(
-            profileCubit: cubit,
-          ),
-        ),
+          builder: (context) => BlocProvider.value(
+                value: cubit,
+                child: ChangePasswordScreen(
+                  profileCubit: cubit,
+                ),
+              ));
+    case Routes.orderDetails:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) {
+          final args = settings.arguments as DriverOrderModel;
+          return BlocProvider.value(
+              value: getIt<HomeCubit>(), child: OrderDetailsPage(order: args));
+        },
+      );
+    case Routes.ordersScreen:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (context) {
+          final driverId = settings.arguments as String?;
+          if (driverId != null) {
+            return OrdersScreen(driverId: driverId);
+          }
+
+          return FutureBuilder<String?>(
+            future: getIt<OdersUsecase>().execute(),
+            builder: (context, snapshot) =>
+                OrdersScreen(driverId: snapshot.data),
+          );
+        },
+      );
+
+    case Routes.completedDetailsScreen:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const CompletedOrdersDetails(),
       );
     default:
       return MaterialPageRoute(

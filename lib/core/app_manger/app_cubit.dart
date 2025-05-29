@@ -45,7 +45,7 @@ class AppCubit extends Cubit<AppState> {
     return locale;
   }
 
-  void toggleAppLocale(String newLocale) async {
+  void changeAppLocale(String newLocale) async {
     newLocale = state.appLocale == 'en' ? 'ar' : 'en';
     await _localStorageClient.saveData('appLocale', newLocale);
 

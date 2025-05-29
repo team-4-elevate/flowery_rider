@@ -1,6 +1,7 @@
 // features/auth/domain/entities/apply_entity.dart
 
 import 'dart:io';
+import 'package:flowery_rider/core/app_data/shared_models/orders/driver.dart';
 
 class ApplyEntity {
   final String firstName;
@@ -74,5 +75,27 @@ class ApplyEntity {
       'idNumber': idNumber,
       'password': password,
     };
+  }
+
+  factory ApplyEntity.fromJson(Map<String, dynamic> json) {
+    return ApplyEntity(
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      email: json['email'],
+      phone: json['phone'],
+      countryCode: json['countryCode'],
+      gender: json['gender'],
+      vehicleType: json['vehicleType'],
+      vehicleNumber: json['vehicleNumber'],
+      idNumber: json['idNumber'],
+      password: json['password'],
+    );
+  }
+  FirebaseDriverDM toFirebaseDriver(ApplyEntity applyEntity) {
+    return FirebaseDriverDM(
+        id: applyEntity.idNumber,
+        name: applyEntity.firstName + applyEntity.lastName,
+        phone: phone,
+        email: email);
   }
 }

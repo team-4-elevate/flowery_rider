@@ -11,8 +11,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flowery_rider/core/app_data/api/api_client.dart' as _i452;
 import 'package:flowery_rider/core/app_data/api/dio_client.dart' as _i862;
-import 'package:flowery_rider/core/app_data/firebase/firebase_services.dart'
-    as _i563;
 import 'package:flowery_rider/core/app_data/local_storage/local_storage_client.dart'
     as _i983;
 import 'package:flowery_rider/core/app_manger/app_cubit.dart' as _i548;
@@ -69,8 +67,6 @@ import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_s
     as _i765;
 import 'package:flowery_rider/features/Home_layout/data/datasource/remote_data_source/home_remote_data_source_impl.dart'
     as _i44;
-import 'package:flowery_rider/features/Home_layout/data/repo/home_repo_impl.dart'
-    as _i700;
 import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.dart'
     as _i408;
 import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart'
@@ -81,22 +77,6 @@ import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart'
     as _i105;
 import 'package:flowery_rider/features/order_details/presentation/cubit/order_details_cubit.dart'
     as _i793;
-import 'package:flowery_rider/features/profile/data/datasources/profile_remote_data_source.dart'
-    as _i1051;
-import 'package:flowery_rider/features/profile/data/datasources/profile_remote_data_source_impl.dart'
-    as _i765;
-import 'package:flowery_rider/features/profile/data/repositories/profile_repo_impl.dart'
-    as _i934;
-import 'package:flowery_rider/features/profile/domain/repositories/profile_repo.dart'
-    as _i115;
-import 'package:flowery_rider/features/profile/domain/use_cases/get_profile_data_use_case.dart'
-    as _i78;
-import 'package:flowery_rider/features/profile/domain/use_cases/update_car_info_use_case.dart'
-    as _i408;
-import 'package:flowery_rider/features/profile/domain/use_cases/update_user_data_use_case.dart'
-    as _i856;
-import 'package:flowery_rider/features/profile/presentation/cubit/profile_cubit.dart'
-    as _i378;
 import 'package:flutter/cupertino.dart' as _i719;
 import 'package:flutter/material.dart' as _i409;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
@@ -118,7 +98,6 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final getItRegisterModule = _$GetItRegisterModule();
-    gh.factory<_i793.OrderDetailsCubit>(() => _i793.OrderDetailsCubit());
     gh.singleton<_i409.GlobalKey<_i409.NavigatorState>>(
         () => getItRegisterModule.navigatorKey);
     gh.singleton<_i973.InternetConnectionChecker>(
@@ -133,7 +112,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i944.AppNavigatorObserver());
     gh.singleton<_i318.DialogUtils>(() => _i318.DialogUtils());
     gh.singleton<_i105.LayoutCubit>(() => _i105.LayoutCubit());
-    gh.lazySingleton<_i563.FirebaseServices>(() => _i563.FirebaseServices());
     gh.singleton<_i983.LocalStorageClient>(() => _i983.LocalStorageClient(
           gh<_i460.SharedPreferences>(),
           gh<_i558.FlutterSecureStorage>(),
@@ -146,6 +124,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i348.AuthLocalDataSourceImpl(gh<_i983.LocalStorageClient>()));
     gh.factory<_i650.ForgetPasswordLocalDsI>(
         () => _i316.ForgetPasswordLocalDsImpl(gh<_i983.LocalStorageClient>()));
+    gh.lazySingleton<_i767.IDeliveryFirebaseService>(
+        () => _i20.FirebaseDriverServiceImpl(gh<_i983.LocalStorageClient>()));
+    gh.factory<_i315.OdersUsecase>(
+        () => _i315.OdersUsecase(gh<_i902.AuthLocalDataSource>()));
     gh.singleton<_i452.ApiClient>(() => _i862.DioApiClient(
           gh<_i983.LocalStorageClient>(),
           gh<_i388.DioErrorHandler>(),
@@ -155,8 +137,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i548.AppCubit(gh<_i902.AuthLocalDataSource>()));
     gh.factory<_i1016.ForgetPasswordRemoteDsI>(
         () => _i785.ForgetPasswordRemoteDsImpl(gh<_i452.ApiClient>()));
-    gh.factory<_i1051.ProfileRemoteDataSource>(
-        () => _i765.ProfileRemoteDataSourceImpl(gh<_i452.ApiClient>()));
     gh.factory<_i765.HomeRemoteDataSource>(
         () => _i44.HomeRemoteDataSourceImpl(gh<_i452.ApiClient>()));
     gh.factory<_i614.AuthRemoteDataSource>(
@@ -169,8 +149,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i614.AuthRemoteDataSource>(),
           gh<_i902.AuthLocalDataSource>(),
         ));
-    gh.factory<_i115.ProfileRepo>(
-        () => _i934.ProfileRepoImpl(gh<_i1051.ProfileRemoteDataSource>()));
     gh.factory<_i408.HomeRepository>(() => _i700.HomeRepositoryImpl(
           gh<_i765.HomeRemoteDataSource>(),
           gh<_i902.AuthLocalDataSource>(),
@@ -196,24 +174,15 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i592.ResetPasswordUseCase>(),
           gh<_i1007.VerifyOtpUseCase>(),
         ));
-    gh.factory<_i78.GetProfileDataUseCase>(
-        () => _i78.GetProfileDataUseCase(gh<_i115.ProfileRepo>()));
-    gh.factory<_i408.UpdateCarInfoUseCase>(
-        () => _i408.UpdateCarInfoUseCase(gh<_i115.ProfileRepo>()));
-    gh.factory<_i856.UpdateUserDataUseCase>(
-        () => _i856.UpdateUserDataUseCase(gh<_i115.ProfileRepo>()));
     gh.factory<_i867.HomeUseCase>(
         () => _i867.HomeUseCase(gh<_i408.HomeRepository>()));
     gh.factory<_i364.LoginCubit>(() => _i364.LoginCubit(
           gh<_i968.LoginUseCase>(),
           gh<_i597.CacheRememberMeUsecase>(),
         ));
-    gh.factory<_i955.HomeCubit>(() => _i955.HomeCubit(gh<_i867.HomeUseCase>()));
-    gh.factory<_i378.ProfileCubit>(() => _i378.ProfileCubit(
-          gh<_i78.GetProfileDataUseCase>(),
-          gh<_i548.AppCubit>(),
-          gh<_i856.UpdateUserDataUseCase>(),
-          gh<_i408.UpdateCarInfoUseCase>(),
+    gh.factory<_i955.HomeCubit>(() => _i955.HomeCubit(
+          gh<_i867.HomeUseCase>(),
+          gh<_i408.HomeRepository>(),
         ));
     return this;
   }

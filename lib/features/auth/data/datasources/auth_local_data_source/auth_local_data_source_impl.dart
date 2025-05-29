@@ -3,6 +3,7 @@
 import 'package:flowery_rider/core/app_data/local_storage/local_storage_client.dart';
 import 'package:flowery_rider/core/logger/app_logger.dart';
 import 'package:flowery_rider/features/auth/data/datasources/auth_local_data_source/auth_local_data_source.dart';
+import 'package:flowery_rider/features/auth/domain/entities/apply_entity.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: AuthLocalDataSource)
@@ -57,5 +58,31 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> deleteRememberMe() async {
     await _localStorageClient.deleteData('rememberMe');
+  }
+
+  //-----------------------------Driver ID-----------------------------------
+  @override
+  Future<void> cacheDriverId(String driverId) async {
+    await _localStorageClient.saveSecuredData('driver_id', driverId);
+  }
+
+  @override
+  Future<String?> getDriverId() async {
+    try {
+      return await _localStorageClient.getSecuredData('driver_id');
+    } catch (e) {
+      Log.e('Error getting driver ID: $e');
+      return null;
+    }
+  }
+
+  @override
+  Future<void> deleteDriverId() async {
+    await _localStorageClient.deleteSecuredData('driver_id');
+  }
+
+  @override
+  saveUserApplyData(ApplyEntity entity) async {
+    await _localStorageClient.saveUserApplyData(entity);
   }
 }

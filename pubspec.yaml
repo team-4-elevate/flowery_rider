@@ -70,6 +70,12 @@ dev_dependencies:
     sdk: flutter
   injectable_generator: ^2.6.0
   json_serializable: null
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/rider_logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following order_details_page: https://dart.dev/tools/pub/pubspec

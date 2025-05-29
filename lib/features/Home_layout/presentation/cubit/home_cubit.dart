@@ -1,49 +1,100 @@
-// features/Home_layout/presentation/cubit/home_cubit.dart
-import 'package:bloc/bloc.dart';
+import 'dart:async';
+import 'dart:developer';
+import 'package:flowery_rider/core/app_data/firebase/firebase_service_interface.dart';
 import 'package:flowery_rider/core/base/base_state.dart';
-import 'package:flowery_rider/features/Home_layout/domain/entities/order_entity.dart';
-import 'package:flowery_rider/features/Home_layout/domain/repo/home_repository.dart';
-import 'package:flowery_rider/features/Home_layout/domain/use_case/home_usecase.dart';
 import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_states.dart';
+import 'package:flowery_rider/features/order_details/domain/entities/order_status_enum.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-
-@injectable
+@singleton
 class HomeCubit extends Cubit<HomeStates> {
-  final HomeUseCase _homeUseCase;
-  final HomeRepository _homeRepository;
-  final Set<String> _rejectedOrderIds = {};
+  final IDeliveryFirebaseService _firebase;
+  StreamSubscription? _sub;
+  bool _isListening = false;
 
-  HomeCubit(this._homeUseCase, this._homeRepository)
-      : super(HomeStates(homeState: BaseInitialState()));
-
-  List<OrderEntity> get visibleOrders => state.orders
-      .where((order) => order.isPending)
-      .where((order) => !_rejectedOrderIds.contains(order.id))
-      .toList();
-
-  void rejectOrder(String orderId) {
-    _rejectedOrderIds.add(orderId);
-    emit(HomeStates(
-      homeState: BaseSuccessState<List<OrderEntity>>(data: state.orders),
-      orders: state.orders,
-    ));
+  HomeCubit(this._firebase) : super(HomeStates(homeState: BaseInitialState())) {
+    listenToOrders();
+  }
+  Future<void> rejectOrder(String orderId) async {
+    await _firebase.updateOrderStatus(
+        orderId: orderId, status: OrderStatusEnum.rejected);
   }
 
-  Future<void> getPendingOrders() async {
-    emit(state.copyWith(homeState: BaseLoadingState()));
-    _rejectedOrderIds.clear();
-
-    final result = await _homeUseCase();
-
-    if (result.isLeft) {
-      final error = result.left;
-      emit(state.copyWith(homeState: BaseErrorState(error.message)));
-    } else {
-      final orders = result.right;
+  listenToOrders() {
+    if (_isListening) return;
+    
+    try {
+      _isListening = true;
+      emit(state.copyWith(homeState: BaseLoadingState()));
+      final ordersStream = _firebase.fireMappedOrdersStream();
+      if (ordersStream == null) {
+        _isListening = false;
+        emit(state.copyWith(
+          homeState: BaseErrorState('Failed to get orders stream'),
+        ));
+        return;
+      }
+      
+      _sub = ordersStream.listen(
+        (orders) {
+          emit(state.copyWith(
+            firebaseOrders: orders, 
+            homeState: BaseSuccessState(data: orders)));
+        },
+        onError: (error) {
+          _isListening = false;
+          emit(state.copyWith(
+            homeState: BaseErrorState(error.toString()),
+          ));
+        },
+      );
+    } catch (e) {
+      _isListening = false;
       emit(state.copyWith(
-        homeState: BaseSuccessState<List<OrderEntity>>(data: orders),
-        orders: orders,
+        homeState: BaseErrorState(e.toString()),
       ));
     }
+  }
+
+  Future<void> changeOrderStatus({
+    required String orderId,
+    required OrderStatusEnum status,
+  }) async {
+    log(status.name);
+    status == OrderStatusEnum.accepted
+        ? await _firebase.acceptOrder(orderId: orderId)
+        : await _firebase.updateOrderStatus(
+            orderId: orderId,
+            status: status,
+          );
+    emit(state.copyWith(currentStep: _setCurrentStep(status)));
+  }
+
+  @override
+  Future<void> close() async {
+    _isListening = false;
+    await _sub?.cancel();
+    return super.close();
+  }
+
+  _setCurrentStep(OrderStatusEnum status) {
+    switch (status) {
+      case OrderStatusEnum.accepted:
+        return 0;
+      case OrderStatusEnum.pickedUp:
+        return 1;
+      case OrderStatusEnum.outForDelivery:
+        return 2;
+      case OrderStatusEnum.arrived:
+        return 3;
+      case OrderStatusEnum.delivered:
+        return 4;
+      default:
+        return 0;
+    }
+  }
+
+  void changeCurrentStep(int i) {
+    emit(state.copyWith(currentStep: i));
   }
 }

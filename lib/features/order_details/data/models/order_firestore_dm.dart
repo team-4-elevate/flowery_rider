@@ -33,7 +33,7 @@ class OrderFirestoreDM extends Equatable {
           ? DateTime.parse(json['estimatedArrival']! as String)
           : null,
       riderLocation: locationData != null
-          ? LocationDM.fromJson(Map<String, dynamic>.from(locationData))
+          ? LocationDM.fromJson(Map<String, String>.from(locationData))
           : null,
       createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt']! as String)

@@ -155,6 +155,7 @@ class Validator {
     //   return LocaleKeys.validation_required.tr();
     // } else if (vehicleNumberRegex.hasMatch(vehicleNumber) == false) {
     //   return LocaleKeys.validation_vehicleNumber.tr();
+    //   'return LocaleKeys.validation_vehicleNumber.tr();'
     // } else {
     //   return null;
     // }

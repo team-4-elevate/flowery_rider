@@ -1,3 +1,4 @@
+// main.dart
 import 'dart:async';
 import 'dart:isolate';
 import 'dart:ui';
@@ -36,8 +37,7 @@ void main() async {
       fallbackLocale: Locale(appLocale),
       child: BlocProvider.value(
         value: appCubit,
-        child: const FloweryRider(),
-      ),
+        child: const FloweryRider()),
     ),
   );
 }
@@ -50,6 +50,8 @@ class FloweryRider extends StatefulWidget {
 }
 
 class _FloweryRiderState extends State<FloweryRider> {
+ 
+ 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AppCubit, AppState>(
