@@ -17,7 +17,7 @@ import '../widgets/order_details_steps_widget.dart';
 
 class OrderDetailsPage extends StatelessWidget {
   final DriverOrderModel order;
-  
+
   const OrderDetailsPage({super.key, required this.order});
 
   @override

@@ -27,7 +27,7 @@ class TestableProfileRemoteDataSource extends ProfileRemoteDataSourceImpl {
     if (file != null) {
       await mockApiClient.put(
         ApiConstants.uploadProfileImage,
-        data: FormData.fromMap({'image': 'test-file'}), 
+        data: FormData.fromMap({'image': 'test-file'}),
         requiresToken: true,
       );
     }
@@ -337,5 +337,4 @@ void main() {
       );
     });
   });
-
 }

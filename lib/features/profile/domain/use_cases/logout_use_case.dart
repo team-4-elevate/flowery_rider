@@ -4,9 +4,9 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class LogoutUseCase {
-final  ProfileRepo _profileRepo;
+  final ProfileRepo _profileRepo;
   LogoutUseCase(this._profileRepo);
   Future<Either<Exception, void>> call() async {
-   return await _profileRepo.logout();
+    return await _profileRepo.logout();
   }
 }

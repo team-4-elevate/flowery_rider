@@ -11,12 +11,15 @@ class Result<T> {
     this.isLoading = false,
   });
 
- const Result.initial() : data = null, error = null, isLoading = false;
-  
+  const Result.initial()
+      : data = null,
+        error = null,
+        isLoading = false;
+
   factory Result.loading() => const Result._(isLoading: true);
-  
+
   factory Result.success(T data) => Result._(data: data);
-  
+
   factory Result.error(String message) => Result._(error: message);
 
   bool get isInitial => !isLoading && data == null && error == null;
@@ -25,10 +28,10 @@ class Result<T> {
 
   /// Safely get data or return null
   T? getOrNull() => data;
-  
+
   /// Safely get data or return default value
   T getOrElse(T defaultValue) => data ?? defaultValue;
-  
+
   /// Transform the data if present
   Result<R> map<R>(R Function(T data) mapper) {
     if (isSuccess) return Result.success(mapper(data!));
@@ -36,7 +39,7 @@ class Result<T> {
     if (isError) return Result.error(error!);
     return Result<R>.initial();
   }
-  
+
   /// Transform the result to another result type
   Result<R> flatMap<R>(Result<R> Function(T data) mapper) {
     if (isSuccess) return mapper(data!);
@@ -82,11 +85,11 @@ class Result<T> {
       isLoading: isLoading ?? this.isLoading,
     );
   }
-  
+
   @override
   String toString() =>
       'Result{data: $data, error: $error, isLoading: $isLoading}';
-  
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

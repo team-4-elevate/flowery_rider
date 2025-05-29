@@ -74,5 +74,4 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     );
     return ChangePasswordResponse.fromJson(response);
   }
-
 }

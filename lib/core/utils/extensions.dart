@@ -34,12 +34,12 @@ extension BuildContextExtension on BuildContext {
       ),
     );
   }
-   void hideLoadingIndicator() {
+
+  void hideLoadingIndicator() {
     if (mounted && Navigator.of(this).canPop()) {
       Navigator.of(this).pop();
     }
   }
-
 
   // // Text sizes
   // double get bodyText => screenWidth * 0.035;

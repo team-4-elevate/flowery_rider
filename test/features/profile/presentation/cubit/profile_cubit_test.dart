@@ -67,7 +67,7 @@ void main() {
       userProfileImage: null,
     ));
     registerFallbackValue(UpdateCarInfoModel(
-     vehicleLicense: null,
+      vehicleLicense: null,
       vehicleNumber: '',
       vehicleType: '',
     ));
@@ -182,10 +182,12 @@ void main() {
         carNumber: 'number',
         carLicense: File('license'),
       ),
-     expect: () => [
-  isA<ProfileState>().having((s) => s.updateCarInfo.isLoading, 'loading', true),
-  isA<ProfileState>().having((s) => s.updateCarInfo.isLoading, 'loading', false),
-],
+      expect: () => [
+        isA<ProfileState>()
+            .having((s) => s.updateCarInfo.isLoading, 'loading', true),
+        isA<ProfileState>()
+            .having((s) => s.updateCarInfo.isLoading, 'loading', false),
+      ],
     );
 
     blocTest<ProfileCubit, ProfileState>(
@@ -262,10 +264,10 @@ void main() {
         return cubit;
       },
       act: (cubit) => cubit.logout(),
-     expect: () => [
-  isA<ProfileState>().having((s) => s.logout.isLoading, 'loading', true),
-  isA<ProfileState>().having((s) => s.logout.isLoading, 'loading', false),
-],
+      expect: () => [
+        isA<ProfileState>().having((s) => s.logout.isLoading, 'loading', true),
+        isA<ProfileState>().having((s) => s.logout.isLoading, 'loading', false),
+      ],
     );
 
     blocTest<ProfileCubit, ProfileState>(

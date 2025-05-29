@@ -162,7 +162,9 @@ class _HomeLayoutState extends State<HomeScreen> {
             context: context,
           );
           Navigator.of(context).pushNamed(Routes.orderDetails,
-              arguments: order.copyWith(status: OrderStatusEnum.accepted,));
+              arguments: order.copyWith(
+                status: OrderStatusEnum.accepted,
+              ));
         }
       },
     );

@@ -132,7 +132,7 @@ void main() {
     final updateCarInfoModel = UpdateCarInfoModel(
       vehicleType: 'New Car Type',
       vehicleNumber: 'New1234',
-      vehicleLicense: null, // Assuming license is optional for this test     
+      vehicleLicense: null, // Assuming license is optional for this test
     );
     const driverId = '123';
 

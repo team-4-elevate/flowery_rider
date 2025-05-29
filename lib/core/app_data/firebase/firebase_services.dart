@@ -11,6 +11,5 @@ class FirebaseServices {
 
   Future<void> sendOrderDataToFireBase(FullOrderModel order) async {
     await _ordersRef.set(order.toJson());
-    
   }
 }

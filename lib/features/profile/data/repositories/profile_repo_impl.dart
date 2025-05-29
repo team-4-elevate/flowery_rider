@@ -15,7 +15,7 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: ProfileRepo)
 class ProfileRepoImpl implements ProfileRepo {
   final ProfileRemoteDataSource _dataSource;
- final AuthLocalDataSource _authLocalDataSource;
+  final AuthLocalDataSource _authLocalDataSource;
 
   ProfileRepoImpl(this._dataSource, this._authLocalDataSource);
 
@@ -81,9 +81,9 @@ class ProfileRepoImpl implements ProfileRepo {
       );
     }
   }
-  
+
   @override
-  Future<Either<Exception, void>> logout() async{
+  Future<Either<Exception, void>> logout() async {
     try {
       _authLocalDataSource.deleteToken();
       _authLocalDataSource.deleteRememberMe();

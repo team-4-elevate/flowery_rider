@@ -21,6 +21,5 @@ abstract interface class ProfileRepo {
   Future<Either<ApiException, ChangePasswordResponse>> changePassword(
       ChangePasswordRequestModel changePasswordModel);
 
-
   Future<Either<Exception, void>> logout();
 }

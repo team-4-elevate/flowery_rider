@@ -9,7 +9,7 @@ class ProfileState extends Equatable {
   final Result<void> changePassword;
   final Result<void> logout;
 
-    const ProfileState({
+  const ProfileState({
     this.userData = const Result<UserDataEntity>.initial(),
     this.updateUserData = const Result<UserDataEntity>.initial(),
     this.updateCarInfo = const Result<void>.initial(),

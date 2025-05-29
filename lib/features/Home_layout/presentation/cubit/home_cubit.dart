@@ -6,6 +6,7 @@ import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_state
 import 'package:flowery_rider/features/order_details/domain/entities/order_status_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+
 @singleton
 class HomeCubit extends Cubit<HomeStates> {
   final IDeliveryFirebaseService _firebase;
@@ -22,7 +23,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
   listenToOrders() {
     if (_isListening) return;
-    
+
     try {
       _isListening = true;
       emit(state.copyWith(homeState: BaseLoadingState()));
@@ -34,12 +35,12 @@ class HomeCubit extends Cubit<HomeStates> {
         ));
         return;
       }
-      
+
       _sub = ordersStream.listen(
         (orders) {
           emit(state.copyWith(
-            firebaseOrders: orders, 
-            homeState: BaseSuccessState(data: orders)));
+              firebaseOrders: orders,
+              homeState: BaseSuccessState(data: orders)));
         },
         onError: (error) {
           _isListening = false;
