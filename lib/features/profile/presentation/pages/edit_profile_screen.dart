@@ -212,7 +212,7 @@ class EditProfileScreen extends StatelessWidget {
               SizedBox(width: context.widthPercent(10)),
               UserGenderRow(
                 value: 'female',
-                label: LocaleKeys.profile_edit_profile_gender_female.tr(),
+                label: LocaleKeys.apply_gender_user_female.tr(),
                 fillColor: AppColors.primary,
                 isSelected: (context
                             .read<ProfileCubit>()
@@ -226,7 +226,7 @@ class EditProfileScreen extends StatelessWidget {
               SizedBox(width: context.widthPercent(5)),
               UserGenderRow(
                 value: 'male',
-                label: LocaleKeys.profile_edit_profile_gender_male.tr(),
+                label: LocaleKeys.apply_gender_user_male.tr(),
                 fillColor: AppColors.primary,
                 isSelected: (context
                             .read<ProfileCubit>()

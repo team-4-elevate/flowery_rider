@@ -25,19 +25,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  late final ProfileCubit _profileCubit;
-
-  @override
-  void initState() {
-    _profileCubit = getIt<ProfileCubit>();
-    _profileCubit.getUserData();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _profileCubit,
+    return BlocProvider(
+      create:(context) => getIt<ProfileCubit>()..getUserData(),
       child: PopScope(
         canPop: false,
         child: Scaffold(
@@ -97,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 arguments: {
                                   'userData': userData,
                                   'isEditUserData': true,
-                                  'profileCubit': _profileCubit,
+                                  'profileCubit': context.read<ProfileCubit>(),
                                 },
                               );
                             },
@@ -117,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 arguments: {
                                   'userData': userData,
                                   'isEditUserData': false,
-                                  'profileCubit': _profileCubit,
+                                  'profileCubit': context.read<ProfileCubit>(),
                                 },
                               );
                             },
@@ -180,9 +171,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onTap: () {
                               showDialog(
                                 context: context,
-                                builder: (context) {
+                                builder: (builderContext) {
                                   return LogoutDialog(
-                                    cubit: _profileCubit,
+                                    cubit: context.read<ProfileCubit>(),
                                   );
                                 },
                               );

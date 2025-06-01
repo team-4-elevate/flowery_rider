@@ -30,7 +30,7 @@ class ProfileCustomContainer extends StatelessWidget {
       splashColor: AppColors.grey.withOpacity(.03),
       onTap: onTap,
       child: Container(
-        height: context.heightPercent(13.5),
+        height: context.heightPercent(14.5),
         width: context.widthPercent(100.1),
         padding: EdgeInsets.symmetric(
           horizontal: context.widthPercent(1),
@@ -66,28 +66,34 @@ class ProfileCustomContainer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    textNameOrInfo ?? '',
-                    style: getBoldStyle(color: AppColors.black, fontSize: 18),
-                    overflow: TextOverflow.ellipsis,
+                  Expanded(
+                    child: Text(
+                      textNameOrInfo ?? '',
+                      style: getBoldStyle(color: AppColors.black, fontSize: 18),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   SizedBox(height: context.heightPercent(0.5)),
-                  Text(
-                    emailOrType ?? '',
-                    style: getRegularStyle(
-                      color: AppColors.black,
-                      fontSize: 16,
+                  Expanded(
+                    child: Text(
+                      emailOrType ?? '',
+                      style: getRegularStyle(
+                        color: AppColors.black,
+                        fontSize: 16,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: context.heightPercent(0.5)),
-                  Text(
-                    phoneOrVehicleNum ?? '',
-                    style: getRegularStyle(
-                      color: AppColors.black,
-                      fontSize: 16,
+                  Expanded(
+                    child: Text(
+                      phoneOrVehicleNum ?? '',
+                      style: getRegularStyle(
+                        color: AppColors.black,
+                        fontSize: 16,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

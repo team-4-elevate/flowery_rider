@@ -63,7 +63,7 @@ class CompletedOrdersDetails extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  '# ${order?.id ?? LocaleKeys.completed_orders_details_fallback_id.tr()}',
+                  '# ${order?.id ?? LocaleKeys.profile_completed_orders_details_fallback_id.tr()}',
                   style:
                       getMediumStyle(color: AppColors.black, fontSize: 16.sp),
                 ),
@@ -73,38 +73,38 @@ class CompletedOrdersDetails extends StatelessWidget {
 
             //------------------------------------------------ Pickup Address
             Text(
-              LocaleKeys.completed_orders_details_pickup_address.tr(),
+              LocaleKeys.profile_completed_orders_details_pickup_address.tr(),
               style: getRegularStyle(color: AppColors.grey, fontSize: 12.sp),
             ),
             SizedBox(height: 8.h),
             AddressCard(
               title: order?.pickupAddress?.address ??
-                  LocaleKeys.completed_orders_details_fallback_store_name.tr(),
+                  LocaleKeys.profile_completed_orders_details_fallback_store_name.tr(),
               address: order?.pickupAddress?.address ??
-                  LocaleKeys.completed_orders_details_fallback_address.tr(),
+                  LocaleKeys.profile_completed_orders_details_fallback_address.tr(),
               icon: Icons.store,
             ),
             SizedBox(height: 16.h),
 
             // //------------------------------------------------ User Address
             Text(
-              LocaleKeys.completed_orders_details_user_address.tr(),
+              LocaleKeys.profile_completed_orders_details_user_address.tr(),
               style: getRegularStyle(color: AppColors.grey, fontSize: 12.sp),
             ),
             SizedBox(height: 8.h),
             AddressCard(
               title: order?.customer?.firstName ??
-                  LocaleKeys.completed_orders_details_fallback_customer_name
+                  LocaleKeys.profile_completed_orders_details_fallback_customer_name
                       .tr(),
               address: order?.customer?.address ??
-                  LocaleKeys.completed_orders_details_fallback_address.tr(),
+                  LocaleKeys.profile_completed_orders_details_fallback_address.tr(),
               icon: Icons.person,
             ),
             SizedBox(height: 24.h),
 
             ////------------------------------------------------ Order Details
             Text(
-              LocaleKeys.completed_orders_details_order_details.tr(),
+              LocaleKeys.profile_completed_orders_details_order_details.tr(),
               style: getBoldStyle(color: AppColors.black, fontSize: 16.sp),
             ),
             SizedBox(height: 16.h),
@@ -116,14 +116,14 @@ class CompletedOrdersDetails extends StatelessWidget {
                       AddressCard(
                         title: item.name ??
                             LocaleKeys
-                                .completed_orders_details_fallback_product_name
+                                .profile_completed_orders_details_fallback_product_name
                                 .tr(),
                         address:
-                            '${LocaleKeys.completed_orders_details_currency.tr()} ${item.price?.toString() ?? LocaleKeys.completed_orders_details_fallback_price.tr()}',
+                            '${LocaleKeys.profile_completed_orders_details_currency.tr()} ${item.price?.toString() ?? LocaleKeys.profile_completed_orders_details_fallback_price.tr()}',
                         icon: Icons.local_florist,
                         showLocationIcon: false,
                         trailing: Text(
-                          'x${item.quantity?.toString() ?? LocaleKeys.completed_orders_details_fallback_quantity.tr()}',
+                          'x${item.quantity?.toString() ?? LocaleKeys.profile_completed_orders_details_fallback_quantity.tr()}',
                           style: getMediumStyle(
                               color: AppColors.primary, fontSize: 14.sp),
                         ),
@@ -133,14 +133,14 @@ class CompletedOrdersDetails extends StatelessWidget {
                   ))
             else
               AddressCard(
-                title: LocaleKeys.completed_orders_details_fallback_product_name
+                title: LocaleKeys.profile_completed_orders_details_fallback_product_name
                     .tr(),
                 address:
-                    '${LocaleKeys.completed_orders_details_currency.tr()} ${LocaleKeys.completed_orders_details_fallback_price.tr()}',
+                    '${LocaleKeys.profile_completed_orders_details_currency.tr()} ${LocaleKeys.profile_completed_orders_details_fallback_price.tr()}',
                 icon: Icons.local_florist,
                 showLocationIcon: false,
                 trailing: Text(
-                  'x${LocaleKeys.completed_orders_details_fallback_quantity.tr()}',
+                  'x${LocaleKeys.profile_completed_orders_details_fallback_quantity.tr()}',
                   style:
                       getMediumStyle(color: AppColors.primary, fontSize: 14.sp),
                 ),
@@ -149,19 +149,19 @@ class CompletedOrdersDetails extends StatelessWidget {
 
             // Total Section
             InfoRow(
-              label: LocaleKeys.completed_orders_details_total.tr(),
+              label: LocaleKeys.profile_completed_orders_details_total.tr(),
               value:
-                  '${LocaleKeys.completed_orders_details_currency.tr()} ${order!.totalPrice.toString()}',
+                  '${LocaleKeys.profile_completed_orders_details_currency.tr()} ${order!.totalPrice.toString()}',
             ),
 
             SizedBox(height: 20.h),
 
             // Payment Method
             InfoRow(
-                label: LocaleKeys.completed_orders_details_payment_method.tr(),
+                label: LocaleKeys.profile_completed_orders_details_payment_method.tr(),
                 value: order?.paymentType == PaymentTypeEnum.cash
-                    ? LocaleKeys.completed_orders_details_cash_on_delivery.tr()
-                    : LocaleKeys.completed_orders_details_card_payment.tr()),
+                    ? LocaleKeys.profile_completed_orders_details_cash_on_delivery.tr()
+                    : LocaleKeys.profile_completed_orders_details_card_payment.tr()),
           ],
         ),
       ),

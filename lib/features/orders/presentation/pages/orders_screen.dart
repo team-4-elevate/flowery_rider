@@ -52,7 +52,7 @@ class OrdersScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: AppColors.scaffoldBackground,
             appBar: AppBar(
-              title: Text(LocaleKeys.orders_title.tr()),
+              title: Text(LocaleKeys.profile_orders_title.tr()),
               automaticallyImplyLeading: false,
               surfaceTintColor: Colors.transparent,
             ),
@@ -69,7 +69,7 @@ class OrdersScreen extends StatelessWidget {
                             Expanded(
                               child: SummaryCard(
                                 count: cancelledOrders.length,
-                                status: LocaleKeys.orders_cancelled.tr(),
+                                status: LocaleKeys.profile_orders_cancelled.tr(),
                                 statusIcon: Icons.cancel_outlined,
                                 statusColor: AppColors.error,
                                 backgroundColor: AppColors.lightPink,
@@ -79,7 +79,7 @@ class OrdersScreen extends StatelessWidget {
                             Expanded(
                               child: SummaryCard(
                                 count: completedOrders.length,
-                                status: LocaleKeys.orders_completed.tr(),
+                                status: LocaleKeys.profile_orders_completed.tr(),
                                 statusIcon: Icons.check_circle_outline,
                                 statusColor: AppColors.success,
                                 backgroundColor:
@@ -91,7 +91,7 @@ class OrdersScreen extends StatelessWidget {
                         SizedBox(height: 24.h),
                         //-------------------------------------------------recent orders
                         Text(
-                          LocaleKeys.orders_recent_orders.tr(),
+                          LocaleKeys.profile_orders_recent_orders.tr(),
                           style: getBoldStyle(
                               color: AppColors.black, fontSize: 16.sp),
                         ),
@@ -114,13 +114,13 @@ class OrdersScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            LocaleKeys.orders_failed_to_load.tr(),
+            LocaleKeys.profile_orders_failed_to_load.tr(),
             style: getMediumStyle(color: AppColors.error, fontSize: 16.sp),
           ),
           SizedBox(height: 16.h),
           TextButton(
             onPressed: () => context.read<HomeCubit>().listenToOrders(),
-            child: Text(LocaleKeys.orders_retry.tr(),
+            child: Text(LocaleKeys.profile_orders_retry.tr(),
                 style:
                     getMediumStyle(color: AppColors.primary, fontSize: 14.sp)),
           ),
@@ -142,7 +142,7 @@ class OrdersScreen extends StatelessWidget {
             CircularProgressIndicator(color: AppColors.primary),
             SizedBox(height: 16.h),
             Text(
-              LocaleKeys.orders_loading.tr(),
+              LocaleKeys.profile_orders_loading.tr(),
               style: getMediumStyle(color: AppColors.grey, fontSize: 14.sp),
             ),
           ],
@@ -159,12 +159,12 @@ class OrdersScreen extends StatelessWidget {
             Icon(Icons.inbox_outlined, size: 48.sp, color: AppColors.grey),
             SizedBox(height: 16.h),
             Text(
-              LocaleKeys.orders_no_orders_found.tr(),
+              LocaleKeys.profile_orders_no_orders_found.tr(),
               style: getMediumStyle(color: AppColors.grey, fontSize: 16.sp),
             ),
             SizedBox(height: 8.h),
             Text(
-              LocaleKeys.orders_no_orders_message.tr(),
+              LocaleKeys.profile_orders_no_orders_message.tr(),
               style: getRegularStyle(color: AppColors.grey, fontSize: 14.sp),
             ),
           ],
@@ -177,7 +177,7 @@ class OrdersScreen extends StatelessWidget {
         // Completed orders
         ...completedOrders.map((order) => OrderCard(
               orderNumber: order.id,
-              status: LocaleKeys.orders_completed.tr(),
+              status: LocaleKeys.profile_orders_completed.tr(),
               isCompleted: true,
               orderModel: order,
             )),
@@ -185,7 +185,7 @@ class OrdersScreen extends StatelessWidget {
         // Cancelled orders
         ...cancelledOrders.map((order) => OrderCard(
               orderNumber: order.id,
-              status: LocaleKeys.orders_cancelled.tr(),
+              status: LocaleKeys.profile_orders_cancelled.tr(),
               isCompleted: false,
               orderModel: order,
             )),

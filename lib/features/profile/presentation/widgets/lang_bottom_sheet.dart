@@ -33,7 +33,7 @@ class _LangBottomSheetState extends State<LangBottomSheet> {
             localeValue: const Locale('ar'),
             selectedLocale: Locale(currentLocale),
             onSelected: (value) {
-              context.read<AppCubit>().toggleAppLocale(value.toString());
+              context.read<AppCubit>().changeAppLocale(value.toString());
               Navigator.pop(context);
             },
           ),
@@ -42,7 +42,7 @@ class _LangBottomSheetState extends State<LangBottomSheet> {
             localeValue: const Locale('en'),
             selectedLocale: Locale(currentLocale),
             onSelected: (value) {
-              context.read<AppCubit>().toggleAppLocale(value.toString());
+              context.read<AppCubit>().changeAppLocale(value.toString());
               Navigator.pop(context);
             },
           ),

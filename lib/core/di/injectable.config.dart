@@ -11,6 +11,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flowery_rider/core/app_data/api/api_client.dart' as _i452;
 import 'package:flowery_rider/core/app_data/api/dio_client.dart' as _i862;
+import 'package:flowery_rider/core/app_data/firebase/firebase_service_impl.dart'
+    as _i20;
+import 'package:flowery_rider/core/app_data/firebase/firebase_service_interface.dart'
+    as _i767;
+import 'package:flowery_rider/core/app_data/firebase/firebase_services.dart'
+    as _i563;
 import 'package:flowery_rider/core/app_data/local_storage/local_storage_client.dart'
     as _i983;
 import 'package:flowery_rider/core/app_manger/app_cubit.dart' as _i548;
@@ -75,8 +81,28 @@ import 'package:flowery_rider/features/Home_layout/presentation/cubit/home_cubit
     as _i955;
 import 'package:flowery_rider/features/main_layout/cubit/layout_cubit.dart'
     as _i105;
-import 'package:flowery_rider/features/order_details/presentation/cubit/order_details_cubit.dart'
-    as _i793;
+import 'package:flowery_rider/features/orders/domain/usecase/order_usecase.dart'
+    as _i315;
+import 'package:flowery_rider/features/profile/data/datasources/profile_remote_data_source.dart'
+    as _i1051;
+import 'package:flowery_rider/features/profile/data/datasources/profile_remote_data_source_impl.dart'
+    as _i765;
+import 'package:flowery_rider/features/profile/data/repositories/profile_repo_impl.dart'
+    as _i934;
+import 'package:flowery_rider/features/profile/domain/repositories/profile_repo.dart'
+    as _i115;
+import 'package:flowery_rider/features/profile/domain/use_cases/change_password_use_case.dart'
+    as _i679;
+import 'package:flowery_rider/features/profile/domain/use_cases/get_profile_data_use_case.dart'
+    as _i78;
+import 'package:flowery_rider/features/profile/domain/use_cases/logout_use_case.dart'
+    as _i630;
+import 'package:flowery_rider/features/profile/domain/use_cases/update_car_info_use_case.dart'
+    as _i408;
+import 'package:flowery_rider/features/profile/domain/use_cases/update_user_data_use_case.dart'
+    as _i856;
+import 'package:flowery_rider/features/profile/presentation/cubit/profile_cubit.dart'
+    as _i378;
 import 'package:flutter/cupertino.dart' as _i719;
 import 'package:flutter/material.dart' as _i409;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
@@ -98,6 +124,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final getItRegisterModule = _$GetItRegisterModule();
+    gh.factory<_i105.LayoutCubit>(() => _i105.LayoutCubit());
     gh.singleton<_i409.GlobalKey<_i409.NavigatorState>>(
         () => getItRegisterModule.navigatorKey);
     gh.singleton<_i973.InternetConnectionChecker>(
@@ -108,10 +135,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i558.FlutterSecureStorage>(
         () => getItRegisterModule.secureStorage);
+    gh.singleton<_i318.DialogUtils>(() => _i318.DialogUtils());
     gh.singleton<_i944.AppNavigatorObserver>(
         () => _i944.AppNavigatorObserver());
-    gh.singleton<_i318.DialogUtils>(() => _i318.DialogUtils());
-    gh.singleton<_i105.LayoutCubit>(() => _i105.LayoutCubit());
+    gh.lazySingleton<_i563.FirebaseServices>(() => _i563.FirebaseServices());
+    gh.factory<_i867.HomeUseCase>(
+        () => _i867.HomeUseCase(gh<_i408.HomeRepository>()));
     gh.singleton<_i983.LocalStorageClient>(() => _i983.LocalStorageClient(
           gh<_i460.SharedPreferences>(),
           gh<_i558.FlutterSecureStorage>(),
@@ -133,10 +162,16 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i388.DioErrorHandler>(),
           gh<_i719.GlobalKey<_i719.NavigatorState>>(),
         ));
-    gh.lazySingleton<_i548.AppCubit>(
-        () => _i548.AppCubit(gh<_i902.AuthLocalDataSource>()));
+    gh.lazySingleton<_i548.AppCubit>(() => _i548.AppCubit(
+          gh<_i902.AuthLocalDataSource>(),
+          gh<_i983.LocalStorageClient>(),
+        ));
     gh.factory<_i1016.ForgetPasswordRemoteDsI>(
         () => _i785.ForgetPasswordRemoteDsImpl(gh<_i452.ApiClient>()));
+    gh.factory<_i1051.ProfileRemoteDataSource>(
+        () => _i765.ProfileRemoteDataSourceImpl(gh<_i452.ApiClient>()));
+    gh.singleton<_i955.HomeCubit>(
+        () => _i955.HomeCubit(gh<_i767.IDeliveryFirebaseService>()));
     gh.factory<_i765.HomeRemoteDataSource>(
         () => _i44.HomeRemoteDataSourceImpl(gh<_i452.ApiClient>()));
     gh.factory<_i614.AuthRemoteDataSource>(
@@ -149,40 +184,52 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i614.AuthRemoteDataSource>(),
           gh<_i902.AuthLocalDataSource>(),
         ));
-    gh.factory<_i408.HomeRepository>(() => _i700.HomeRepositoryImpl(
-          gh<_i765.HomeRemoteDataSource>(),
-          gh<_i902.AuthLocalDataSource>(),
-        ));
-    gh.factory<_i442.ForgetPasswordUseCase>(
-        () => _i442.ForgetPasswordUseCase(gh<_i78.ForgetPasswordRepoI>()));
     gh.factory<_i542.ResendOtpUseCase>(
         () => _i542.ResendOtpUseCase(gh<_i78.ForgetPasswordRepoI>()));
+    gh.factory<_i442.ForgetPasswordUseCase>(
+        () => _i442.ForgetPasswordUseCase(gh<_i78.ForgetPasswordRepoI>()));
     gh.factory<_i1007.VerifyOtpUseCase>(
         () => _i1007.VerifyOtpUseCase(gh<_i78.ForgetPasswordRepoI>()));
-    gh.factory<_i929.ApplyUseCase>(
-        () => _i929.ApplyUseCase(gh<_i351.AuthRepo>()));
     gh.factory<_i597.CacheRememberMeUsecase>(
         () => _i597.CacheRememberMeUsecase(gh<_i351.AuthRepo>()));
     gh.factory<_i968.LoginUseCase>(
         () => _i968.LoginUseCase(gh<_i351.AuthRepo>()));
+    gh.factory<_i929.ApplyUseCase>(
+        () => _i929.ApplyUseCase(gh<_i351.AuthRepo>()));
     gh.factory<_i394.AuthCubit>(() => _i394.AuthCubit(gh<_i351.AuthRepo>()));
+    gh.factory<_i115.ProfileRepo>(() => _i934.ProfileRepoImpl(
+          gh<_i1051.ProfileRemoteDataSource>(),
+          gh<_i902.AuthLocalDataSource>(),
+        ));
     gh.factory<_i592.ResetPasswordUseCase>(
         () => _i592.ResetPasswordUseCase(gh<_i78.ForgetPasswordRepoI>()));
+    gh.factory<_i630.LogoutUseCase>(
+        () => _i630.LogoutUseCase(gh<_i115.ProfileRepo>()));
     gh.factory<_i107.ForgetPasswordCubit>(() => _i107.ForgetPasswordCubit(
           gh<_i442.ForgetPasswordUseCase>(),
           gh<_i542.ResendOtpUseCase>(),
           gh<_i592.ResetPasswordUseCase>(),
           gh<_i1007.VerifyOtpUseCase>(),
         ));
-    gh.factory<_i867.HomeUseCase>(
-        () => _i867.HomeUseCase(gh<_i408.HomeRepository>()));
+    gh.factory<_i78.GetProfileDataUseCase>(
+        () => _i78.GetProfileDataUseCase(gh<_i115.ProfileRepo>()));
+    gh.factory<_i408.UpdateCarInfoUseCase>(
+        () => _i408.UpdateCarInfoUseCase(gh<_i115.ProfileRepo>()));
+    gh.factory<_i856.UpdateUserDataUseCase>(
+        () => _i856.UpdateUserDataUseCase(gh<_i115.ProfileRepo>()));
     gh.factory<_i364.LoginCubit>(() => _i364.LoginCubit(
           gh<_i968.LoginUseCase>(),
           gh<_i597.CacheRememberMeUsecase>(),
         ));
-    gh.factory<_i955.HomeCubit>(() => _i955.HomeCubit(
-          gh<_i867.HomeUseCase>(),
-          gh<_i408.HomeRepository>(),
+    gh.factory<_i679.ChangePasswordUseCase>(
+        () => _i679.ChangePasswordUseCase(gh<_i115.ProfileRepo>()));
+    gh.factory<_i378.ProfileCubit>(() => _i378.ProfileCubit(
+          gh<_i78.GetProfileDataUseCase>(),
+          gh<_i548.AppCubit>(),
+          gh<_i856.UpdateUserDataUseCase>(),
+          gh<_i408.UpdateCarInfoUseCase>(),
+          gh<_i679.ChangePasswordUseCase>(),
+          gh<_i630.LogoutUseCase>(),
         ));
     return this;
   }
