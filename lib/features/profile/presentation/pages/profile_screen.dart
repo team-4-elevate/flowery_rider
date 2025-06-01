@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:(context) => getIt<ProfileCubit>()..getUserData(),
+      create: (context) => getIt<ProfileCubit>()..getUserData(),
       child: PopScope(
         canPop: false,
         child: Scaffold(

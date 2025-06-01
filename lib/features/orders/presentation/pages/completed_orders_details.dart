@@ -79,9 +79,12 @@ class CompletedOrdersDetails extends StatelessWidget {
             SizedBox(height: 8.h),
             AddressCard(
               title: order?.pickupAddress?.address ??
-                  LocaleKeys.profile_completed_orders_details_fallback_store_name.tr(),
+                  LocaleKeys
+                      .profile_completed_orders_details_fallback_store_name
+                      .tr(),
               address: order?.pickupAddress?.address ??
-                  LocaleKeys.profile_completed_orders_details_fallback_address.tr(),
+                  LocaleKeys.profile_completed_orders_details_fallback_address
+                      .tr(),
               icon: Icons.store,
             ),
             SizedBox(height: 16.h),
@@ -94,10 +97,12 @@ class CompletedOrdersDetails extends StatelessWidget {
             SizedBox(height: 8.h),
             AddressCard(
               title: order?.customer?.firstName ??
-                  LocaleKeys.profile_completed_orders_details_fallback_customer_name
+                  LocaleKeys
+                      .profile_completed_orders_details_fallback_customer_name
                       .tr(),
               address: order?.customer?.address ??
-                  LocaleKeys.profile_completed_orders_details_fallback_address.tr(),
+                  LocaleKeys.profile_completed_orders_details_fallback_address
+                      .tr(),
               icon: Icons.person,
             ),
             SizedBox(height: 24.h),
@@ -133,7 +138,8 @@ class CompletedOrdersDetails extends StatelessWidget {
                   ))
             else
               AddressCard(
-                title: LocaleKeys.profile_completed_orders_details_fallback_product_name
+                title: LocaleKeys
+                    .profile_completed_orders_details_fallback_product_name
                     .tr(),
                 address:
                     '${LocaleKeys.profile_completed_orders_details_currency.tr()} ${LocaleKeys.profile_completed_orders_details_fallback_price.tr()}',
@@ -158,10 +164,15 @@ class CompletedOrdersDetails extends StatelessWidget {
 
             // Payment Method
             InfoRow(
-                label: LocaleKeys.profile_completed_orders_details_payment_method.tr(),
+                label: LocaleKeys
+                    .profile_completed_orders_details_payment_method
+                    .tr(),
                 value: order?.paymentType == PaymentTypeEnum.cash
-                    ? LocaleKeys.profile_completed_orders_details_cash_on_delivery.tr()
-                    : LocaleKeys.profile_completed_orders_details_card_payment.tr()),
+                    ? LocaleKeys
+                        .profile_completed_orders_details_cash_on_delivery
+                        .tr()
+                    : LocaleKeys.profile_completed_orders_details_card_payment
+                        .tr()),
           ],
         ),
       ),

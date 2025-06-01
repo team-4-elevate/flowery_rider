@@ -69,7 +69,8 @@ class OrdersScreen extends StatelessWidget {
                             Expanded(
                               child: SummaryCard(
                                 count: cancelledOrders.length,
-                                status: LocaleKeys.profile_orders_cancelled.tr(),
+                                status:
+                                    LocaleKeys.profile_orders_cancelled.tr(),
                                 statusIcon: Icons.cancel_outlined,
                                 statusColor: AppColors.error,
                                 backgroundColor: AppColors.lightPink,
@@ -79,7 +80,8 @@ class OrdersScreen extends StatelessWidget {
                             Expanded(
                               child: SummaryCard(
                                 count: completedOrders.length,
-                                status: LocaleKeys.profile_orders_completed.tr(),
+                                status:
+                                    LocaleKeys.profile_orders_completed.tr(),
                                 statusIcon: Icons.check_circle_outline,
                                 statusColor: AppColors.success,
                                 backgroundColor:
